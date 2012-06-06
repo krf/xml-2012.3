@@ -1,5 +1,5 @@
-xml-2012.3
-==========
+XML-Technologien (Gruppe III)
+=============================
 
 Mitglieder
 * Kevin Funk
@@ -7,5 +7,3 @@ Mitglieder
 * André Zoufahl
 * Konrad Reiche
 * David Bialik
-=======
-XML-Technologien (Gruppe III)
