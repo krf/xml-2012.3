@@ -1,6 +1,7 @@
 # common
 *~
 .*
+*.out
 
 # python
 *.pyc
