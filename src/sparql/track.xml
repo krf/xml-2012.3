@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpsies>
+  <meta>
+    <requestUrl>http://www.gpsies.org/api.do?fileId=wudderqtkftukqwg&amp;trackDataLength=20&amp;key=czxpyyinrqaektof</requestUrl>
+    <fileId>wudderqtkftukqwg</fileId>
+    <resultPage>1</resultPage>
+    <limit>10</limit>
+    <downloadBaseUrl>http://www.gpsies.com/download.do?</downloadBaseUrl>
+    <resultSize>1</resultSize>
+  </meta>
+  <tracks>
+    <track>
+      <title>Von Eisenhüttestadt nach Eisenhüttenstadt</title>
+      <fileId>wudderqtkftukqwg</fileId>
+      <downloadLink>http://www.gpsies.com/files/kmz/w/wudderqtkftukqwg.kmz</downloadLink>
+      <createdDate>2006-08-23 20:07:34.0</createdDate>
+      <changedDate>2012-01-11 00:03:35.0</changedDate>
+      <description>Entlang der Oder und durch' s Schlaubetal.</description>
+      <trackTypes>
+        <trackType>biking</trackType>
+      </trackTypes>
+      <trackCharacters>
+        <trackCharacter>flat</trackCharacter>
+        <trackCharacter>hilly</trackCharacter>
+      </trackCharacters>
+      <statistics>
+        <countDownload>30</countDownload>
+        <countViewOnMap>506</countViewOnMap>
+      </statistics>
+      <username>filipohatschi</username>
+      <startPointLat>52.1475700</startPointLat>
+      <startPointLon>14.6586000</startPointLon>
+      <endPointLat>52.1474740</endPointLat>
+      <endPointLon>14.6582830</endPointLon>
+      <startPointCountry>DE</startPointCountry>
+      <endPointCountry>DE</endPointCountry>
+      <startPointAddress>15890 Eisenhüttenstadt Fürstenberg, Landkreis Oder-Spree, Brandenburg</startPointAddress>
+      <endPointAddress>15890 Eisenhüttenstadt Fürstenberg, Landkreis Oder-Spree, Brandenburg</endPointAddress>
+      <trackLengthM>105841.408361058</trackLengthM>
+      <countTrackpoints>597</countTrackpoints>
+      <trackProperty>roundTrip</trackProperty>
+      <externalLink>http://www.filipo-hatschi.pytalhost.de/index.htm</externalLink>
+      <altitudeMinHeightM>19</altitudeMinHeightM>
+      <altitudeMaxHeightM>129</altitudeMaxHeightM>
+      <altitudeDifferenceM>110</altitudeDifferenceM>
+      <totalAscentM>0</totalAscentM>
+      <totalDescentM>0</totalDescentM>
+      <trackData>52.14757000,14.65860000,0.0
+52.17554100,14.69963500,33.783447
+52.23926800,14.70231100,25.612305
+52.26838700,14.62001100,22.247559
+52.24602400,14.57399700,22.728271
+52.23701800,14.53024000,30.899536
+52.24321400,14.48195400,36.186768
+52.24126500,14.42079200,40.032104
+52.21846100,14.42269200,49.164551
+52.20406200,14.42816000,49.164551
+52.17448300,14.43712300,87.136597
+52.14251800,14.41758200,69.832886
+52.10313500,14.43113000,77.042847
+52.08318800,14.50994800,127.99255
+52.10487100,14.58654300,89.059326
+52.08890300,14.63834500,60.219727
+52.08323200,14.64331900,45.319214
+52.06772000,14.62629500,62.142334
+52.06531800,14.70768800,41.954712
+52.14747400,14.65828300,43.396606</trackData>
+    </track>
+  </tracks>
+</gpsies>
+
