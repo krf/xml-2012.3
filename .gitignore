@@ -5,3 +5,9 @@
 
 # python
 *.pyc
+
+# python-tornado
+tornado.httpserver
+tornado.ioloop
+tornado.options
+tornado.web
