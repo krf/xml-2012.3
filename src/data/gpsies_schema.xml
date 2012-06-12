@@ -32,8 +32,11 @@
                     <xsd:element name="title" type="xsd:string" />
                     <xsd:element name="fileId" type="xsd:string" />
                     <xsd:element name="downloadLink" type="xsd:string" />
-                    <xsd:element name="createdDate" type="xsd:dateTime" />
-                    <xsd:element name="changedDate" type="xsd:dateTime" />
+
+                    <!-- Next two elements are no valid xsd:dateTime values :'( -->
+                    <xsd:element name="createdDate" type="xsd:string" />
+                    <xsd:element name="changedDate" type="xsd:string" />
+
                     <xsd:element name="startPointLat" type="xsd:decimal" />
                     <xsd:element name="startPointLon" type="xsd:decimal" />
                     <xsd:element name="endPointLat" type="xsd:decimal" />
