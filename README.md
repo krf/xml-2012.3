@@ -20,13 +20,13 @@ Running
 -----
 
 Prerequisites:
-    $ export PYTHONPATH=./src
+* $ export PYTHONPATH=./src
 
 Run basexserver (should contain data)
-    $ basexserver
+*  $ basexserver
 
 Run web server:
-    $ cd src/
-    $ ./web/web.py
+*  $ cd src/
+*  $ ./web/web.py
 
 This starts a web server on http://localhost:8888
