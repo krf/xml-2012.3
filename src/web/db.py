@@ -2,8 +2,6 @@ from __future__ import print_function
 
 from shared import BaseXClient
 
-import time
-
 class DatabaseConnection:
 
     def __init__(self, databaseName):
@@ -39,7 +37,7 @@ class DatabaseConnection:
 
         return True
 
-    def query(self, input):
+    def query(self, queryStr):
         """Return a list of query results"""
 
         self._reset()
@@ -47,7 +45,7 @@ class DatabaseConnection:
         try:
             session = self.session
             query = session.execute('OPEN {0}'.format(self.databaseName))
-            query = session.query(input)
+            query = session.query(queryStr)
 
             # loop through all results
             results = []
