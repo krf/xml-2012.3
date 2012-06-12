@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: iso-8859-15 -*-
 
 import sys
 
@@ -6,6 +7,7 @@ import tornado.ioloop
 import tornado.web
 
 from db import DatabaseConnection
+from lxml import etree
 
 class MainHandler(tornado.web.RequestHandler):
 
@@ -32,7 +34,7 @@ class RequestHandler(tornado.web.RequestHandler):
 
     def post(self):
         # FIXME: proper database selection, query string
-        db = DatabaseConnection("out")
+        db = DatabaseConnection("GPSies_sample")
         success = db.connect()
         if not success:
             self.write("Database error: {0}".format(db.error))
@@ -53,24 +55,37 @@ class RequestHandler(tornado.web.RequestHandler):
             )
         results = db.query(queryString)
 
-        self.set_header("Content-Type", "text/plain")
-        self.write(
-"""\
-Search: {0}
-Location: {1}
-ZIP: {2}
 
-Query string:
-{3}
+        rawxml = "<?xml version='1.0' encoding='ISO-8859-1'?><result>"+", ".join(results)+"</result>"
+        xml = etree.fromstring(rawxml)
+        xslt = etree.parse("src/web/xslt/demo.xsl")
+        transform = etree.XSLT(xslt)      
+        resulthtml = transform(xml)
 
-Result:
-{4}
-"""
-.format(
-    searchParam, locationParam, zipParam,
-    queryString,
-    ", ".join(results)
-))
+
+
+        #self.set_header("Content-Type", "text/plain")  
+        self.write(unicode(resulthtml))
+#        self.write(
+#            """\
+#            Search: {0}
+#            Location: {1}
+#            ZIP: {2}
+#            
+#            Query string:
+#            {3}
+#            
+#            Result:
+#            {4}
+#            """
+#            .format(
+#                searchParam, locationParam, zipParam,
+#                queryString,
+#                ", ".join(results)
+#            )
+#        )
+
+
 
 application = tornado.web.Application([
     (r"/", MainHandler),
