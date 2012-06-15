@@ -15,6 +15,7 @@ Dependencies
 
 * BaseX (http://basex.org/)
 * Python LXML (http://lxml.de)
+* SPARQL Endpoint interface to Python (http://sparql-wrapper.sourceforge.net/)
 
 Running
 -----
