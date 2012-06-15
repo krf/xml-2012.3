@@ -14,7 +14,7 @@ class MainHandler(tornado.web.RequestHandler):
 
     def get(self):
     
-        rawxml = "<?xml version='1.0' encoding='ISO-8859-1'?><doc></doc>"
+        rawxml = "<?xml version='1.0' encoding='ISO-8859-1'?><response></response>"
         xml = etree.fromstring(rawxml)
         xslt = etree.parse(os.path.join(doc_root,"xslt/")+"core.xsl")
         transform = etree.XSLT(xslt)      
@@ -51,34 +51,22 @@ class RequestHandler(tornado.web.RequestHandler):
         results = db.query(queryString)
 
 
-        rawxml = "<?xml version='1.0' encoding='ISO-8859-1'?><result>"+", ".join(results)+"</result>"
+        searchparaxml = """
+            <searchparameter>
+                <param label="search" value="{0}"/>
+                <param label="location" value="{1}"/>
+                <param label="zip" value="{2}"/>
+            </searchparameter>""".format(
+            searchParam, locationParam, zipParam
+        )
+        rawxml = "<?xml version='1.0' encoding='ISO-8859-1'?><response>"+searchparaxml+"<searchresult>"+", ".join(results)+"</searchresult></response>"
         xml = etree.fromstring(rawxml)
         xslt = etree.parse(os.path.join(doc_root,"xslt/")+"core.xsl")
         transform = etree.XSLT(xslt)      
         resulthtml = transform(xml)
 
-
-
-        #self.set_header("Content-Type", "text/plain")  
         self.write(unicode(resulthtml))
-#        self.write(
-#            """\
-#            Search: {0}
-#            Location: {1}
-#            ZIP: {2}
-#            
-#            Query string:
-#            {3}
-#            
-#            Result:
-#            {4}
-#            """
-#            .format(
-#                searchParam, locationParam, zipParam,
-#                queryString,
-#                ", ".join(results)
-#            )
-#        )
+        return
 
 doc_root = os.path.dirname(__file__)
 settings = {

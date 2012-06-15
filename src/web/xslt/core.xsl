@@ -4,14 +4,25 @@
 <xsl:include href="func.xsl"/>
 
 
-<xsl:template match="/">
+<xsl:template match="response">
     <html>
     <xsl:call-template name="htmlhead"/>
 
     <body>
-        <h1>hello world</h1>
-        <!-- do something here -->
-        <xsl:call-template name="searchform"/>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span3">
+                <!--Sidebar content-->
+                    <xsl:call-template name="searchform"/>
+                </div>
+                <div class="span9">
+                <!--Body content-->
+                    <xsl:apply-templates/>
+                </div>
+            </div>
+        </div>
+    
+            <!-- do something here -->
     </body>
 
     </html>
