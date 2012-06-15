@@ -70,7 +70,7 @@ class RequestHandler(tornado.web.RequestHandler):
 
         rawxml = "<?xml version='1.0' encoding='ISO-8859-1'?><result>"+", ".join(results)+"</result>"
         xml = etree.fromstring(rawxml)
-        xslt = etree.parse("src/web/xslt/demo.xsl")
+        xslt = etree.parse("src/web/xslt/core.xsl")
         transform = etree.XSLT(xslt)      
         resulthtml = transform(xml)
 
