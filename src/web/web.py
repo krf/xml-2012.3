@@ -16,28 +16,11 @@ class MainHandler(tornado.web.RequestHandler):
     
         rawxml = "<?xml version='1.0' encoding='ISO-8859-1'?><doc></doc>"
         xml = etree.fromstring(rawxml)
-        xslt = etree.parse("src/web/xslt/core.xsl")
+        xslt = etree.parse(os.path.join(doc_root,"xslt/")+"core.xsl")
         transform = etree.XSLT(xslt)      
         resulthtml = transform(xml)    
         self.write(unicode(resulthtml))
         return
-        
-        self.write(
-"""
-<html>
-<head>
-<body>
-<img src="favicon.ico"/>
-<form action="/request" method="post">
-Search: <input type="text" name="search"/><br/>
-Location: <input type="text" name="location"/><br/>
-ZIP: <input type="text" name="zip"/><br/>
-<input type="submit" value="Submit">
-</form>
-</body>
-</html>
-"""
-        )
 
 class RequestHandler(tornado.web.RequestHandler):
 
@@ -70,7 +53,7 @@ class RequestHandler(tornado.web.RequestHandler):
 
         rawxml = "<?xml version='1.0' encoding='ISO-8859-1'?><result>"+", ".join(results)+"</result>"
         xml = etree.fromstring(rawxml)
-        xslt = etree.parse("src/web/xslt/core.xsl")
+        xslt = etree.parse(os.path.join(doc_root,"xslt/")+"core.xsl")
         transform = etree.XSLT(xslt)      
         resulthtml = transform(xml)
 
@@ -97,8 +80,9 @@ class RequestHandler(tornado.web.RequestHandler):
 #            )
 #        )
 
+doc_root = os.path.dirname(__file__)
 settings = {
-    "static_path": os.path.join(os.path.dirname(__file__), "static")
+    "static_path": os.path.join(doc_root, "static")
 }
 pprint(settings)   
 
