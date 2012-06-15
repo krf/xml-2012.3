@@ -1,21 +1,33 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-15 -*-
 
-import sys
+import sys, os
 
 import tornado.ioloop
 import tornado.web
 
 from db import DatabaseConnection
 from lxml import etree
+from pprint import pprint
 
 class MainHandler(tornado.web.RequestHandler):
 
     def get(self):
+    
+        rawxml = "<?xml version='1.0' encoding='ISO-8859-1'?><doc></doc>"
+        xml = etree.fromstring(rawxml)
+        xslt = etree.parse("src/web/xslt/core.xsl")
+        transform = etree.XSLT(xslt)      
+        resulthtml = transform(xml)    
+        self.write(unicode(resulthtml))
+        return
+        
         self.write(
 """
 <html>
+<head>
 <body>
+<img src="favicon.ico"/>
 <form action="/request" method="post">
 Search: <input type="text" name="search"/><br/>
 Location: <input type="text" name="location"/><br/>
@@ -85,12 +97,16 @@ class RequestHandler(tornado.web.RequestHandler):
 #            )
 #        )
 
+settings = {
+    "static_path": os.path.join(os.path.dirname(__file__), "static")
+}
+pprint(settings)   
 
 
 application = tornado.web.Application([
     (r"/", MainHandler),
-    (r"/request", RequestHandler)
-])
+    (r"/request", RequestHandler),
+], **settings)
 
 if __name__ == "__main__":
     application.listen(8888)
