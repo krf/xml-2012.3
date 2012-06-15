@@ -37,6 +37,10 @@ class DatabaseConnection:
 
         return True
 
+    # For retrieving all the documents present in the database
+    def getAllDocuments(self):
+            return self.query('collection({0})'.format(self.databaseName))
+
     def query(self, queryStr):
         """Return a list of query results"""
 
