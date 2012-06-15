@@ -1,451 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<gpsies>
-  <meta>
-    <requestUrl>http://www.gpsies.org/api.do?trackTypes=jogging&amp;limit=20&amp;perimeter=80&amp;filetype=kml&amp;key=czxpyyinrqaektof&amp;lat=51&amp;lon=10</requestUrl>
-    <lat>51</lat>
-    <lon>10</lon>
-    <perimeter>80.0</perimeter>
-    <trackType>jogging</trackType>
-    <trackType>jogging</trackType>
-    <resultPage>1</resultPage>
-    <limit>20</limit>
-    <filetype>kml</filetype>
-    <downloadBaseUrl>http://www.gpsies.com/download.do?</downloadBaseUrl>
-    <northWestLat>50.28005759539237</northWestLat>
-    <northWestLon>8.856000195057057</northWestLon>
-    <southEastLat>51.71994240460763</southEastLat>
-    <southEastLon>11.143999804942943</southEastLon>
-    <resultSize>20</resultSize>
-  </meta>
-  <tracks>
-    <track>
-      <title>Tour de Suess ???</title>
-      <fileId>gypjnkjxjzbvbzfj</fileId>
-      <downloadLink>http://www.gpsies.com/download.do?fileId=gypjnkjxjzbvbzfj&amp;filetype=kml</downloadLink>
-      <createdDate>2009-05-15 19:00:55.0</createdDate>
-      <changedDate>2012-01-11 00:03:35.0</changedDate>
-      <startPointLat>50.9868000</startPointLat>
-      <startPointLon>9.98126000</startPointLon>
-      <endPointLat>50.9969900</endPointLat>
-      <endPointLon>9.96653000</endPointLon>
-      <startPointCountry>DE</startPointCountry>
-      <endPointCountry>DE</endPointCountry>
-      <trackLengthM>2440.2877562923104</trackLengthM>
-      <countTrackpoints>63</countTrackpoints>
-      <trackProperty>oneWayTrip</trackProperty>
-      <altitudeMinHeightM>281</altitudeMinHeightM>
-      <altitudeMaxHeightM>444</altitudeMaxHeightM>
-      <altitudeDifferenceM>163</altitudeDifferenceM>
-      <totalAscentM>163</totalAscentM>
-      <totalDescentM>0</totalDescentM>
-    </track>
-    <track>
-      <title>Über den Lindig Nr. 2, Wildeck</title>
-      <fileId>okusufsewvqpfxwy</fileId>
-      <downloadLink>http://www.gpsies.com/download.do?fileId=okusufsewvqpfxwy&amp;filetype=kml</downloadLink>
-      <createdDate>2009-06-21 14:33:41.0</createdDate>
-      <changedDate>2012-01-11 00:03:35.0</changedDate>
-      <startPointLat>50.9715473</startPointLat>
-      <startPointLon>10.0198151</startPointLon>
-      <endPointLat>50.9713646</endPointLat>
-      <endPointLon>10.0202278</endPointLon>
-      <startPointCountry>DE</startPointCountry>
-      <endPointCountry>DE</endPointCountry>
-      <trackLengthM>7082.93264740351</trackLengthM>
-      <countTrackpoints>56</countTrackpoints>
-      <trackProperty>roundTrip</trackProperty>
-      <altitudeMinHeightM>241</altitudeMinHeightM>
-      <altitudeMaxHeightM>360</altitudeMaxHeightM>
-      <altitudeDifferenceM>119</altitudeDifferenceM>
-      <totalAscentM>104</totalAscentM>
-      <totalDescentM>104</totalDescentM>
-    </track>
-    <track>
-      <title>Kurze bergstrecke in Wildeck</title>
-      <fileId>qwfuyiofzgyajdaq</fileId>
-      <downloadLink>http://www.gpsies.com/download.do?fileId=qwfuyiofzgyajdaq&amp;filetype=kml</downloadLink>
-      <createdDate>2009-06-18 12:35:20.0</createdDate>
-      <changedDate>2012-01-11 00:03:35.0</changedDate>
-      <startPointLat>50.9712790</startPointLat>
-      <startPointLon>10.0195530</startPointLon>
-      <endPointLat>50.9711030</endPointLat>
-      <endPointLon>10.0196170</endPointLon>
-      <startPointCountry>DE</startPointCountry>
-      <endPointCountry>DE</endPointCountry>
-      <trackLengthM>4864.15414848439</trackLengthM>
-      <countTrackpoints>38</countTrackpoints>
-      <trackProperty>roundTrip</trackProperty>
-      <altitudeMinHeightM>226</altitudeMinHeightM>
-      <altitudeMaxHeightM>303</altitudeMaxHeightM>
-      <altitudeDifferenceM>77</altitudeDifferenceM>
-      <totalAscentM>76</totalAscentM>
-      <totalDescentM>82</totalDescentM>
-    </track>
-    <track>
-      <title>Richelsdorf, Bosserode, Obersuhl, Richelsdorf</title>
-      <fileId>biqovnqoanlkvorm</fileId>
-      <downloadLink>http://www.gpsies.com/download.do?fileId=biqovnqoanlkvorm&amp;filetype=kml</downloadLink>
-      <createdDate>2009-06-21 14:05:14.0</createdDate>
-      <changedDate>2012-01-11 00:03:35.0</changedDate>
-      <startPointLat>50.9712109</startPointLat>
-      <startPointLon>10.0196599</startPointLon>
-      <endPointLat>50.9711298</endPointLat>
-      <endPointLon>10.0197887</endPointLon>
-      <startPointCountry>DE</startPointCountry>
-      <endPointCountry>DE</endPointCountry>
-      <trackLengthM>9808.537925784149</trackLengthM>
-      <countTrackpoints>72</countTrackpoints>
-      <trackProperty>roundTrip</trackProperty>
-      <altitudeMinHeightM>224</altitudeMinHeightM>
-      <altitudeMaxHeightM>303</altitudeMaxHeightM>
-      <altitudeDifferenceM>79</altitudeDifferenceM>
-      <totalAscentM>151</totalAscentM>
-      <totalDescentM>151</totalDescentM>
-    </track>
-    <track>
-      <title>Über den Lindig, Wildeck-Richelsdorf</title>
-      <fileId>lfpoplgnqkiwbwaq</fileId>
-      <downloadLink>http://www.gpsies.com/download.do?fileId=lfpoplgnqkiwbwaq&amp;filetype=kml</downloadLink>
-      <createdDate>2009-06-18 12:11:54.0</createdDate>
-      <changedDate>2012-01-11 00:03:35.0</changedDate>
-      <startPointLat>50.9712110</startPointLat>
-      <startPointLon>10.0197240</startPointLon>
-      <endPointLat>50.9710760</endPointLat>
-      <endPointLon>10.0197670</endPointLon>
-      <startPointCountry>DE</startPointCountry>
-      <endPointCountry>DE</endPointCountry>
-      <trackLengthM>6386.2380681237</trackLengthM>
-      <countTrackpoints>59</countTrackpoints>
-      <trackProperty>roundTrip</trackProperty>
-      <altitudeMinHeightM>241</altitudeMinHeightM>
-      <altitudeMaxHeightM>360</altitudeMaxHeightM>
-      <altitudeDifferenceM>119</altitudeDifferenceM>
-      <totalAscentM>125</totalAscentM>
-      <totalDescentM>125</totalDescentM>
-    </track>
-    <track>
-      <title>Waldrunde in Wildeck-Richelsdorf</title>
-      <fileId>wtgksoblyodfkvap</fileId>
-      <downloadLink>http://www.gpsies.com/download.do?fileId=wtgksoblyodfkvap&amp;filetype=kml</downloadLink>
-      <createdDate>2009-06-18 12:21:05.0</createdDate>
-      <changedDate>2012-01-11 00:03:35.0</changedDate>
-      <startPointLat>50.9712380</startPointLat>
-      <startPointLon>10.0197890</startPointLon>
-      <endPointLat>50.9711030</endPointLat>
-      <endPointLon>10.0198850</endPointLon>
-      <startPointCountry>DE</startPointCountry>
-      <endPointCountry>DE</endPointCountry>
-      <trackLengthM>9023.36514254836</trackLengthM>
-      <countTrackpoints>140</countTrackpoints>
-      <trackProperty>roundTrip</trackProperty>
-      <altitudeMinHeightM>230</altitudeMinHeightM>
-      <altitudeMaxHeightM>381</altitudeMaxHeightM>
-      <altitudeDifferenceM>151</altitudeDifferenceM>
-      <totalAscentM>317</totalAscentM>
-      <totalDescentM>317</totalDescentM>
-    </track>
-    <track>
-      <title>Bergwaldstrecke Wildeck-Richelsdorf</title>
-      <fileId>evporjulkrjsgdbt</fileId>
-      <downloadLink>http://www.gpsies.com/download.do?fileId=evporjulkrjsgdbt&amp;filetype=kml</downloadLink>
-      <createdDate>2009-05-15 13:42:59.0</createdDate>
-      <changedDate>2012-01-11 00:03:35.0</changedDate>
-      <description>nach dem ersten Drittel ziemlich steil, schönen Grüß an die Oberschenkel ...</description>
-      <startPointLat>50.9711501</startPointLat>
-      <startPointLon>10.0196707</startPointLon>
-      <endPointLat>50.9711771</endPointLat>
-      <endPointLon>10.0197672</endPointLon>
-      <startPointCountry>DE</startPointCountry>
-      <endPointCountry>DE</endPointCountry>
-      <trackLengthM>3707.7492718490503</trackLengthM>
-      <countTrackpoints>66</countTrackpoints>
-      <trackProperty>roundTrip</trackProperty>
-      <altitudeMinHeightM>244</altitudeMinHeightM>
-      <altitudeMaxHeightM>381</altitudeMaxHeightM>
-      <altitudeDifferenceM>137</altitudeDifferenceM>
-      <totalAscentM>151</totalAscentM>
-      <totalDescentM>151</totalDescentM>
-    </track>
-    <track>
-      <title>Blankenbach, Kohlbach, Fuldischer Berg, Gerstungen</title>
-      <fileId>eswxbqvaapuxucsc</fileId>
-      <downloadLink>http://www.gpsies.com/download.do?fileId=eswxbqvaapuxucsc&amp;filetype=kml</downloadLink>
-      <createdDate>2009-06-18 12:15:03.0</createdDate>
-      <changedDate>2012-01-11 00:03:35.0</changedDate>
-      <startPointLat>50.9712650</startPointLat>
-      <startPointLon>10.0199600</startPointLon>
-      <endPointLat>50.9708870</endPointLat>
-      <endPointLon>10.0204320</endPointLon>
-      <startPointCountry>DE</startPointCountry>
-      <endPointCountry>DE</endPointCountry>
-      <trackLengthM>16258.9481862694</trackLengthM>
-      <countTrackpoints>145</countTrackpoints>
-      <trackProperty>roundTrip</trackProperty>
-      <altitudeMinHeightM>247</altitudeMinHeightM>
-      <altitudeMaxHeightM>359</altitudeMaxHeightM>
-      <altitudeDifferenceM>112</altitudeDifferenceM>
-      <totalAscentM>391</totalAscentM>
-      <totalDescentM>399</totalDescentM>
-    </track>
-    <track>
-      <title>esw-kl-laufen 2011-04-09b (Zeit: 01:09:12)</title>
-      <fileId>gvxvgfyhgbrigayd</fileId>
-      <downloadLink>http://www.gpsies.com/download.do?fileId=gvxvgfyhgbrigayd&amp;filetype=kml</downloadLink>
-      <createdDate>2011-04-10 21:45:35.0</createdDate>
-      <changedDate>2012-01-11 00:03:35.0</changedDate>
-      <startPointLat>50.9473427</startPointLat>
-      <startPointLon>10.0222041</startPointLon>
-      <endPointLat>50.9464717</endPointLat>
-      <endPointLon>10.0227789</endPointLon>
-      <startPointCountry>DE</startPointCountry>
-      <endPointCountry>DE</endPointCountry>
-      <trackLengthM>13479.3459638154</trackLengthM>
-      <countTrackpoints>895</countTrackpoints>
-      <trackProperty>roundTrip</trackProperty>
-      <altitudeMinHeightM>202</altitudeMinHeightM>
-      <altitudeMaxHeightM>239</altitudeMaxHeightM>
-      <altitudeDifferenceM>37</altitudeDifferenceM>
-      <totalAscentM>89</totalAscentM>
-      <totalDescentM>88</totalDescentM>
-    </track>
-    <track>
-      <title>esw-kl-laufen 2011-04-10 (Zeit: 01:00:54)</title>
-      <fileId>jjhpvwhapjfqvpqv</fileId>
-      <downloadLink>http://www.gpsies.com/download.do?fileId=jjhpvwhapjfqvpqv&amp;filetype=kml</downloadLink>
-      <createdDate>2011-04-10 21:54:50.0</createdDate>
-      <changedDate>2012-01-11 00:03:35.0</changedDate>
-      <description>Bahntraining in Obersuhl: 2800 m in 10:59,45 Min. mit 8 Sprints 5000 m in 19:37,52 Min. Steigerung (4:10 - 4:04 - 3:54 - 3:46 - 3:42 Min.)</description>
-      <startPointLat>50.9477643</startPointLat>
-      <startPointLon>10.0243844</startPointLon>
-      <endPointLat>50.9478288</endPointLat>
-      <endPointLon>10.0246652</endPointLon>
-      <startPointCountry>DE</startPointCountry>
-      <endPointCountry>DE</endPointCountry>
-      <trackLengthM>12815.232534667499</trackLengthM>
-      <countTrackpoints>840</countTrackpoints>
-      <trackProperty>roundTrip</trackProperty>
-      <altitudeMinHeightM>212</altitudeMinHeightM>
-      <altitudeMaxHeightM>239</altitudeMaxHeightM>
-      <altitudeDifferenceM>27</altitudeDifferenceM>
-      <totalAscentM>178</totalAscentM>
-      <totalDescentM>185</totalDescentM>
-    </track>
-    <track>
-      <title>esw-kl-laufen 2011-04-09a (Zeit: 01:38:58)</title>
-      <fileId>mqhqwfbqcremhebm</fileId>
-      <downloadLink>http://www.gpsies.com/download.do?fileId=mqhqwfbqcremhebm&amp;filetype=kml</downloadLink>
-      <createdDate>2011-04-10 21:42:34.0</createdDate>
-      <changedDate>2012-01-11 00:03:35.0</changedDate>
-      <startPointLat>50.9466529</startPointLat>
-      <startPointLon>10.0221817</startPointLon>
-      <endPointLat>50.9479126</endPointLat>
-      <endPointLon>10.0246201</endPointLon>
-      <startPointCountry>DE</startPointCountry>
-      <endPointCountry>DE</endPointCountry>
-      <trackLengthM>20152.999310353098</trackLengthM>
-      <countTrackpoints>1285</countTrackpoints>
-      <trackProperty>roundTrip</trackProperty>
-      <altitudeMinHeightM>136</altitudeMinHeightM>
-      <altitudeMaxHeightM>448</altitudeMaxHeightM>
-      <altitudeDifferenceM>312</altitudeDifferenceM>
-      <totalAscentM>427</totalAscentM>
-      <totalDescentM>342</totalDescentM>
-    </track>
-    <track>
-      <title>Husarenallee Waldrundweg Sontra Süd-Ost</title>
-      <fileId>pahzgrdkziivcinw</fileId>
-      <downloadLink>http://www.gpsies.com/download.do?fileId=pahzgrdkziivcinw&amp;filetype=kml</downloadLink>
-      <createdDate>2007-09-10 11:29:57.0</createdDate>
-      <changedDate>2012-01-11 00:03:35.0</changedDate>
-      <description>Ein sehr schöner Track der an Landesgrenze Hessen - Thüringen verläuft. Optimal für leichtes Ausdauertraining im hügelichen Bereich. Sehr gut geeignet für Trekking- und Mountainbike. Der Streckenverlauf beginnt auf der Husarenallee 100, 36205 Sontra, (Husarenkaserne) und führt Sie über mehrere kleine Dörfer: Lindau - Erdmannshain - Wölferrode - Tannenberg - Weißenhasel - Lindau. Der regelmäßige Wechsel der Wegbeschaffenheit und die Fahrt über Dörfer, Wald und Wiese lassen diesen Track nicht langweilig werden. Zusätzlichen Anspruch bekommt die Strecke durch das ständige Auf und Ab der bis zu 425m (ü.n.N) hohen Hügel. Zusammenfassend eignet sich die Strecke für kurzes aber knackiges Fahrradtraining. Viel Spaß!</description>
-      <startPointLat>51.0475052</startPointLat>
-      <startPointLon>9.95644569</startPointLon>
-      <endPointLat>51.0476266</endPointLat>
-      <endPointLon>9.95734691</endPointLon>
-      <startPointCountry>DE</startPointCountry>
-      <endPointCountry>DE</endPointCountry>
-      <trackLengthM>29729.1863849862</trackLengthM>
-      <countTrackpoints>316</countTrackpoints>
-      <trackProperty>roundTrip</trackProperty>
-      <altitudeMinHeightM>0</altitudeMinHeightM>
-      <altitudeMaxHeightM>418</altitudeMaxHeightM>
-      <altitudeDifferenceM>418</altitudeDifferenceM>
-      <totalAscentM>0</totalAscentM>
-      <totalDescentM>0</totalDescentM>
-    </track>
-    <track>
-      <title>Wildeck, 9,47 km</title>
-      <fileId>udleadodgkchpikx</fileId>
-      <downloadLink>http://www.gpsies.com/download.do?fileId=udleadodgkchpikx&amp;filetype=kml</downloadLink>
-      <createdDate>2010-01-18 22:05:05.0</createdDate>
-      <changedDate>2012-01-11 00:03:35.0</changedDate>
-      <description>Flach</description>
-      <startPointLat>50.9487145</startPointLat>
-      <startPointLon>10.0407099</startPointLon>
-      <endPointLat>50.9486942</endPointLat>
-      <endPointLon>10.0406724</endPointLon>
-      <startPointCountry>DE</startPointCountry>
-      <endPointCountry>DE</endPointCountry>
-      <trackLengthM>9600.46544037226</trackLengthM>
-      <countTrackpoints>471</countTrackpoints>
-      <trackProperty>roundTrip</trackProperty>
-      <altitudeMinHeightM>206</altitudeMinHeightM>
-      <altitudeMaxHeightM>222</altitudeMaxHeightM>
-      <altitudeDifferenceM>16</altitudeDifferenceM>
-      <totalAscentM>27</totalAscentM>
-      <totalDescentM>27</totalDescentM>
-    </track>
-    <track>
-      <title>Kleiner Rundweg-Nentershausen</title>
-      <fileId>zkjfhjmzhenvszlr</fileId>
-      <downloadLink>http://www.gpsies.com/download.do?fileId=zkjfhjmzhenvszlr&amp;filetype=kml</downloadLink>
-      <createdDate>2010-10-14 12:56:31.0</createdDate>
-      <changedDate>2012-01-11 00:03:35.0</changedDate>
-      <startPointLat>51.0147401</startPointLat>
-      <startPointLon>9.93526697</startPointLon>
-      <endPointLat>51.0147500</endPointLat>
-      <endPointLon>9.93528000</endPointLon>
-      <startPointCountry>DE</startPointCountry>
-      <endPointCountry>DE</endPointCountry>
-      <trackLengthM>6952.596076113479</trackLengthM>
-      <countTrackpoints>146</countTrackpoints>
-      <trackProperty>roundTrip</trackProperty>
-      <altitudeMinHeightM>289</altitudeMinHeightM>
-      <altitudeMaxHeightM>438</altitudeMaxHeightM>
-      <altitudeDifferenceM>149</altitudeDifferenceM>
-      <totalAscentM>193</totalAscentM>
-      <totalDescentM>193</totalDescentM>
-    </track>
-    <track>
-      <title>Rundweg-Nentershausen</title>
-      <fileId>buubdfdxmjhntblf</fileId>
-      <downloadLink>http://www.gpsies.com/download.do?fileId=buubdfdxmjhntblf&amp;filetype=kml</downloadLink>
-      <createdDate>2010-10-13 13:14:57.0</createdDate>
-      <changedDate>2012-01-11 00:03:35.0</changedDate>
-      <description>Start am Gutshof in Nentershausen, über den Marktplatz, an der Kirche und dem Friedhof vorbei zu den 3-Kastanien dem Anstieg folgen. An der T-Kreuzung rechts dem Weg zur nächsten grossen Kreuzung folgen. Dort links ab in die Senke laufen. Den nächsten Abzweig links folgen und dem Anstieg bis zur Strasse folgen. Ein kurzes Stück bergab nach Nentershausen der Strasse folgen und dann rechts in den Weg Richtung Wald abbiegen. An der Waldgrenze links den Weg Richtung Bauernhof folgen. Den Hof links liegen lassen und auf dem Höhenweg rechts Richtung Gutshof folgen - geschafft  :o)</description>
-      <startPointLat>51.0145950</startPointLat>
-      <startPointLon>9.93454813</startPointLon>
-      <endPointLat>51.0146000</endPointLat>
-      <endPointLon>9.93455000</endPointLon>
-      <startPointCountry>DE</startPointCountry>
-      <endPointCountry>DE</endPointCountry>
-      <trackLengthM>9510.37829145722</trackLengthM>
-      <countTrackpoints>211</countTrackpoints>
-      <trackProperty>roundTrip</trackProperty>
-      <altitudeMinHeightM>289</altitudeMinHeightM>
-      <altitudeMaxHeightM>438</altitudeMaxHeightM>
-      <altitudeDifferenceM>149</altitudeDifferenceM>
-      <totalAscentM>235</totalAscentM>
-      <totalDescentM>235</totalDescentM>
-    </track>
-    <track>
-      <title>Nentershausen</title>
-      <fileId>hcrgwbnlbofzugzg</fileId>
-      <downloadLink>http://www.gpsies.com/download.do?fileId=hcrgwbnlbofzugzg&amp;filetype=kml</downloadLink>
-      <createdDate>2010-06-17 20:04:03.0</createdDate>
-      <changedDate>2012-01-11 00:03:35.0</changedDate>
-      <startPointLat>51.0145660</startPointLat>
-      <startPointLon>9.92542300</startPointLon>
-      <endPointLat>51.0199900</endPointLat>
-      <endPointLon>9.91733000</endPointLon>
-      <startPointCountry>DE</startPointCountry>
-      <endPointCountry>DE</endPointCountry>
-      <trackLengthM>5776.8303009744295</trackLengthM>
-      <countTrackpoints>337</countTrackpoints>
-      <trackProperty>roundTrip</trackProperty>
-      <altitudeMinHeightM>288</altitudeMinHeightM>
-      <altitudeMaxHeightM>373</altitudeMaxHeightM>
-      <altitudeDifferenceM>85</altitudeDifferenceM>
-      <totalAscentM>157</totalAscentM>
-      <totalDescentM>141</totalDescentM>
-    </track>
-    <track>
-      <title>Radtour Rhäden</title>
-      <fileId>ijqkdxvvucetjngc</fileId>
-      <downloadLink>http://www.gpsies.com/download.do?fileId=ijqkdxvvucetjngc&amp;filetype=kml</downloadLink>
-      <createdDate>2011-06-04 09:59:46.0</createdDate>
-      <changedDate>2012-01-11 00:03:35.0</changedDate>
-      <startPointLat>50.9599086</startPointLat>
-      <startPointLon>10.0646761</startPointLon>
-      <endPointLat>50.9599747</endPointLat>
-      <endPointLon>10.0647617</endPointLon>
-      <startPointCountry>DE</startPointCountry>
-      <endPointCountry>DE</endPointCountry>
-      <trackLengthM>16316.741077094</trackLengthM>
-      <countTrackpoints>347</countTrackpoints>
-      <trackProperty>roundTrip</trackProperty>
-      <altitudeMinHeightM>208</altitudeMinHeightM>
-      <altitudeMaxHeightM>229</altitudeMaxHeightM>
-      <altitudeDifferenceM>21</altitudeDifferenceM>
-      <totalAscentM>30</totalAscentM>
-      <totalDescentM>43</totalDescentM>
-    </track>
-    <track>
-      <title>kleine_Runde_BW_Bolzplatz</title>
-      <fileId>xynexubyxgciemct</fileId>
-      <downloadLink>http://www.gpsies.com/download.do?fileId=xynexubyxgciemct&amp;filetype=kml</downloadLink>
-      <createdDate>2012-03-01 19:43:20.0</createdDate>
-      <changedDate>2012-03-01 19:43:21.0</changedDate>
-      <startPointLat>51.0633363</startPointLat>
-      <startPointLon>9.95605945</startPointLon>
-      <endPointLat>51.0634000</endPointLat>
-      <endPointLon>9.95599000</endPointLon>
-      <startPointCountry>DE</startPointCountry>
-      <endPointCountry>DE</endPointCountry>
-      <trackLengthM>3459.4384973595397</trackLengthM>
-      <countTrackpoints>73</countTrackpoints>
-      <trackProperty>roundTrip</trackProperty>
-      <altitudeMinHeightM>325</altitudeMinHeightM>
-      <altitudeMaxHeightM>424</altitudeMaxHeightM>
-      <altitudeDifferenceM>99</altitudeDifferenceM>
-      <totalAscentM>95</totalAscentM>
-      <totalDescentM>104</totalDescentM>
-    </track>
-    <track>
-      <title>Permanenter Weg in Dankmarshausen</title>
-      <fileId>bmpmisqfslhowvfx</fileId>
-      <downloadLink>http://www.gpsies.com/download.do?fileId=bmpmisqfslhowvfx&amp;filetype=kml</downloadLink>
-      <createdDate>2009-10-19 18:31:38.0</createdDate>
-      <changedDate>2012-01-11 00:03:35.0</changedDate>
-      <startPointLat>50.9243317</startPointLat>
-      <startPointLon>10.0147375</startPointLon>
-      <endPointLat>50.9243588</endPointLat>
-      <endPointLon>10.0147623</endPointLon>
-      <startPointCountry>DE</startPointCountry>
-      <endPointCountry>DE</endPointCountry>
-      <trackLengthM>8695.90494687104</trackLengthM>
-      <countTrackpoints>789</countTrackpoints>
-      <trackProperty>roundTrip</trackProperty>
-      <externalLink>http://www.esterer-web.de/dankmarshausen/dankmarshausen.htm</externalLink>
-      <altitudeMinHeightM>205</altitudeMinHeightM>
-      <altitudeMaxHeightM>255</altitudeMaxHeightM>
-      <altitudeDifferenceM>50</altitudeDifferenceM>
-      <totalAscentM>79</totalAscentM>
-      <totalDescentM>81</totalDescentM>
-    </track>
-    <track>
-      <title>IVV PW Dankmarshausen Hessisch-Thüringische Grenzwanderung durch die Rhäden</title>
-      <fileId>ekktqargzqcuwsmq</fileId>
-      <downloadLink>http://www.gpsies.com/download.do?fileId=ekktqargzqcuwsmq&amp;filetype=kml</downloadLink>
-      <createdDate>2009-06-22 19:25:26.0</createdDate>
-      <changedDate>2012-02-10 18:01:26.0</changedDate>
-      <description>(8-310-15)</description>
-      <startPointLat>50.9238606</startPointLat>
-      <startPointLon>10.0155991</startPointLon>
-      <endPointLat>50.9238673</endPointLat>
-      <endPointLon>10.0155937</endPointLon>
-      <startPointCountry>DE</startPointCountry>
-      <endPointCountry>DE</endPointCountry>
-      <trackLengthM>12857.8867433156</trackLengthM>
-      <countTrackpoints>228</countTrackpoints>
-      <trackProperty>roundTrip</trackProperty>
-      <externalLink>http://www.volkswandern.info</externalLink>
-      <altitudeMinHeightM>210</altitudeMinHeightM>
-      <altitudeMaxHeightM>283</altitudeMaxHeightM>
-      <altitudeDifferenceM>73</altitudeDifferenceM>
-      <totalAscentM>137</totalAscentM>
-      <totalDescentM>126</totalDescentM>
-    </track>
-  </tracks>
-</gpsies>
-
+<?xml version="1.0" encoding="UTF-8"?><gpsies>  <meta>    <requestUrl>http://www.gpsies.org/api.do?trackTypes=jogging&amp;limit=20&amp;perimeter=80&amp;filetype=kml&amp;key=czxpyyinrqaektof&amp;lat=51&amp;lon=10</requestUrl>    <lat>51</lat>    <lon>10</lon>    <perimeter>80.0</perimeter>    <trackType>jogging</trackType>    <trackType>jogging</trackType>    <resultPage>1</resultPage>    <limit>20</limit>    <filetype>kml</filetype>    <downloadBaseUrl>http://www.gpsies.com/download.do?</downloadBaseUrl>    <northWestLat>50.28005759539237</northWestLat>    <northWestLon>8.856000195057057</northWestLon>    <southEastLat>51.71994240460763</southEastLat>    <southEastLon>11.143999804942943</southEastLon>    <resultSize>20</resultSize>  </meta>  <tracks>    <track>      <title>Tour de Suess ???</title>      <fileId>gypjnkjxjzbvbzfj</fileId>      <downloadLink>http://www.gpsies.com/download.do?fileId=gypjnkjxjzbvbzfj&amp;filetype=kml</downloadLink>      <createdDate>2009-05-15 19:00:55.0</createdDate>      <changedDate>2012-01-11 00:03:35.0</changedDate>      <startPointLat>50.9868000</startPointLat>      <startPointLon>9.98126000</startPointLon>      <endPointLat>50.9969900</endPointLat>      <endPointLon>9.96653000</endPointLon>      <startPointCountry>DE</startPointCountry>      <endPointCountry>DE</endPointCountry>      <trackLengthM>2440.2877562923104</trackLengthM>      <countTrackpoints>63</countTrackpoints>      <trackProperty>oneWayTrip</trackProperty>      <altitudeMinHeightM>281</altitudeMinHeightM>      <altitudeMaxHeightM>444</altitudeMaxHeightM>      <altitudeDifferenceM>163</altitudeDifferenceM>      <totalAscentM>163</totalAscentM>      <totalDescentM>0</totalDescentM>    </track>    <track>      <title>Über den Lindig Nr. 2, Wildeck</title>      <fileId>okusufsewvqpfxwy</fileId>      <downloadLink>http://www.gpsies.com/download.do?fileId=okusufsewvqpfxwy&amp;filetype=kml</downloadLink>      <createdDate>2009-06-21 14:33:41.0</createdDate>      <changedDate>2012-01-11 00:03:35.0</changedDate>      <startPointLat>50.9715473</startPointLat>      <startPointLon>10.0198151</startPointLon>      <endPointLat>50.9713646</endPointLat>      <endPointLon>10.0202278</endPointLon>      <startPointCountry>DE</startPointCountry>      <endPointCountry>DE</endPointCountry>      <trackLengthM>7082.93264740351</trackLengthM>      <countTrackpoints>56</countTrackpoints>      <trackProperty>roundTrip</trackProperty>      <altitudeMinHeightM>241</altitudeMinHeightM>      <altitudeMaxHeightM>360</altitudeMaxHeightM>      <altitudeDifferenceM>119</altitudeDifferenceM>      <totalAscentM>104</totalAscentM>      <totalDescentM>104</totalDescentM>    </track>    <track>      <title>Kurze bergstrecke in Wildeck</title>      <fileId>qwfuyiofzgyajdaq</fileId>      <downloadLink>http://www.gpsies.com/download.do?fileId=qwfuyiofzgyajdaq&amp;filetype=kml</downloadLink>      <createdDate>2009-06-18 12:35:20.0</createdDate>      <changedDate>2012-01-11 00:03:35.0</changedDate>      <startPointLat>50.9712790</startPointLat>      <startPointLon>10.0195530</startPointLon>      <endPointLat>50.9711030</endPointLat>      <endPointLon>10.0196170</endPointLon>      <startPointCountry>DE</startPointCountry>      <endPointCountry>DE</endPointCountry>      <trackLengthM>4864.15414848439</trackLengthM>      <countTrackpoints>38</countTrackpoints>      <trackProperty>roundTrip</trackProperty>      <altitudeMinHeightM>226</altitudeMinHeightM>      <altitudeMaxHeightM>303</altitudeMaxHeightM>      <altitudeDifferenceM>77</altitudeDifferenceM>      <totalAscentM>76</totalAscentM>      <totalDescentM>82</totalDescentM>    </track>    <track>      <title>Richelsdorf, Bosserode, Obersuhl, Richelsdorf</title>      <fileId>biqovnqoanlkvorm</fileId>      <downloadLink>http://www.gpsies.com/download.do?fileId=biqovnqoanlkvorm&amp;filetype=kml</downloadLink>      <createdDate>2009-06-21 14:05:14.0</createdDate>      <changedDate>2012-01-11 00:03:35.0</changedDate>      <startPointLat>50.9712109</startPointLat>      <startPointLon>10.0196599</startPointLon>      <endPointLat>50.9711298</endPointLat>      <endPointLon>10.0197887</endPointLon>      <startPointCountry>DE</startPointCountry>      <endPointCountry>DE</endPointCountry>      <trackLengthM>9808.537925784149</trackLengthM>      <countTrackpoints>72</countTrackpoints>      <trackProperty>roundTrip</trackProperty>      <altitudeMinHeightM>224</altitudeMinHeightM>      <altitudeMaxHeightM>303</altitudeMaxHeightM>      <altitudeDifferenceM>79</altitudeDifferenceM>      <totalAscentM>151</totalAscentM>      <totalDescentM>151</totalDescentM>    </track>    <track>      <title>Über den Lindig, Wildeck-Richelsdorf</title>      <fileId>lfpoplgnqkiwbwaq</fileId>      <downloadLink>http://www.gpsies.com/download.do?fileId=lfpoplgnqkiwbwaq&amp;filetype=kml</downloadLink>      <createdDate>2009-06-18 12:11:54.0</createdDate>      <changedDate>2012-01-11 00:03:35.0</changedDate>      <startPointLat>50.9712110</startPointLat>      <startPointLon>10.0197240</startPointLon>      <endPointLat>50.9710760</endPointLat>      <endPointLon>10.0197670</endPointLon>      <startPointCountry>DE</startPointCountry>      <endPointCountry>DE</endPointCountry>      <trackLengthM>6386.2380681237</trackLengthM>      <countTrackpoints>59</countTrackpoints>      <trackProperty>roundTrip</trackProperty>      <altitudeMinHeightM>241</altitudeMinHeightM>      <altitudeMaxHeightM>360</altitudeMaxHeightM>      <altitudeDifferenceM>119</altitudeDifferenceM>      <totalAscentM>125</totalAscentM>      <totalDescentM>125</totalDescentM>    </track>    <track>      <title>Waldrunde in Wildeck-Richelsdorf</title>      <fileId>wtgksoblyodfkvap</fileId>      <downloadLink>http://www.gpsies.com/download.do?fileId=wtgksoblyodfkvap&amp;filetype=kml</downloadLink>      <createdDate>2009-06-18 12:21:05.0</createdDate>      <changedDate>2012-01-11 00:03:35.0</changedDate>      <startPointLat>50.9712380</startPointLat>      <startPointLon>10.0197890</startPointLon>      <endPointLat>50.9711030</endPointLat>      <endPointLon>10.0198850</endPointLon>      <startPointCountry>DE</startPointCountry>      <endPointCountry>DE</endPointCountry>      <trackLengthM>9023.36514254836</trackLengthM>      <countTrackpoints>140</countTrackpoints>      <trackProperty>roundTrip</trackProperty>      <altitudeMinHeightM>230</altitudeMinHeightM>      <altitudeMaxHeightM>381</altitudeMaxHeightM>      <altitudeDifferenceM>151</altitudeDifferenceM>      <totalAscentM>317</totalAscentM>      <totalDescentM>317</totalDescentM>    </track>    <track>      <title>Bergwaldstrecke Wildeck-Richelsdorf</title>      <fileId>evporjulkrjsgdbt</fileId>      <downloadLink>http://www.gpsies.com/download.do?fileId=evporjulkrjsgdbt&amp;filetype=kml</downloadLink>      <createdDate>2009-05-15 13:42:59.0</createdDate>      <changedDate>2012-01-11 00:03:35.0</changedDate>      <description>nach dem ersten Drittel ziemlich steil, schönen Grüß an die Oberschenkel ...</description>      <startPointLat>50.9711501</startPointLat>      <startPointLon>10.0196707</startPointLon>      <endPointLat>50.9711771</endPointLat>      <endPointLon>10.0197672</endPointLon>      <startPointCountry>DE</startPointCountry>      <endPointCountry>DE</endPointCountry>      <trackLengthM>3707.7492718490503</trackLengthM>      <countTrackpoints>66</countTrackpoints>      <trackProperty>roundTrip</trackProperty>      <altitudeMinHeightM>244</altitudeMinHeightM>      <altitudeMaxHeightM>381</altitudeMaxHeightM>      <altitudeDifferenceM>137</altitudeDifferenceM>      <totalAscentM>151</totalAscentM>      <totalDescentM>151</totalDescentM>    </track>    <track>      <title>Blankenbach, Kohlbach, Fuldischer Berg, Gerstungen</title>      <fileId>eswxbqvaapuxucsc</fileId>      <downloadLink>http://www.gpsies.com/download.do?fileId=eswxbqvaapuxucsc&amp;filetype=kml</downloadLink>      <createdDate>2009-06-18 12:15:03.0</createdDate>      <changedDate>2012-01-11 00:03:35.0</changedDate>      <startPointLat>50.9712650</startPointLat>      <startPointLon>10.0199600</startPointLon>      <endPointLat>50.9708870</endPointLat>      <endPointLon>10.0204320</endPointLon>      <startPointCountry>DE</startPointCountry>      <endPointCountry>DE</endPointCountry>      <trackLengthM>16258.9481862694</trackLengthM>      <countTrackpoints>145</countTrackpoints>      <trackProperty>roundTrip</trackProperty>      <altitudeMinHeightM>247</altitudeMinHeightM>      <altitudeMaxHeightM>359</altitudeMaxHeightM>      <altitudeDifferenceM>112</altitudeDifferenceM>      <totalAscentM>391</totalAscentM>      <totalDescentM>399</totalDescentM>    </track>    <track>      <title>esw-kl-laufen 2011-04-09b (Zeit: 01:09:12)</title>      <fileId>gvxvgfyhgbrigayd</fileId>      <downloadLink>http://www.gpsies.com/download.do?fileId=gvxvgfyhgbrigayd&amp;filetype=kml</downloadLink>      <createdDate>2011-04-10 21:45:35.0</createdDate>      <changedDate>2012-01-11 00:03:35.0</changedDate>      <startPointLat>50.9473427</startPointLat>      <startPointLon>10.0222041</startPointLon>      <endPointLat>50.9464717</endPointLat>      <endPointLon>10.0227789</endPointLon>      <startPointCountry>DE</startPointCountry>      <endPointCountry>DE</endPointCountry>      <trackLengthM>13479.3459638154</trackLengthM>      <countTrackpoints>895</countTrackpoints>      <trackProperty>roundTrip</trackProperty>      <altitudeMinHeightM>202</altitudeMinHeightM>      <altitudeMaxHeightM>239</altitudeMaxHeightM>      <altitudeDifferenceM>37</altitudeDifferenceM>      <totalAscentM>89</totalAscentM>      <totalDescentM>88</totalDescentM>    </track>    <track>      <title>esw-kl-laufen 2011-04-10 (Zeit: 01:00:54)</title>      <fileId>jjhpvwhapjfqvpqv</fileId>      <downloadLink>http://www.gpsies.com/download.do?fileId=jjhpvwhapjfqvpqv&amp;filetype=kml</downloadLink>      <createdDate>2011-04-10 21:54:50.0</createdDate>      <changedDate>2012-01-11 00:03:35.0</changedDate>      <description>Bahntraining in Obersuhl: 2800 m in 10:59,45 Min. mit 8 Sprints 5000 m in 19:37,52 Min. Steigerung (4:10 - 4:04 - 3:54 - 3:46 - 3:42 Min.)</description>      <startPointLat>50.9477643</startPointLat>      <startPointLon>10.0243844</startPointLon>      <endPointLat>50.9478288</endPointLat>      <endPointLon>10.0246652</endPointLon>      <startPointCountry>DE</startPointCountry>      <endPointCountry>DE</endPointCountry>      <trackLengthM>12815.232534667499</trackLengthM>      <countTrackpoints>840</countTrackpoints>      <trackProperty>roundTrip</trackProperty>      <altitudeMinHeightM>212</altitudeMinHeightM>      <altitudeMaxHeightM>239</altitudeMaxHeightM>      <altitudeDifferenceM>27</altitudeDifferenceM>      <totalAscentM>178</totalAscentM>      <totalDescentM>185</totalDescentM>    </track>    <track>      <title>esw-kl-laufen 2011-04-09a (Zeit: 01:38:58)</title>      <fileId>mqhqwfbqcremhebm</fileId>      <downloadLink>http://www.gpsies.com/download.do?fileId=mqhqwfbqcremhebm&amp;filetype=kml</downloadLink>      <createdDate>2011-04-10 21:42:34.0</createdDate>      <changedDate>2012-01-11 00:03:35.0</changedDate>      <startPointLat>50.9466529</startPointLat>      <startPointLon>10.0221817</startPointLon>      <endPointLat>50.9479126</endPointLat>      <endPointLon>10.0246201</endPointLon>      <startPointCountry>DE</startPointCountry>      <endPointCountry>DE</endPointCountry>      <trackLengthM>20152.999310353098</trackLengthM>      <countTrackpoints>1285</countTrackpoints>      <trackProperty>roundTrip</trackProperty>      <altitudeMinHeightM>136</altitudeMinHeightM>      <altitudeMaxHeightM>448</altitudeMaxHeightM>      <altitudeDifferenceM>312</altitudeDifferenceM>      <totalAscentM>427</totalAscentM>      <totalDescentM>342</totalDescentM>    </track>    <track>      <title>Husarenallee Waldrundweg Sontra Süd-Ost</title>      <fileId>pahzgrdkziivcinw</fileId>      <downloadLink>http://www.gpsies.com/download.do?fileId=pahzgrdkziivcinw&amp;filetype=kml</downloadLink>      <createdDate>2007-09-10 11:29:57.0</createdDate>      <changedDate>2012-01-11 00:03:35.0</changedDate>      <description>Ein sehr schöner Track der an Landesgrenze Hessen - Thüringen verläuft. Optimal für leichtes Ausdauertraining im hügelichen Bereich. Sehr gut geeignet für Trekking- und Mountainbike. Der Streckenverlauf beginnt auf der Husarenallee 100, 36205 Sontra, (Husarenkaserne) und führt Sie über mehrere kleine Dörfer: Lindau - Erdmannshain - Wölferrode - Tannenberg - Weißenhasel - Lindau. Der regelmäßige Wechsel der Wegbeschaffenheit und die Fahrt über Dörfer, Wald und Wiese lassen diesen Track nicht langweilig werden. Zusätzlichen Anspruch bekommt die Strecke durch das ständige Auf und Ab der bis zu 425m (ü.n.N) hohen Hügel. Zusammenfassend eignet sich die Strecke für kurzes aber knackiges Fahrradtraining. Viel Spaß!</description>      <startPointLat>51.0475052</startPointLat>      <startPointLon>9.95644569</startPointLon>      <endPointLat>51.0476266</endPointLat>      <endPointLon>9.95734691</endPointLon>      <startPointCountry>DE</startPointCountry>      <endPointCountry>DE</endPointCountry>      <trackLengthM>29729.1863849862</trackLengthM>      <countTrackpoints>316</countTrackpoints>      <trackProperty>roundTrip</trackProperty>      <altitudeMinHeightM>0</altitudeMinHeightM>      <altitudeMaxHeightM>418</altitudeMaxHeightM>      <altitudeDifferenceM>418</altitudeDifferenceM>      <totalAscentM>0</totalAscentM>      <totalDescentM>0</totalDescentM>    </track>    <track>      <title>Wildeck, 9,47 km</title>      <fileId>udleadodgkchpikx</fileId>      <downloadLink>http://www.gpsies.com/download.do?fileId=udleadodgkchpikx&amp;filetype=kml</downloadLink>      <createdDate>2010-01-18 22:05:05.0</createdDate>      <changedDate>2012-01-11 00:03:35.0</changedDate>      <description>Flach</description>      <startPointLat>50.9487145</startPointLat>      <startPointLon>10.0407099</startPointLon>      <endPointLat>50.9486942</endPointLat>      <endPointLon>10.0406724</endPointLon>      <startPointCountry>DE</startPointCountry>      <endPointCountry>DE</endPointCountry>      <trackLengthM>9600.46544037226</trackLengthM>      <countTrackpoints>471</countTrackpoints>      <trackProperty>roundTrip</trackProperty>      <altitudeMinHeightM>206</altitudeMinHeightM>      <altitudeMaxHeightM>222</altitudeMaxHeightM>      <altitudeDifferenceM>16</altitudeDifferenceM>      <totalAscentM>27</totalAscentM>      <totalDescentM>27</totalDescentM>    </track>    <track>      <title>Kleiner Rundweg-Nentershausen</title>      <fileId>zkjfhjmzhenvszlr</fileId>      <downloadLink>http://www.gpsies.com/download.do?fileId=zkjfhjmzhenvszlr&amp;filetype=kml</downloadLink>      <createdDate>2010-10-14 12:56:31.0</createdDate>      <changedDate>2012-01-11 00:03:35.0</changedDate>      <startPointLat>51.0147401</startPointLat>      <startPointLon>9.93526697</startPointLon>      <endPointLat>51.0147500</endPointLat>      <endPointLon>9.93528000</endPointLon>      <startPointCountry>DE</startPointCountry>      <endPointCountry>DE</endPointCountry>      <trackLengthM>6952.596076113479</trackLengthM>      <countTrackpoints>146</countTrackpoints>      <trackProperty>roundTrip</trackProperty>      <altitudeMinHeightM>289</altitudeMinHeightM>      <altitudeMaxHeightM>438</altitudeMaxHeightM>      <altitudeDifferenceM>149</altitudeDifferenceM>      <totalAscentM>193</totalAscentM>      <totalDescentM>193</totalDescentM>    </track>    <track>      <title>Rundweg-Nentershausen</title>      <fileId>buubdfdxmjhntblf</fileId>      <downloadLink>http://www.gpsies.com/download.do?fileId=buubdfdxmjhntblf&amp;filetype=kml</downloadLink>      <createdDate>2010-10-13 13:14:57.0</createdDate>      <changedDate>2012-01-11 00:03:35.0</changedDate>      <description>Start am Gutshof in Nentershausen, über den Marktplatz, an der Kirche und dem Friedhof vorbei zu den 3-Kastanien dem Anstieg folgen. An der T-Kreuzung rechts dem Weg zur nächsten grossen Kreuzung folgen. Dort links ab in die Senke laufen. Den nächsten Abzweig links folgen und dem Anstieg bis zur Strasse folgen. Ein kurzes Stück bergab nach Nentershausen der Strasse folgen und dann rechts in den Weg Richtung Wald abbiegen. An der Waldgrenze links den Weg Richtung Bauernhof folgen. Den Hof links liegen lassen und auf dem Höhenweg rechts Richtung Gutshof folgen - geschafft  :o)</description>      <startPointLat>51.0145950</startPointLat>      <startPointLon>9.93454813</startPointLon>      <endPointLat>51.0146000</endPointLat>      <endPointLon>9.93455000</endPointLon>      <startPointCountry>DE</startPointCountry>      <endPointCountry>DE</endPointCountry>      <trackLengthM>9510.37829145722</trackLengthM>      <countTrackpoints>211</countTrackpoints>      <trackProperty>roundTrip</trackProperty>      <altitudeMinHeightM>289</altitudeMinHeightM>      <altitudeMaxHeightM>438</altitudeMaxHeightM>      <altitudeDifferenceM>149</altitudeDifferenceM>      <totalAscentM>235</totalAscentM>      <totalDescentM>235</totalDescentM>    </track>    <track>      <title>Nentershausen</title>      <fileId>hcrgwbnlbofzugzg</fileId>      <downloadLink>http://www.gpsies.com/download.do?fileId=hcrgwbnlbofzugzg&amp;filetype=kml</downloadLink>      <createdDate>2010-06-17 20:04:03.0</createdDate>      <changedDate>2012-01-11 00:03:35.0</changedDate>      <startPointLat>51.0145660</startPointLat>      <startPointLon>9.92542300</startPointLon>      <endPointLat>51.0199900</endPointLat>      <endPointLon>9.91733000</endPointLon>      <startPointCountry>DE</startPointCountry>      <endPointCountry>DE</endPointCountry>      <trackLengthM>5776.8303009744295</trackLengthM>      <countTrackpoints>337</countTrackpoints>      <trackProperty>roundTrip</trackProperty>      <altitudeMinHeightM>288</altitudeMinHeightM>      <altitudeMaxHeightM>373</altitudeMaxHeightM>      <altitudeDifferenceM>85</altitudeDifferenceM>      <totalAscentM>157</totalAscentM>      <totalDescentM>141</totalDescentM>    </track>    <track>      <title>Radtour Rhäden</title>      <fileId>ijqkdxvvucetjngc</fileId>      <downloadLink>http://www.gpsies.com/download.do?fileId=ijqkdxvvucetjngc&amp;filetype=kml</downloadLink>      <createdDate>2011-06-04 09:59:46.0</createdDate>      <changedDate>2012-01-11 00:03:35.0</changedDate>      <startPointLat>50.9599086</startPointLat>      <startPointLon>10.0646761</startPointLon>      <endPointLat>50.9599747</endPointLat>      <endPointLon>10.0647617</endPointLon>      <startPointCountry>DE</startPointCountry>      <endPointCountry>DE</endPointCountry>      <trackLengthM>16316.741077094</trackLengthM>      <countTrackpoints>347</countTrackpoints>      <trackProperty>roundTrip</trackProperty>      <altitudeMinHeightM>208</altitudeMinHeightM>      <altitudeMaxHeightM>229</altitudeMaxHeightM>      <altitudeDifferenceM>21</altitudeDifferenceM>      <totalAscentM>30</totalAscentM>      <totalDescentM>43</totalDescentM>    </track>    <track>      <title>kleine_Runde_BW_Bolzplatz</title>      <fileId>xynexubyxgciemct</fileId>      <downloadLink>http://www.gpsies.com/download.do?fileId=xynexubyxgciemct&amp;filetype=kml</downloadLink>      <createdDate>2012-03-01 19:43:20.0</createdDate>      <changedDate>2012-03-01 19:43:21.0</changedDate>      <startPointLat>51.0633363</startPointLat>      <startPointLon>9.95605945</startPointLon>      <endPointLat>51.0634000</endPointLat>      <endPointLon>9.95599000</endPointLon>      <startPointCountry>DE</startPointCountry>      <endPointCountry>DE</endPointCountry>      <trackLengthM>3459.4384973595397</trackLengthM>      <countTrackpoints>73</countTrackpoints>      <trackProperty>roundTrip</trackProperty>      <altitudeMinHeightM>325</altitudeMinHeightM>      <altitudeMaxHeightM>424</altitudeMaxHeightM>      <altitudeDifferenceM>99</altitudeDifferenceM>      <totalAscentM>95</totalAscentM>      <totalDescentM>104</totalDescentM>    </track>    <track>      <title>Permanenter Weg in Dankmarshausen</title>      <fileId>bmpmisqfslhowvfx</fileId>      <downloadLink>http://www.gpsies.com/download.do?fileId=bmpmisqfslhowvfx&amp;filetype=kml</downloadLink>      <createdDate>2009-10-19 18:31:38.0</createdDate>      <changedDate>2012-01-11 00:03:35.0</changedDate>      <startPointLat>50.9243317</startPointLat>      <startPointLon>10.0147375</startPointLon>      <endPointLat>50.9243588</endPointLat>      <endPointLon>10.0147623</endPointLon>      <startPointCountry>DE</startPointCountry>      <endPointCountry>DE</endPointCountry>      <trackLengthM>8695.90494687104</trackLengthM>      <countTrackpoints>789</countTrackpoints>      <trackProperty>roundTrip</trackProperty>      <externalLink>http://www.esterer-web.de/dankmarshausen/dankmarshausen.htm</externalLink>      <altitudeMinHeightM>205</altitudeMinHeightM>      <altitudeMaxHeightM>255</altitudeMaxHeightM>      <altitudeDifferenceM>50</altitudeDifferenceM>      <totalAscentM>79</totalAscentM>      <totalDescentM>81</totalDescentM>    </track>    <track>      <title>IVV PW Dankmarshausen Hessisch-Thüringische Grenzwanderung durch die Rhäden</title>      <fileId>ekktqargzqcuwsmq</fileId>      <downloadLink>http://www.gpsies.com/download.do?fileId=ekktqargzqcuwsmq&amp;filetype=kml</downloadLink>      <createdDate>2009-06-22 19:25:26.0</createdDate>      <changedDate>2012-02-10 18:01:26.0</changedDate>      <description>(8-310-15)</description>      <startPointLat>50.9238606</startPointLat>      <startPointLon>10.0155991</startPointLon>      <endPointLat>50.9238673</endPointLat>      <endPointLon>10.0155937</endPointLon>      <startPointCountry>DE</startPointCountry>      <endPointCountry>DE</endPointCountry>      <trackLengthM>12857.8867433156</trackLengthM>      <countTrackpoints>228</countTrackpoints>      <trackProperty>roundTrip</trackProperty>      <externalLink>http://www.volkswandern.info</externalLink>      <altitudeMinHeightM>210</altitudeMinHeightM>      <altitudeMaxHeightM>283</altitudeMaxHeightM>      <altitudeDifferenceM>73</altitudeDifferenceM>      <totalAscentM>137</totalAscentM>      <totalDescentM>126</totalDescentM>    </track>  </tracks></gpsies>
