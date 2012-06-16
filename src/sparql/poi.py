@@ -78,9 +78,8 @@ def augmentTrackDocument(document, labels):
 def writeBack(document):
         database = DatabaseConnection('database')
         database.connect()
-        database.session.execute('OPEN {0}'.format(database.databaseName))
-        print etree.tostring(document, pretty_print = True)
-        database.session.execute('STORE TO troll.xml "%s"' % etree.tostring(document))
+        name = document.find('.//fileId').text
+        database.session.add(name + '_poi.xml', etree.tostring(document))
         database.close()
 
 def main():
