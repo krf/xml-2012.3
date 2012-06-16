@@ -6,7 +6,7 @@ from web.db import DatabaseConnection
 # SPARQL query string, has to be formatted
 SPARQL_QUERY = """
                PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
-               SELECT ?subject ?label WHERE {
+               SELECT ?subject ?label ?lat ?long WHERE {
                ?subject geo:lat ?lat.
                ?subject geo:long ?long.
                ?subject rdfs:label ?label.
@@ -27,6 +27,16 @@ RESULT_LIMIT = 10
 # Difference between the GPS coordinates
 DISTANCE = 0.05
 
+class POI:
+
+        def __init__(self, label, la, lo):
+                self.label = label
+                self.latitude = la
+                self.longitude = lo
+
+        def __hash__(self):
+                return hash(self.label)
+
 # Returns a list of track dom objects with no point of interests
 # in order to augment them
 def getTrackDocuments():
@@ -34,7 +44,7 @@ def getTrackDocuments():
         database.connect()
         documents = database.getAllDocuments()
         database.close()
-        return  [etree.fromstring(doc) for doc in documents if
+        return [etree.fromstring(doc) for doc in documents if
                         (etree.fromstring(doc).find('.//pois') is None)]
         
 # For the SPARQL query the GPS coordinates are parsed and
@@ -56,21 +66,34 @@ def queryDBpedia(latitude, longitude, distance, limit):
         sparql.setReturnFormat(JSON)
         results = sparql.query().convert()
 
-        return set([result['label']['value'] for result in results['results']['bindings']])
+        pois = []
+        for result in results['results']['bindings']:
+                label = result['label']['value']
+                la = result['lat']['value']
+                lo = result['long']['value']
+                pois.append(POI(label, la, lo))
+
+        return pois
 
 # Augments the track document with the point of interests
-def augmentTrackDocument(document, labels):
+def augmentTrackDocument(document, pois):
 
-        pois = etree.Element('pois')
-        for label in labels:
-                poi = etree.Element('poi')
-                name = etree.Element('name')
-                name.text = label
-                poi.append(name)
-                pois.append(poi)
+        poisNode = etree.Element('pois')
+        for poi in pois:
+                poiNode = etree.Element('poi')
+                nameNode = etree.Element('name')
+                latNode = etree.Element('lat')
+                lonNode = etree.Element('lon')
+                nameNode.text = poi.label
+                latNode.text = poi.latitude
+                lonNode.text = poi.longitude
+                poiNode.append(nameNode)
+                poiNode.append(latNode)
+                poiNode.append(lonNode)
+                poisNode.append(poiNode)
 
         track = document.find('.//track')
-        track.append(etree.fromstring(etree.tostring(pois, pretty_print = True)))
+        track.append(etree.fromstring(etree.tostring(poisNode, pretty_print = True)))
 
         return document
 
@@ -79,15 +102,19 @@ def writeBack(document):
         database = DatabaseConnection('database')
         database.connect()
         name = document.find('.//fileId').text
-        database.session.add(name + '_poi.xml', etree.tostring(document))
+        database.session.replace(name + '_poi.xml', etree.tostring(document))
         database.close()
 
 def main():
         tracks = getTrackDocuments()
-        for document in tracks:
-                (la,lo) = getGpsCoordinates(document)[0]
-                pois = queryDBpedia(la,lo, DISTANCE, RESULT_LIMIT)
-                writeBack(augmentTrackDocument(document, pois))
+        print 'Found %d documents with no POIs' % len(tracks)
+        for i, document in enumerate(tracks):
+                pois = []
+                for j, (la, lo) in enumerate(getGpsCoordinates(document)):
+                        pois += queryDBpedia(la,lo, DISTANCE, RESULT_LIMIT)
+                        print 'Queried %d of 20 GPS coordinates' % (j+1)
 
+                writeBack(augmentTrackDocument(document, set(pois)))
+                print 'Augmented document %d of %d' % (i+1, len(tracks))
 
 main()
