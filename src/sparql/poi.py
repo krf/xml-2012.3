@@ -27,15 +27,16 @@ RESULT_LIMIT = 10
 # Difference between the GPS coordinates
 DISTANCE = 0.05
 
-# Returns a list of track dom objects in order
-# to augment them with point of interests
+# Returns a list of track dom objects with no point of interests
+# in order to augment them
 def getTrackDocuments():
         database = DatabaseConnection('database')
         database.connect()
         documents = database.getAllDocuments()
         database.close()
-        return [etree.fromstring(doc) for doc in documents]
-
+        return  [etree.fromstring(doc) for doc in documents if
+                        (etree.fromstring(doc).find('.//pois') is None)]
+        
 # For the SPARQL query the GPS coordinates are parsed and
 # returned as a list [latitude, longitude]
 # For now the alitude (height) is ignored
@@ -50,7 +51,6 @@ def queryDBpedia(latitude, longitude, distance, limit):
         query = SPARQL_QUERY % (latitude, distance, latitude, distance,
                         longitude, distance, longitude, distance, limit)
 
-
         sparql = SPARQLWrapper('http://dbpedia.org/sparql')
         sparql.setQuery(query)
         sparql.setReturnFormat(JSON)
@@ -59,17 +59,18 @@ def queryDBpedia(latitude, longitude, distance, limit):
         return set([result['label']['value'] for result in results['results']['bindings']])
 
 # Augments the track document with the point of interests
-def augmentTrackDocument(document, pois):
+def augmentTrackDocument(document, labels):
 
-        augmentation = "<pois>%s</pois>"
-        poisXml = ""
-        for poi in pois:
-                poisXml += "<poi><name>" + poi + "</name></poi>"
-        augmentation = augmentation % poisXml
+        pois = etree.Element('pois')
+        for label in labels:
+                poi = etree.Element('poi')
+                name = etree.Element('name')
+                name.text = label
+                poi.append(name)
+                pois.append(poi)
 
-        part = document.find('.//track')
-        xml = etree.fromstring(augmentation)
-        part.insert(28, xml)
+        track = document.find('.//track')
+        track.append(etree.fromstring(etree.tostring(pois, pretty_print = True)))
 
         return document
 
@@ -78,7 +79,7 @@ def writeBack(document):
         database = DatabaseConnection('database')
         database.connect()
         database.session.execute('OPEN {0}'.format(database.databaseName))
-        print etree.tostring(document)
+        print etree.tostring(document, pretty_print = True)
         database.session.execute('STORE TO troll.xml "%s"' % etree.tostring(document))
         database.close()
 
@@ -88,6 +89,6 @@ def main():
                 (la,lo) = getGpsCoordinates(document)[0]
                 pois = queryDBpedia(la,lo, DISTANCE, RESULT_LIMIT)
                 writeBack(augmentTrackDocument(document, pois))
-                
+
 
 main()
