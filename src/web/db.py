@@ -19,6 +19,7 @@ class DatabaseConnection:
     def close(self):
         # close session
         if self.session:
+            self.session.execute('CLOSE')
             self.session.close()
             self.session = None
 
@@ -29,6 +30,7 @@ class DatabaseConnection:
         try:
             # create session
             self.session = BaseXClient.Session('localhost', 1984, 'admin', 'admin')
+            self.session.execute('OPEN {0}'.format(self.databaseName))
 
         except IOError as e:
             # print exception
@@ -48,7 +50,6 @@ class DatabaseConnection:
 
         try:
             session = self.session
-            query = session.execute('OPEN {0}'.format(self.databaseName))
             query = session.query(queryStr)
 
             # loop through all results
