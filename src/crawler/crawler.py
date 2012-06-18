@@ -7,6 +7,7 @@ import argparse
 import urllib2
 import os
 import sys
+import shutil
 
 from lxml import etree
 
@@ -23,7 +24,22 @@ from shared.util import log
 # read options file initially
 options = SafeConfigParser()
 dirname = os.path.dirname(os.path.realpath(__file__))
-options.read(os.path.join(dirname, 'config.ini'))
+
+# read defaul config
+defaultConfig = os.path.join(dirname, 'config.ini')
+options.read(defaultConfig)
+
+# read per-user config
+userConfig = os.path.expanduser('~/.xml2012.3.ini')
+if not os.path.isfile(userConfig):
+    shutil.copy(defaultConfig, userConfig)
+options.read(userConfig)
+
+def getApiKey():
+    API_KEY = options.get('Common', 'API_KEY', )
+    if not API_KEY:
+        raise RuntimeError("API key not set: Set it in {0}".format(userConfig))
+    return API_KEY
 
 def readUrl(url):
     if not url.startswith('http://'):
@@ -67,16 +83,17 @@ def sanitizedPath(path):
     dirname = os.path.dirname(os.path.realpath(__file__))
     return os.path.join(dirname, path)
 
-def autoRun(key):
+def autoRun():
     """Auto-run, crawl from a specific set of pages
 
     \return True if successful, else False"""
 
     API_BASE_URL = options.get('Common', 'API_BASE_URL')
+    apiKey = getApiKey()
 
     def getUrl(resultPage):
         url = "{0}/api.do?key={1}&country={2}&limit=100&resultPage={3}".format(
-            API_BASE_URL, key, "DE", resultPage
+            API_BASE_URL, apiKey, "DE", resultPage
         )
         return url
 
@@ -90,6 +107,8 @@ def autoRun(key):
     resultPage = 1
     while True:
         url = getUrl(resultPage)
+        log.debug("Parsing URL: {0}".format(url))
+
         content = readUrl(url)
         tree = parseContent(content)
 
@@ -122,7 +141,7 @@ def main(args):
     # main actions (mutual exclusive)
     if args.autorun:
         print("Starting auto-run")
-        success = autoRun(args.autorun)
+        success = autoRun()
     elif args.parse:
         # validate
         if not isValidUrl(args.parse):
@@ -160,7 +179,7 @@ if __name__ == "__main__":
     # optional
     parser.add_argument('-p', '--parse', metavar='URL',
         help='Parse content and validate')
-    parser.add_argument('-a', '--autorun', metavar='API_KEY',
+    parser.add_argument('-a', '--autorun', action='store_true',
         help='Autorun, crawl from gpsies.com')
     args = parser.parse_args()
 
