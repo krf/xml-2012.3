@@ -6,9 +6,10 @@ import sys, os
 import tornado.ioloop
 import tornado.web
 
-from db import DatabaseConnection
 from lxml import etree
 from pprint import pprint
+from shared import constants
+from shared.db import DatabaseConnection
 
 class MainHandler(tornado.web.RequestHandler):
 
@@ -29,7 +30,7 @@ class RequestHandler(tornado.web.RequestHandler):
 
     def post(self):
         # FIXME: proper database selection, query string
-        db = DatabaseConnection("GPSies_sample")
+        db = DatabaseConnection(constants.DATABASE_NAME)
         success = db.connect()
         if not success:
             self.write("Database error: {0}".format(db.error))
