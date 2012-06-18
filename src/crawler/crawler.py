@@ -8,12 +8,17 @@ import urllib2
 import os
 import sys
 
+from lxml import etree
+
 # see: http://www.doughellmann.com/PyMOTW/ConfigParser/s
 from ConfigParser import SafeConfigParser
 
 # local
 from parser import XmlParser
 from validator import XmlValidator
+from shared import constants
+from shared.db import DatabaseConnection
+from shared.util import log
 
 # read options file initially
 options = SafeConfigParser()
@@ -62,6 +67,49 @@ def sanitizedPath(path):
     dirname = os.path.dirname(os.path.realpath(__file__))
     return os.path.join(dirname, path)
 
+def autoRun(key):
+    """Auto-run, crawl from a specific set of pages
+
+    \return True if successful, else False"""
+
+    API_BASE_URL = options.get('Common', 'API_BASE_URL')
+
+    def getUrl(resultPage):
+        url = "{0}/api.do?key={1}&country={2}&limit=100&resultPage={3}".format(
+            API_BASE_URL, key, "DE", resultPage
+        )
+        return url
+
+    # open database
+    db = DatabaseConnection(constants.DATABASE_NAME)
+    success = db.connect()
+    if not success:
+        print("Database error: {0}".format(db.error))
+        return False
+
+    resultPage = 1
+    while True:
+        url = getUrl(resultPage)
+        content = readUrl(url)
+        tree = parseContent(content)
+
+        tracksSearch = etree.XPath("//track")
+        tracks = tracksSearch(tree)
+        if len(tracks) == 0:
+            break
+
+        # add tracks to database
+        db.session.add("tracks", content)
+        log.debug("Added {0} tracks to the database".format(len(tracks)))
+        resultPage += 1
+
+        # print out number of tracks in db
+        queryString = "count(//track)"
+        result = db.query(queryString)
+        log.debug("Tracks in database: {0}".format(result[0]))
+
+    return True
+
 def main(args):
     """Main routine
 
@@ -70,39 +118,33 @@ def main(args):
 
     API_BASE_URL = options.get('Common', 'API_BASE_URL')
 
-    # validate
-    if not isValidUrl(args.url):
-        print("URL is not a valid gpsies.com url")
-        print("It needs to be of the form {0}/*".format(API_BASE_URL))
-        return 1
-
-    # main routine
-    print("URL:         {0}".format(args.url))
-
-    # call correct function based on arguments
-    content = readUrl(args.url)
-
+    success = True
     # main actions (mutual exclusive)
-    if args.download is not None:
-        print("Saving content to disk")
-        saveToFile(content, args.download)
-        print("Saved to file: {0}".format(args.download))
-    else:
-        # default: print XML
-        print("Content:")
-        print(content)
+    if args.autorun:
+        print("Starting auto-run")
+        success = autoRun(args.autorun)
+    elif args.parse:
+        # validate
+        if not isValidUrl(args.parse):
+            print("URL is not a valid gpsies.com url")
+            print("It needs to be of the form {0}/*".format(API_BASE_URL))
+            return 1
 
-    # additional actions
-    if args.parse:
+        print("URL: {0}".format(args.url))
+        content = readUrl(args.url)
+
         # parse + validate content
         tree = parseContent(content)
         schemaFile = sanitizedPath(options.get('Common', 'API_SIMPLE_XML_SCHEMA'))
 
         print("Trying to validate content...")
         validateContent(tree, schemaFile) # raises if invalid
-        print("Ok.")
+        success = True
+    else:
+        print("No action specified")
+        success = False
 
-    return 0 # SUCCESS
+    return 0 if success else 1
 
 if __name__ == "__main__":
     # parse arguments
@@ -114,13 +156,12 @@ if __name__ == "__main__":
   www.gpsies.org/api.do?key=YOUR_API_KEY&lat=51&lon=10&perimeter=80&limit=20&trackTypes=jogging&filetype=kml"""
     )
     # default args
-    parser.add_argument('url', metavar='URL', type=str,
-        help='A URL pointing to the gpsies.com API')
+    #None
     # optional
-    parser.add_argument('-p', '--parse', action='store_true',
+    parser.add_argument('-p', '--parse', metavar='URL',
         help='Parse content and validate')
-    parser.add_argument('-d', '--download', metavar='FILE',
-        help='Save the XML file')
+    parser.add_argument('-a', '--autorun', metavar='API_KEY',
+        help='Autorun, crawl from gpsies.com')
     args = parser.parse_args()
 
     rc = main(args)

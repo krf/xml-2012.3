@@ -1,7 +1,8 @@
 from lxml import etree
 from SPARQLWrapper import SPARQLWrapper, JSON
 
-from web.db import DatabaseConnection
+from shared.db import DatabaseConnection
+from shared import constants
 
 # SPARQL query string, has to be formatted
 SPARQL_QUERY = """
@@ -40,7 +41,7 @@ class POI:
 # Returns a list of track dom objects with no point of interests
 # in order to augment them
 def getTrackDocuments():
-        database = DatabaseConnection('database')
+        database = DatabaseConnection(constants.DATABASE_NAME)
         database.connect()
         documents = database.getAllDocuments()
         database.close()
