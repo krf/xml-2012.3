@@ -14,9 +14,10 @@
 	<head>
 	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	    <title>xml-2012-drei</title>
-	    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-	    <!-- <script type="text/javascript" src="js/core.js"></script> -->
+	    <script type="text/javascript" src="static/js/jquery-1.7.2.min.js"></script>
+	    <script type="text/javascript" src="static/js/core.js"></script>
 	    <link rel="stylesheet" type="text/css" href="static/bootstrap/css/bootstrap.css"/>
+	    <link rel="stylesheet" type="text/css" href="static/core.css"/>
 	</head>
 </xsl:template>
 
@@ -34,8 +35,7 @@
         <input id="inSearch" type="text" class="span12" name="search" placeholder="Berge, Brandenburger Tor, ..."/>
         
         <label for="inLocation">Ort</label>
-        <input id="inLocation" type="text" class="span12" name="location" placeholder="Berlin, Potsdam, ..."/>
-        
+        <input id="inLocation" type="text" class="span12" name="location" placeholder="Berlin, Potsdam, ..."/>   
         
         <label for="inZIP">Postleitzahl</label>
         <input id="inZIP" type="text" class="span4" name="zip" placeholder="12345"/>
@@ -53,31 +53,81 @@
 	INPUT: (implizit) searchresult-node of xml with trackrecords
 -->
 <xsl:template match="searchresult">
-    <h1>Suchergebnisse</h1>
-    <xsl:choose>
-        <xsl:when test="count(track)>0">
-            
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th> Titel </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <xsl:for-each select="track">
-                        <tr>
-                            <td>
-                                <xsl:value-of select="title"/>
-                            </td>
-                        </tr>
-                    </xsl:for-each>
-                </tbody>
-            </table>
-        </xsl:when>
-        <xsl:otherwise>
-            <p><span class="label label-warning"><i class="icon-search"></i> Leider gibt es keine passenden Daten zur Suche.</span></p>
-        </xsl:otherwise>
-    </xsl:choose>
+    <div class="contentcontainer summary">
+        <h1>Suchergebnisse</h1>
+        <xsl:choose>
+            <xsl:when test="count(track)>0">
+                
+                <!-- used various times later, so we put it into one var -->
+                <xsl:variable name="requestvar">
+                    <xsl:value-of select="concat(
+                        'search=',
+                        //searchparameter/param[@label='search']/@value,
+                        '&amp;location=',
+                        //searchparameter/param[@label='location']/@value,
+                        '&amp;zip=',
+                        //searchparameter/param[@label='zip']/@value
+                    )"/>
+                </xsl:variable>
+                
+                <div class="summarytable">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <a href="/request?{$requestvar}&amp;ordercol=title&amp;orderdir=ascending&amp;ordertype=text"><i class="icon-chevron-up"></i></a> Titel
+                                    <a href="/request?{$requestvar}&amp;ordercol=title&amp;orderdir=descending&amp;ordertype=text"><i class="icon-chevron-down"></i></a> 
+                                </th>
+                                <th>
+                                    <a href="/request?{$requestvar}&amp;ordercol=startPointCountry&amp;orderdir=ascending&amp;ordertype=text"><i class="icon-chevron-up"></i></a> Land 
+                                    <a href="/request?{$requestvar}&amp;ordercol=startPointCountry&amp;orderdir=descending&amp;ordertype=text"><i class="icon-chevron-down"></i></a> 
+                                </th>
+                                <th>
+                                    <a href="/request?{$requestvar}&amp;ordercol=countTrackpoints&amp;orderdir=ascending&amp;ordertype=number"><i class="icon-chevron-up"></i></a> POIs
+                                    <a href="/request?{$requestvar}&amp;ordercol=countTrackpoints&amp;orderdir=descending&amp;ordertype=number"><i class="icon-chevron-down"></i></a>
+                                </th>                        
+                            </tr>
+                        </thead>
+                        <tbody>
+                        
+                            <!-- can't handle in the xpath-expressions directly into sort, see e.g. [http://stackoverflow.com/questions/2197882/dynamic-sort-in-xslt] -->
+                            <xsl:variable name="sortselect">
+                              <xsl:value-of select="//searchparameter/param[@label='ordercol']/@value"/>
+                            </xsl:variable>                    
+                            <xsl:variable name="sortorder">
+                              <xsl:value-of select="//searchparameter/param[@label='orderdir']/@value"/>
+                            </xsl:variable>
+                            <xsl:variable name="sorttype">
+                              <xsl:value-of select="//searchparameter/param[@label='ordertype']/@value"/>
+                            </xsl:variable>                    
+                            <xsl:for-each select="track">
+                                <xsl:sort select="*[name() = $sortselect]" order="{$sortorder}" data-type="{$sorttype}"/>
+                                <tr>
+                                    <td>
+                                        <a href="/detail?id={fileId}" class="ajax"><xsl:value-of select="title"/></a>
+                                    </td>
+                                    <td>
+                                        <xsl:value-of select="startPointCountry"/>
+                                    </td>
+                                    <td>
+                                        <xsl:value-of select="countTrackpoints"/>
+                                    </td>
+                                </tr>
+                            </xsl:for-each>
+                        </tbody>
+                    </table>
+                </div>
+            </xsl:when>
+            <xsl:otherwise>
+                <p><span class="label label-warning"><i class="icon-search"></i> Leider gibt es keine passenden Daten zur Suche.</span></p>
+            </xsl:otherwise>
+        </xsl:choose>
+    </div>
+    
+    <!-- do something here -->
+    <div class="contentcontainer detail">
+        
+    </div>
 </xsl:template>
 
 

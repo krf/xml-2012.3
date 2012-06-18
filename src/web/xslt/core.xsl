@@ -19,10 +19,9 @@
                 <!--Body content-->
                     <xsl:apply-templates/>
                 </div>
+                
             </div>
         </div>
-    
-            <!-- do something here -->
     </body>
 
     </html>

@@ -1,0 +1,13 @@
+.containercontent {
+    
+}
+
+div.summarytable {
+    height: 290px;
+    overflow-y: scroll;
+}
+
+div.detail {
+    width: 100%;
+    margin: 30px 0 0 0;
+}
