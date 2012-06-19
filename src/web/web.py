@@ -150,7 +150,8 @@ class StatisticsHandler(tornado.web.RequestHandler):
 
 doc_root = os.path.dirname(__file__)
 settings = {
-    "static_path": os.path.join(doc_root, "static")
+    "static_path": os.path.join(doc_root, "static"),
+    "debug": True
 }
 pprint(settings)   
 
