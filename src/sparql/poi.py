@@ -100,7 +100,7 @@ def augmentTrackDocument(document, pois):
 
 # Writes the augmented document back into the database
 def writeBack(document):
-        database = DatabaseConnection('database')
+        database = DatabaseConnection(constants.DATABASE_NAME)
         database.connect()
         name = document.find('.//fileId').text
         database.session.replace(name + '_poi.xml', etree.tostring(document))
