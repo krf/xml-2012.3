@@ -61,16 +61,17 @@ class DatabaseConnection:
         try:
             self.session.execute('OPEN {0}'.format(self.databaseName))
         except IOError as e:
+            self.error = e
+
+            # attempt another try
             if "was not found" in str(e):
                 success = self.createDatabase()
                 if success:
                     self.reconnect()
-                else:
-                    return
 
-            self.error = e
             return False
 
+        log.debug("Database opened: {0}".format(self.databaseName))
         return True
 
     # For retrieving all the documents present in the database
@@ -90,6 +91,8 @@ class DatabaseConnection:
             results = []
             for result in query.iter():
                 results.append(result)
+
+            log.info("Query: {0}\n{1}".format(queryStr, query.info()))
 
             # close query object
             query.close()

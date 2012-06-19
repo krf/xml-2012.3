@@ -52,8 +52,8 @@ def getTrackDocuments():
 # returned as a list [latitude, longitude]
 # For now the alitude (height) is ignored
 def getGpsCoordinates(document):
-       resultSet = document.xpath(XPATH_GPS_DATA)[0]
-       return [ (float(la), float(lo)) for la, lo, al in (line.split(',') for line in resultSet.split()) ]
+        resultSet = document.xpath(XPATH_GPS_DATA)[0]
+        return [ (float(la), float(lo)) for la, lo, al in (line.split(',') for line in resultSet.split()) ]
 
 # For retrieving nearby resources a SPARQL query to DBpedia
 # has to be constructed and executed
