@@ -7,10 +7,11 @@ from shared import constants
 # SPARQL query string, has to be formatted
 SPARQL_QUERY = """
                PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
-               SELECT ?subject ?label ?lat ?long WHERE {
+               SELECT ?subject ?label ?lat ?long ?comment WHERE {
                ?subject geo:lat ?lat.
                ?subject geo:long ?long.
                ?subject rdfs:label ?label.
+               ?subject rdfs:comment ?comment.
                FILTER(?lat - %f <= %f && %f - ?lat <= %f &&
                       ?long - %f <= %f && %f - ?long <= %f &&
                       lang(?label) = "en"
