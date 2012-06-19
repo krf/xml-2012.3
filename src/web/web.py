@@ -14,9 +14,8 @@ from shared.db import DatabaseConnection
 class MainHandler(tornado.web.RequestHandler):
 
     def get(self):
-    
-        rawxml = "<?xml version='1.0' encoding='ISO-8859-1'?><response></response>"
-        xml = etree.fromstring(rawxml)
+        rawXml = "<?xml version='1.0' encoding='ISO-8859-1'?><response></response>"
+        xml = etree.fromstring(rawXml)
         xslt = etree.parse(os.path.join(doc_root,"xslt/")+"core.xsl")
         transform = etree.XSLT(xslt)      
         resulthtml = transform(xml)    
@@ -54,8 +53,7 @@ class RequestHandler(tornado.web.RequestHandler):
             )
         results = db.query(queryString)
 
-
-        searchparaxml = """
+        searchParamXml = """
             <searchparameter>
                 <param label="search" value="{0}"/>
                 <param label="location" value="{1}"/>
@@ -66,16 +64,17 @@ class RequestHandler(tornado.web.RequestHandler):
             </searchparameter>""".format(
             searchParam, locationParam, zipParam, orderCol, orderDir, orderType
         )
-        rawxml = "<?xml version='1.0' encoding='UTF-8'?><response>"+searchparaxml+"<searchresult>"+", ".join(results)+"</searchresult></response>"
-        xml = etree.fromstring(rawxml)
+        rawXml = """<?xml version='1.0' encoding='UTF-8'?>
+            <response>{0}<searchresult>{1}</searchresult></response>""".format(
+            searchParamXml, ", ".join(results)
+        )
+        xml = etree.fromstring(rawXml)
         xslt = etree.parse(os.path.join(doc_root,"xslt/")+"core.xsl")
         transform = etree.XSLT(xslt)      
         resulthtml = transform(xml)
         
         self.write(unicode(resulthtml))
         return
-
-
 
 class DetailHandler(tornado.web.RequestHandler):
 
@@ -93,11 +92,9 @@ class DetailHandler(tornado.web.RequestHandler):
         # params
         trackId = self.get_argument("id", default="")
 
-
         # build query
         queryString = """//track[fileId='{0}']""".format(trackId)
         results = db.query(queryString)
-
 
         rawxml = "<?xml version='1.0' encoding='UTF-8'?><response><searchresult>"+", ".join(results)+"</searchresult></response>"
         xml = etree.fromstring(rawxml)
@@ -108,14 +105,11 @@ class DetailHandler(tornado.web.RequestHandler):
         self.write(unicode(resulthtml))
         return
 
-
-
 doc_root = os.path.dirname(__file__)
 settings = {
     "static_path": os.path.join(doc_root, "static")
 }
 pprint(settings)   
-
 
 application = tornado.web.Application([
     (r"/", MainHandler),
