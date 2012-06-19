@@ -102,8 +102,8 @@ def augmentTrackDocument(document, pois):
 def writeBack(document):
         database = DatabaseConnection(constants.DATABASE_NAME)
         database.connect()
-        name = document.find('.//fileId').text
-        database.session.replace(name + '_poi.xml', etree.tostring(document))
+        fileId = document.find('.//fileId').text
+        database.query('replace .//track[fileId == %s] with %s', fileId, etree.tostring(document))
         database.close()
 
 def main():
