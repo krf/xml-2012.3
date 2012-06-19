@@ -28,7 +28,6 @@ class RequestHandler(tornado.web.RequestHandler):
         self.post()
 
     def post(self):
-        # FIXME: proper database selection, query string
         db = DatabaseConnection(constants.DATABASE_NAME)
         success = db.connect()
         if not success:
@@ -82,7 +81,6 @@ class DetailHandler(tornado.web.RequestHandler):
         self.post()
 
     def post(self):
-        # FIXME: proper database selection, query string
         db = DatabaseConnection(constants.DATABASE_NAME)
         success = db.connect()
         if not success:
@@ -105,6 +103,51 @@ class DetailHandler(tornado.web.RequestHandler):
         self.write(unicode(resulthtml))
         return
 
+class StatisticsHandler(tornado.web.RequestHandler):
+
+    def get(self):
+        db = DatabaseConnection(constants.DATABASE_NAME)
+        success = db.connect()
+        if not success:
+            self.write("Database error: {0}".format(db.error))
+            return
+
+        result = db.query("count(//track)")
+        trackCount = result[0]
+        result = db.query("count(//track[not(startPointAddress)])")
+        nonAugmentedTrackCount = result[0]
+        result = db.query("count(//track/startPointAddress)")
+        augmentedTrackCount = result[0]
+
+        # TODO: Is there an easier way to write out this HTML?
+        self.write("""<html>
+<xsl:call-template name="htmlhead"/>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>xml-2012-drei</title>
+    <script type="text/javascript" src="static/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="static/js/core.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="static/core.css"/>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="contentcontainer">
+        <h1>Statistics</h1>
+        Number of tracks: {0}<br/>
+        Number of non-augmented tracks: {1}<br/>
+        Number of augmented tracks: {2}<br/>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>""".format(trackCount, nonAugmentedTrackCount, augmentedTrackCount)
+        )
+
 doc_root = os.path.dirname(__file__)
 settings = {
     "static_path": os.path.join(doc_root, "static")
@@ -115,6 +158,7 @@ application = tornado.web.Application([
     (r"/", MainHandler),
     (r"/request", RequestHandler),
     (r"/detail", DetailHandler),
+    (r"/stats", StatisticsHandler)
 ], **settings)
 
 if __name__ == "__main__":

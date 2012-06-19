@@ -43,6 +43,8 @@
         <button type="submit" class="btn">Suche</button>
     </form>
 
+    <a href="/stats">Show statistics</a>
+
 </xsl:template>
 
 
