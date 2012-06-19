@@ -44,9 +44,9 @@ class RequestHandler(tornado.web.RequestHandler):
 
         # build query
         queryString = """for $x in //track
-            where $x/title/text()[fn:contains(., "{0}")]
-            and(not(fn:exists($x/startPointAddress)) or $x/startPointAddress/text()[fn:contains(., "{1}")])
-            and(not(fn:exists($x/startPointAddress)) or $x/startPointAddress/text()[fn:contains(., "{2}")])
+            where contains($x/title/text(), "{0}")
+            and contains($x/startPointAddress/text(), "{1}")
+            and contains($x/startPointAddress/text(), "{2}")
             return $x""".format(
                 searchParam, locationParam, zipParam
             )
@@ -118,6 +118,7 @@ class StatisticsHandler(tornado.web.RequestHandler):
         nonAugmentedTrackCount = result[0]
         result = db.query("count(//track/startPointAddress)")
         augmentedTrackCount = result[0]
+        databaseInfo = db.session.execute("info database")
 
         # TODO: Is there an easier way to write out this HTML?
         self.write("""<html>
@@ -139,13 +140,18 @@ class StatisticsHandler(tornado.web.RequestHandler):
         <h1>Statistics</h1>
         Number of tracks: {0}<br/>
         Number of non-augmented tracks: {1}<br/>
-        Number of augmented tracks: {2}<br/>
+        Number of augmented tracks: {2}<br/><br/>
+
+        <h2>Database information</h2>
+        <pre>
+{3}
+        </pre>
         </div>
     </div>
 </div>
 </body>
 
-</html>""".format(trackCount, nonAugmentedTrackCount, augmentedTrackCount)
+</html>""".format(trackCount, nonAugmentedTrackCount, augmentedTrackCount, databaseInfo)
         )
 
 doc_root = os.path.dirname(__file__)
