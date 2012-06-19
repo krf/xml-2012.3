@@ -140,9 +140,9 @@ class StatisticsHandler(tornado.web.RequestHandler):
         <h1>Statistics</h1>
         Number of tracks: {0}<br/>
         Number of non-augmented tracks: {1}<br/>
-        Number of augmented tracks: {2}<br/>
+        Number of augmented tracks: {2}<br/><br/>
 
-        Database information:
+        <h2>Database information</h2>
         <pre>
 {3}
         </pre>
