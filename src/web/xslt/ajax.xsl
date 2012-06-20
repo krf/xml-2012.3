@@ -22,7 +22,7 @@
             </ul>
         </li>
 
-        <li class="twitterlist"><span class="label label-info">Tweets über <span class="tsearch"><xsl:value-of select="$track/pois/poi[position()=4]/name"/></span></span>
+        <li class="twitterlist"><span class="label label-info">Tweets über <span class="tsearch"><xsl:value-of select="$track/pois/poi[position()=1]/name"/></span></span>
             <ul class="tweets">
             
             </ul>

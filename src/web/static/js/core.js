@@ -40,15 +40,20 @@ $(document).ready(function() {
 //                    }
 //                    $($("li.twitterlist").get(idx)).find(".tweets").html(items[idx].join(''));
 //                  }
-//                });            
-                    console.log("return from req"+idx);
-                    items[idx] = [];
-                    for (i=0; i < data.results.length; i++){
-                        row = data.results[i];
-                        items[idx].push('<li><span class="label">'+row.from_user+'</span>' +row.text+ '</li>');                
-                    }
-                    $($("li.twitterlist").get(idx)).find(".tweets").html(items[idx].join(''));                    
-                                      
+//                });        
+                    if(data.results.length==0) {
+                        str = "<li><span class=\"label label-warning\">keine Tweets vorhanden</span></li>"
+                    } else {    
+                        console.log("return from req"+idx);
+                        items[idx] = [];
+                        for (i=0; i < data.results.length; i++){
+                            row = data.results[i];
+                            items[idx].push('<li><span class="label">'+row.from_user+'</span>' +row.text+ '</li>');                
+                        }
+                        
+                        str = items[idx].join('');
+                    }          
+                    $($("li.twitterlist").get(idx)).find(".tweets").html(str);                    
                 });
                
                
