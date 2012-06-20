@@ -16,6 +16,10 @@ Dependencies
 * BaseX (http://basex.org/)
 * Python LXML (http://lxml.de)
 * SPARQL Endpoint interface to Python (http://sparql-wrapper.sourceforge.net/)
+* Python CJSON (http://pypi.python.org/pypi/python-cjson)
+
+Quick install (Ubuntu):
+* apt-get install basex python-lxml python-cjson python-sparqlwrapper
 
 Running
 -----

@@ -7,6 +7,7 @@ import argparse
 import urllib2
 import os
 import sys
+import shutil
 
 from lxml import etree
 
@@ -23,7 +24,22 @@ from shared.util import log
 # read options file initially
 options = SafeConfigParser()
 dirname = os.path.dirname(os.path.realpath(__file__))
-options.read(os.path.join(dirname, 'config.ini'))
+
+# read defaul config
+defaultConfig = os.path.join(dirname, 'config.ini')
+options.read(defaultConfig)
+
+# read per-user config
+userConfig = os.path.expanduser('~/.xml2012.3.ini')
+if not os.path.isfile(userConfig):
+    shutil.copy(defaultConfig, userConfig)
+options.read(userConfig)
+
+def getApiKey():
+    API_KEY = options.get('Common', 'API_KEY', )
+    if not API_KEY:
+        raise RuntimeError("API key not set: Set it in {0}".format(userConfig))
+    return API_KEY
 
 def readUrl(url):
     if not url.startswith('http://'):
@@ -67,29 +83,38 @@ def sanitizedPath(path):
     dirname = os.path.dirname(os.path.realpath(__file__))
     return os.path.join(dirname, path)
 
-def autoRun(key):
-    """Auto-run, crawl from a specific set of pages
-
-    \return True if successful, else False"""
-
-    API_BASE_URL = options.get('Common', 'API_BASE_URL')
-
-    def getUrl(resultPage):
-        url = "{0}/api.do?key={1}&country={2}&limit=100&resultPage={3}".format(
-            API_BASE_URL, key, "DE", resultPage
-        )
-        return url
-
+def openDatabase():
     # open database
     db = DatabaseConnection(constants.DATABASE_NAME)
     success = db.connect()
     if not success:
-        print("Database error: {0}".format(db.error))
-        return False
+        log.error("Database error: {0}".format(db.error))
+        raise RuntimeError("Failed to open database")
+    return db
 
+# TODO: Can we avoid adding tracks with duplicate fileIds here?
+def autoRun(db):
+    """Auto-run, crawl from a specific set of pages
+
+    \return True if successful, else False"""
+
+    TRACKS_LIST_TEMPLATE = "{0}/api.do?key={1}&country={2}&limit=100&resultPage={3}"
+    API_KEY = getApiKey()
+    API_BASE_URL = options.get('Common', 'API_BASE_URL')
+    MAX_DATABASE_SIZE = options.get('Common', 'MAX_DATABASE_SIZE')
+
+    def getUrl(resultPage):
+        url = TRACKS_LIST_TEMPLATE.format(
+            API_BASE_URL, API_KEY, "DE", resultPage
+        )
+        return url
+
+    numberOfTracks = -1
     resultPage = 1
-    while True:
+    while numberOfTracks < MAX_DATABASE_SIZE:
         url = getUrl(resultPage)
+        log.debug("Parsing URL: {0}".format(url))
+
         content = readUrl(url)
         tree = parseContent(content)
 
@@ -106,9 +131,78 @@ def autoRun(key):
         # print out number of tracks in db
         queryString = "count(//track)"
         result = db.query(queryString)
-        log.debug("Tracks in database: {0}".format(result[0]))
+        numberOfTracks = int(result[0]) # update track count
+        log.debug("Tracks in database: {0}".format(numberOfTracks))
 
     return True
+
+def augmentOneTrack(db, fileId):
+    """Extend one specific track, by crawling gpsies.org once more"""
+
+    TRACK_DETAILS_TEMPLATE = "{0}/api.do?key={1}&fileId={2}&trackDataLength=250"
+    API_KEY = getApiKey()
+    API_BASE_URL = options.get('Common', 'API_BASE_URL')
+
+    def getUrl(fileId):
+        url = TRACK_DETAILS_TEMPLATE.format(API_BASE_URL, API_KEY, fileId)
+        return url
+
+    url = getUrl(fileId)
+    log.debug("Reading URL: {0}".format(url))
+    content = readUrl(url)
+
+    tree = etree.fromstring(content)
+    tracks = tree.xpath("//track") # should return exactly one track element
+    trackStr = etree.tostring(tracks[0])
+
+    # it's easier to just remove the node and re-add it again
+    queryString = 'delete node //track[fileId="{0}"]'.format(fileId)
+    db.query(queryString)
+
+    # re-add node (with full details now)
+    log.debug("Add track details for fileID: {0}".format(fileId))
+    db.session.add("tracks", trackStr)
+    return True
+
+def augmentTracks(db):
+    """Augment tracks that are already in the database"""
+
+    queryString = "//track[not(startPointAddress)]"
+    results = db.query(queryString)
+
+    iterations = 0
+    for result in results:
+        tree = etree.fromstring(result)
+        fileId = tree.xpath("//fileId/text()")[0]
+
+        log.debug("Finding track details for fileId: {0} (iteration {1})".format(fileId, iterations))
+        augmentOneTrack(db, fileId)
+        iterations += 1
+
+    return True
+
+def getTrackCount(db):
+    results = db.query("count(//track)")
+    return int(results[0])
+
+def pruneDatabase(db):
+    trackCount_old = getTrackCount(db)
+
+    queryString = "delete node //track[not(startPointAddress)]"
+    db.query(queryString)
+
+    trackCount_new = getTrackCount(db)
+    removedTracksCount = trackCount_old - trackCount_new
+    print("Removed tracks count: {0}".format(removedTracksCount))
+
+    return True
+
+def printStatistics(db):
+    result = db.query("count(//track[not(startPointAddress)])")
+    print("Number of non-augmented tracks: {0}".format(result[0]))
+
+    result = db.query("count(//track/startPointAddress)")
+    print("Number of     augmented tracks: {0}".format(result[0]))
 
 def main(args):
     """Main routine
@@ -122,7 +216,20 @@ def main(args):
     # main actions (mutual exclusive)
     if args.autorun:
         print("Starting auto-run")
-        success = autoRun(args.autorun)
+        db = openDatabase()
+        success = autoRun(db)
+    elif args.extend:
+        print("Starting augmenting tracks")
+        db = openDatabase()
+        success = augmentTracks(db)
+    elif args.statistics:
+        print("Printing statistics")
+        db = openDatabase()
+        success = printStatistics(db)
+    elif args.clear:
+        print("Starting pruning database")
+        db = openDatabase()
+        success = pruneDatabase(db)
     elif args.parse:
         # validate
         if not isValidUrl(args.parse):
@@ -160,8 +267,14 @@ if __name__ == "__main__":
     # optional
     parser.add_argument('-p', '--parse', metavar='URL',
         help='Parse content and validate')
-    parser.add_argument('-a', '--autorun', metavar='API_KEY',
+    parser.add_argument('-a', '--autorun', action='store_true',
         help='Autorun, crawl from gpsies.com')
+    parser.add_argument('-e', '--extend', action='store_true',
+        help='Extend existing tracks with track details, crawl from gpsies.com')
+    parser.add_argument('-s', '--statistics', action='store_true',
+        help='Print database statistics')
+    parser.add_argument('-c', '--clear', action='store_true',
+        help='Clear database, remove all non-augmented tracks')
     args = parser.parse_args()
 
     rc = main(args)
