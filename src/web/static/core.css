@@ -11,3 +11,24 @@ div.detail {
     width: 100%;
     margin: 30px 0 0 0;
 }
+
+div.detail ul {}
+
+div.detail ul li {
+    list-style: none;    
+}
+
+div.detail span.label {
+    float: left;
+    font-weight: bold;
+    margin: 0 15px 0 0;
+}
+
+.tweets {
+    padding: 20px 0 0 0;    
+}
+
+
+.invisible {
+    display: none;    
+}

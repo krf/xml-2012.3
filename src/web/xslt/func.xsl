@@ -43,8 +43,6 @@
         <button type="submit" class="btn">Suche</button>
     </form>
 
-    <a href="/stats">Show statistics</a>
-
 </xsl:template>
 
 
@@ -112,7 +110,8 @@
                                         <xsl:value-of select="startPointCountry"/>
                                     </td>
                                     <td>
-                                        <xsl:value-of select="countTrackpoints"/>
+                                        <xsl:value-of select="count(pois/poi)"/>
+                                        <!-- <xsl:value-of select="countTrackpoints"/> -->
                                     </td>
                                 </tr>
                             </xsl:for-each>
@@ -131,5 +130,6 @@
         
     </div>
 </xsl:template>
+
 
 </xsl:stylesheet>
