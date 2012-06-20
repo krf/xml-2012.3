@@ -13,7 +13,7 @@ $(document).ready(function() {
             $("div.detail").html(data);
             
             /* retrieve some twitterinfo */
-            var baseurl = "http://search.twitter.com/search.json?callback=?&q="+$("div.detail #tsearch").html()+"&rpp=5&include_entities=true&result_type=mixed";
+            var baseurl = "http://search.twitter.com/search.json?callback=?&q="+$("div.detail #tsearch").html()+"&lang=de&rpp=5&include_entities=true&result_type=mixed";
             console.log(baseurl);
             $.getJSON(baseurl, function(data) {         
                 

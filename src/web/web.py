@@ -15,7 +15,7 @@ class MainHandler(tornado.web.RequestHandler):
 
     def get(self):
     
-        rawxml = "<?xml version='1.0' encoding='ISO-8859-1'?><response></response>"
+        rawxml = "<?xml version='1.0' encoding='UTF-8'?><response></response>"
         xml = etree.fromstring(rawxml)
         xslt = etree.parse(os.path.join(doc_root,"xslt/")+"core.xsl")
         transform = etree.XSLT(xslt)      
@@ -84,7 +84,7 @@ class DetailHandler(tornado.web.RequestHandler):
 
     def post(self):
         # FIXME: proper database selection, query string
-        db = DatabaseConnection("GPSies_sample")
+        db = DatabaseConnection(constants.DATABASE_NAME)
         success = db.connect()
         if not success:
             self.write("Database error: {0}".format(db.error))
@@ -100,6 +100,7 @@ class DetailHandler(tornado.web.RequestHandler):
 
 
         rawxml = "<?xml version='1.0' encoding='UTF-8'?><response><searchresult>"+", ".join(results)+"</searchresult></response>"
+        print(rawxml)
         xml = etree.fromstring(rawxml)
         xslt = etree.parse(os.path.join(doc_root,"xslt/")+"ajax.xsl")
         transform = etree.XSLT(xslt)      
