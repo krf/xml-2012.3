@@ -8,6 +8,7 @@ import urllib2
 import os
 import sys
 import shutil
+import time
 
 from lxml import etree
 
@@ -15,11 +16,13 @@ from lxml import etree
 from ConfigParser import SafeConfigParser
 
 # local
+import data
 from parser import XmlParser
 from validator import XmlValidator
 from shared import constants
 from shared.db import DatabaseConnection
 from shared.util import log
+from shared.interface import TrackInterface
 
 # read options file initially
 options = SafeConfigParser()
@@ -45,8 +48,13 @@ def readUrl(url):
     if not url.startswith('http://'):
         url = 'http://' + url
 
+    log.debug("Reading URL: {0}".format(url))
+
+    start= time.time()
     f = urllib2.urlopen(url)
     content = f.read()
+    end = time.time()
+    log.debug("  took {0} ms".format(end-start))
     return content
 
 def parseContent(content):
@@ -109,8 +117,10 @@ def autoRun(db):
         )
         return url
 
-    numberOfTracks = -1
-    resultPage = 1
+    iface = TrackInterface(db)
+
+    numberOfTracks = 0
+    resultPage = 142
     while numberOfTracks < MAX_DATABASE_SIZE:
         url = getUrl(resultPage)
         log.debug("Parsing URL: {0}".format(url))
@@ -124,7 +134,7 @@ def autoRun(db):
             break
 
         # add tracks to database
-        db.session.add("tracks", content)
+        iface.addTracks(tracks)
         log.debug("Added {0} tracks to the database".format(len(tracks)))
         resultPage += 1
 
@@ -137,7 +147,11 @@ def autoRun(db):
     return True
 
 def augmentOneTrack(db, fileId):
-    """Extend one specific track, by crawling gpsies.org once more"""
+    """Extend one specific track, by crawling gpsies.org once more
+
+    @param fileId Track file ID
+    @return True on success, False otherwise
+    """
 
     TRACK_DETAILS_TEMPLATE = "{0}/api.do?key={1}&fileId={2}&trackDataLength=250"
     API_KEY = getApiKey()
@@ -148,20 +162,28 @@ def augmentOneTrack(db, fileId):
         return url
 
     url = getUrl(fileId)
-    log.debug("Reading URL: {0}".format(url))
     content = readUrl(url)
 
     tree = etree.fromstring(content)
     tracks = tree.xpath("//track") # should return exactly one track element
+    assert(len(tracks) == 1)
+
+    # transform to our database format
+    success = data.transformTrack(tree)
+    if not success:
+        log.debug("Failed to transform track to database format")
+        return False
+
     trackStr = etree.tostring(tracks[0])
 
     # it's easier to just remove the node and re-add it again
-    queryString = 'delete node //track[fileId="{0}"]'.format(fileId)
-    db.query(queryString)
+#    queryString = 'delete node //track[fileId="{0}"]'.format(fileId)
+#    db.query(queryString)
 
     # re-add node (with full details now)
     log.debug("Add track details for fileID: {0}".format(fileId))
-    db.session.add("tracks", trackStr)
+    iface = TrackInterface(db)
+    iface.addTrack(trackStr) # replaces
     return True
 
 def augmentTracks(db):
