@@ -18,4 +18,3 @@ def createLogger():
 
 # global logging instance
 log = createLogger()
-log.debug("Logging started")
