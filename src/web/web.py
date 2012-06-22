@@ -1,15 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-15 -*-
 
-import sys, os
-
-import tornado.ioloop
-import tornado.web
-
 from lxml import etree
 from pprint import pprint
 from shared import constants
 from shared.db import DatabaseConnection
+from shared.interface import TrackInterface
+import sys
+import os
+import tornado.ioloop
+import tornado.web
+
+
 
 class MainHandler(tornado.web.RequestHandler):
 
@@ -43,13 +45,14 @@ class RequestHandler(tornado.web.RequestHandler):
         orderType = self.get_argument("ordertype", default="text")
 
         # build query
-        queryString = """for $x in //track
-            where contains($x/title/text(), "{0}")
-            and contains($x/startPointAddress/text(), "{1}")
-            and contains($x/startPointAddress/text(), "{2}")
-            return $x""".format(
-                searchParam, locationParam, zipParam
-            )
+        # TODO: Sanitize input?
+        queryString = "for $x in //track where"
+        queryString += ' contains($x/title/text(), "{0}")'.format(searchParam)
+        if zipParam:
+            queryString += ' and $x/startPointZip/text() = "{0}"'.format(zipParam)
+        queryString += ' and contains($x/startPointLocation/text(), "{0}")'.format(locationParam)
+        queryString += " return $x"
+        print(queryString)
         results = db.query(queryString)
 
         searchParamXml = """
@@ -113,12 +116,7 @@ class StatisticsHandler(tornado.web.RequestHandler):
             self.write("Database error: {0}".format(db.error))
             return
 
-        result = db.query("count(//track)")
-        trackCount = result[0]
-        result = db.query("count(//track[not(startPointAddress)])")
-        nonAugmentedTrackCount = result[0]
-        result = db.query("count(//track/startPointAddress)")
-        augmentedTrackCount = result[0]
+        iface = TrackInterface(db)
         databaseInfo = db.session.execute("info database")
 
         # TODO: Is there an easier way to write out this HTML?
@@ -152,7 +150,11 @@ class StatisticsHandler(tornado.web.RequestHandler):
 </div>
 </body>
 
-</html>""".format(trackCount, nonAugmentedTrackCount, augmentedTrackCount, databaseInfo)
+</html>""".format(
+                  iface.getTrackCount(),
+                  iface.getNonAugmentedTrackCount(),
+                  iface.getAugmentedTrackCount(),
+                  databaseInfo)
         )
 
 doc_root = os.path.dirname(__file__)
