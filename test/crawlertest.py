@@ -25,19 +25,25 @@ class CrawlerTest(TestBase):
         self.assertEquals(track.xpath("startPointLocation")[0].text,
                           "Triebischtal, Tanneberg, Meissen, Sachsen")
 
-    def testValidateTrackBrief(self):
+    def testValidateTrackBriefXml(self):
         tree = etree.fromstring(TestBase.TRACK_BRIEF_SAMPLE)
         validator = XmlValidator(XmlValidator.GPSIES_TRACK_BRIEF_SCHEMA)
         validator.validate(tree)
 
-    def testValidateTrackDetails(self):
+    def testValidateTrackDetailsXml(self):
         tree = etree.fromstring(TestBase.TRACK_DETAILS_SAMPLE)
         validator = XmlValidator(XmlValidator.GPSIES_TRACK_DETAILS_SCHEMA)
         validator.validate(tree)
 
-    def testValidateResultpage(self):
+    def testValidateResultpageXml(self):
         tree = etree.fromstring(TestBase.RESULTPAGE_SAMPLE)
         validator = XmlValidator(XmlValidator.GPSIES_RESULTPAGE_SCHEMA)
+        validator.validate(tree)
+
+    def testValidateTrackDbXml(self):
+        tree = etree.fromstring(TestBase.TRACK_DETAILS_SAMPLE)
+        data.transformTrack(tree)
+        validator = XmlValidator(XmlValidator.TRACK_DB_SCHEMA)
         validator.validate(tree)
 
 if __name__ == '__main__':

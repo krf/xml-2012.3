@@ -11,6 +11,7 @@ class XmlValidator:
     GPSIES_RESULTPAGE_SCHEMA = "gpsies_resultpage_schema.xml"
     GPSIES_TRACK_BRIEF_SCHEMA = "gpsies_track_brief_schema.xml"
     GPSIES_TRACK_DETAILS_SCHEMA = "gpsies_track_details_schema.xml"
+    TRACK_DB_SCHEMA = "track_db_schema.xml"
 
     def __init__(self, schema):
         """\param schema File providing the XSLT schema (str)"""
