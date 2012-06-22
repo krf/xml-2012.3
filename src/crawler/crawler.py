@@ -167,6 +167,7 @@ def augmentOneTrack(db, fileId):
     tree = etree.fromstring(content)
     tracks = tree.xpath("//track") # should return exactly one track element
     assert(len(tracks) == 1)
+    track = tracks[0]
 
     # transform to our database format
     success = data.transformTrack(tree)
@@ -174,15 +175,10 @@ def augmentOneTrack(db, fileId):
         log.debug("Failed to transform track to database format")
         return False
 
-    trackStr = etree.tostring(tracks[0])
-
-    # it's easier to just remove the node and re-add it again
-#    queryString = 'delete node //track[fileId="{0}"]'.format(fileId)
-#    db.query(queryString)
-
     # re-add node (with full details now)
     log.debug("Add track details for fileID: {0}".format(fileId))
     iface = TrackInterface(db)
+    trackStr = etree.tostring(track)
     iface.addTrack(trackStr) # replaces
     return True
 

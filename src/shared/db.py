@@ -78,6 +78,14 @@ class DatabaseConnection:
     def getAllDocuments(self):
         return self.query('collection({0})'.format(self.databaseName))
 
+    def delete(self, path):
+        """BaseXClient doesn't offer delete, so let's provide this here"""
+        if not self.session:
+            return False
+
+        self.session.execute("DELETE {0}".format(path))
+        return True
+
     def query(self, queryStr):
         """Return a list of query results"""
 
