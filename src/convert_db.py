@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 
-from crawler.crawler import openDatabase
+from crawler.data import transformTrack, openDatabase
 from lxml import etree
 from shared.interface import TrackInterface
 from shared.util import log
 import sys
-from crawler.data import transformTrack
 
 def main():
     """Convert from old database format"""

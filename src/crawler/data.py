@@ -1,7 +1,19 @@
 from __future__ import print_function
 from lxml import etree
+from shared import constants
+from shared.db import DatabaseConnection
 from shared.interface import TrackInterface
+from shared.util import log
 import re
+
+def openDatabase():
+    # open database
+    db = DatabaseConnection(constants.DATABASE_NAME)
+    success = db.connect()
+    if not success:
+        log.error("Database error: {0}".format(db.error))
+        raise RuntimeError("Failed to open database")
+    return db
 
 def transformTrack(track):
     """Transform the track in our own format

@@ -3,11 +3,11 @@
 from __future__ import print_function # for print()
 from ConfigParser import SafeConfigParser
 from crawler import data
+from crawler.data import openDatabase
 from crawler.parser import XmlParser
 from crawler.validator import XmlValidator
 from lxml import etree
 from shared import constants
-from shared.db import DatabaseConnection
 from shared.interface import TrackInterface
 from shared.util import log
 import argparse
@@ -75,15 +75,6 @@ def isValidUrl(url):
 def sanitizedPath(path):
     dirname = os.path.dirname(os.path.realpath(__file__))
     return os.path.join(dirname, path)
-
-def openDatabase():
-    # open database
-    db = DatabaseConnection(constants.DATABASE_NAME)
-    success = db.connect()
-    if not success:
-        log.error("Database error: {0}".format(db.error))
-        raise RuntimeError("Failed to open database")
-    return db
 
 # TODO: Can we avoid adding tracks with duplicate fileIds here?
 def autoRun(db):
