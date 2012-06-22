@@ -1,8 +1,9 @@
 from __future__ import print_function
 from lxml import etree
+from shared.interface import TrackInterface
 import re
 
-def transformTrack(trackTree):
+def transformTrack(track):
     """Transform the track in our own format
 
     Transformations
@@ -11,11 +12,12 @@ def transformTrack(trackTree):
     @return True if successful, else False
     """
 
+    trackTree = TrackInterface.toElement(track)
     assert(isinstance(trackTree, etree._Element))
 
     startPointAddress = trackTree.xpath("startPointAddress")[0]
     m = re.search("([0-9]+) (.+)", startPointAddress.text)
-    if len(m.groups()) != 2:
+    if not m or len(m.groups()) != 2:
         return False
 
     zipStr = m.group(1)
