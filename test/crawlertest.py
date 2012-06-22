@@ -13,14 +13,16 @@ class CrawlerTest(TestBase):
     def testTransform(self):
         tree = self.tree
         tracks = tree.xpath("//track")
-        assert(len(tracks) == 1)
+        self.assertEquals(len(tracks), 1)
 
         track = tracks[0]
         data.transformTrack(track)
 
         # TODO: Use Schema to validate this
-        assert(len(track.xpath("startPointZip")) == 1)
-        assert(len(track.xpath("startPointLocation")) == 1)
+        self.assertEquals(track.xpath("startPointZip")[0].text,
+                          "01683")
+        self.assertEquals(track.xpath("startPointLocation")[0].text,
+                          "Triebischtal, Tanneberg, Meissen, Sachsen")
 
 if __name__ == '__main__':
     unittest.main()
