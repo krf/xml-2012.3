@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<track>
+	<title>IVV PW Dankmarshausen Hessisch-Thüringische Grenzwanderung
+		durch die Rhäden
+	</title>
+	<fileId>ekktqargzqcuwsmq</fileId>
+	<downloadLink>http://www.gpsies.com/download.do?fileId=ekktqargzqcuwsmq&amp;filetype=kml
+	</downloadLink>
+	<createdDate>2009-06-22 19:25:26.0</createdDate>
+	<changedDate>2012-02-10 18:01:26.0</changedDate>
+	<description>(8-310-15)</description>
+	<startPointLat>50.9238606</startPointLat>
+	<startPointLon>10.0155991</startPointLon>
+	<endPointLat>50.9238673</endPointLat>
+	<endPointLon>10.0155937</endPointLon>
+	<startPointCountry>DE</startPointCountry>
+	<endPointCountry>DE</endPointCountry>
+	<trackLengthM>12857.8867433156</trackLengthM>
+	<countTrackpoints>228</countTrackpoints>
+	<trackProperty>roundTrip</trackProperty>
+	<externalLink>http://www.volkswandern.info</externalLink>
+	<altitudeMinHeightM>210</altitudeMinHeightM>
+	<altitudeMaxHeightM>283</altitudeMaxHeightM>
+	<altitudeDifferenceM>73</altitudeDifferenceM>
+	<totalAscentM>137</totalAscentM>
+	<totalDescentM>126</totalDescentM>
+</track>

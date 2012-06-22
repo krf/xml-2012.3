@@ -15,7 +15,7 @@ class SharedTest(TestBase):
         self.assertEqual(len(tracks), 0)
 
         # add non-augmented track
-        trackXml = TestBase.TRACKDETAILS_SAMPLE
+        trackXml = TestBase.TRACK_DETAILS_SAMPLE
         iface.addTrack(trackXml)
         self.assertEqual(iface.getAugmentedTrackCount(), 0)
         self.assertEqual(iface.getNonAugmentedTrackCount(), 1)
@@ -34,7 +34,7 @@ class SharedTest(TestBase):
         iface = TrackInterface(self.db)
 
         # add some track
-        trackXml = TestBase.TRACKDETAILS_SAMPLE
+        trackXml = TestBase.TRACK_DETAILS_SAMPLE
         iface.addTrack(trackXml)
 
         # find track again
@@ -51,7 +51,7 @@ class SharedTest(TestBase):
         iface = TrackInterface(self.db)
 
         # add some track
-        trackXml = TestBase.TRACKDETAILS_SAMPLE
+        trackXml = TestBase.TRACK_DETAILS_SAMPLE
         iface.addTrack(trackXml)
         self.assertEqual(iface.getNonAugmentedTrackCount(), 1)
 

@@ -16,7 +16,9 @@ class TestBase(unittest.TestCase):
 
     DATABASE_NAME = "test"
 
-    TRACKDETAILS_SAMPLE = _read(os.path.join(RESOURCES_DIR, "trackdetails_sample.xml"))
+    RESULTPAGE_SAMPLE = _read(os.path.join(RESOURCES_DIR, "resultpage_sample.xml"))
+    TRACK_BRIEF_SAMPLE = _read(os.path.join(RESOURCES_DIR, "track_brief_sample.xml"))
+    TRACK_DETAILS_SAMPLE = _read(os.path.join(RESOURCES_DIR, "track_details_sample.xml"))
 
     def __init__(self, methodName='runTest'):
         unittest.TestCase.__init__(self, methodName)

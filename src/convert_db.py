@@ -19,7 +19,10 @@ def main():
         track = etree.fromstring(trackStr)
         fileId = TrackInterface.parseFileId(track)
         log.debug("Transforming track: {0}".format(fileId))
-        transformTrack(track)
+        success = transformTrack(track)
+        if not success:
+            continue
+
         iface.addTrack(track)
         iterations += 1
 

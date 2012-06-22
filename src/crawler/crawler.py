@@ -62,16 +62,9 @@ def parseContent(content):
     parser.parse(content)
     return parser.tree
 
-def validateContent(tree, schemaFile):
-    with open(schemaFile, 'r') as f:
-        schema = f.read()
-        f.close()
-
-        validator = XmlValidator(schema)
-        success = validator.validate(tree)
-
-        if not success:
-            print("Error: {0}".format(validator.error))
+def validateContent(tree, schema):
+    validator = XmlValidator(schema)
+    validator.validate(tree) # raises
 
 def saveToFile(content, outputFile):
     with open(outputFile, 'w') as f:
@@ -260,10 +253,8 @@ def main(args):
 
         # parse + validate content
         tree = parseContent(content)
-        schemaFile = sanitizedPath(options.get('Common', 'API_SIMPLE_XML_SCHEMA'))
-
         print("Trying to validate content...")
-        validateContent(tree, schemaFile) # raises if invalid
+        validateContent(tree, XmlValidator.GPSIES_RESULTPAGE_SCHEMA) # raises if invalid
         success = True
     else:
         print("No action specified")

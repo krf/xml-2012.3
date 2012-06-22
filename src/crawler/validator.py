@@ -1,4 +1,6 @@
 from lxml import etree
+from shared import constants
+import os.path
 
 class XmlValidator:
     """Validates XML
@@ -6,21 +8,25 @@ class XmlValidator:
     \see http://lxml.de/validation.html
     """
 
+    GPSIES_RESULTPAGE_SCHEMA = "gpsies_resultpage_schema.xml"
+    GPSIES_TRACK_BRIEF_SCHEMA = "gpsies_track_brief_schema.xml"
+    GPSIES_TRACK_DETAILS_SCHEMA = "gpsies_track_details_schema.xml"
+
     def __init__(self, schema):
-        """\param schema String providing the XSLT schema"""
+        """\param schema File providing the XSLT schema (str)"""
 
         # validating input
         assert(isinstance(schema, str))
 
-        self.error = None
-        self.schema = etree.fromstring(schema)
+        # read schema
+        path = os.path.join(constants.DATA_DIR, schema)
+        f = open(path, 'r')
+        content = f.read()
+        self.schema = etree.fromstring(content)
 
     def validate(self, tree):
         """Validate a XML tree object
 
-        \note Sets the self.error member if an error occurred
-
-        \return True iff successful, else False
         \param tree An instance of etree.XML()"""
 
         schema = etree.XMLSchema(self.schema)
@@ -29,7 +35,4 @@ class XmlValidator:
         try:
             schema.assertValid(tree)
         except etree.DocumentInvalid, e:
-            self.error = e
-            return False
-
-        return True
+            raise RuntimeError(e)
