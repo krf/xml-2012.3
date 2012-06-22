@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from __future__ import division
 from lxml import etree
 from SPARQLWrapper import SPARQLWrapper, JSON
 
@@ -7,6 +8,7 @@ from shared.db import DatabaseConnection
 from shared import constants
 from shared.interface import TrackInterface
 
+import random
 import logging
 import Queue
 import thread
@@ -14,7 +16,7 @@ import threading
 import time
 import sys
 
-NUM_THREAD_WORKER = 25
+NUM_THREAD_WORKER = 100
 
 # SPARQL query string, has to be formatted
 SPARQL_QUERY = """
@@ -110,7 +112,9 @@ def queryDBpedia(latitude, longitude, distance, limit):
                         results = sparql.query().convert()
                         break
                 except Exception as e:
-                        pass # swallow and retry
+                        # retry after some seconds
+                        wait = random.randint(1, 3)
+                        time.sleep(wait)
 
         pois = []
         for result in results['results']['bindings']:
@@ -181,6 +185,7 @@ class SparqlThread(threading.Thread):
                 processed = self.size - remaining
                 currentTime = time.time()
                 elapsed = currentTime - self.startTime
+                
                 estimated = self.size / processed * elapsed
 
                 m, s = divmod(estimated, 60)
@@ -192,8 +197,8 @@ class SparqlThread(threading.Thread):
                 h, m = divmod(m, 60)
                 approxString = '%dh %dmin' % (h, m)
 
-                sys.stdout.write('Tracks processed: %d / %d (~ %s) => 100.000 Tracks (~ %s)\r'
-                                % (remaining, self.size, estimatedString, approxString))
+                sys.stdout.write('Tracks processed: %d / %d (~ %s) => 100.000 Tracks (~ %s) (DB write back queue: %d)\r'
+                                % (remaining, self.size, estimatedString, approxString, self.out.qsize()))
                 sys.stdout.flush()
 
         def run(self):
@@ -209,22 +214,28 @@ class SparqlThread(threading.Thread):
                         self.queue.task_done()
                         self.status()
 
+                        while self.out.qsize() > 100:
+                                time.sleep(5)
+
 class WriterThread(threading.Thread):
 
-        def __init__(self, queue):
+        def __init__(self, queue, threads):
                 threading.Thread.__init__(self)
                 self.queue = queue
+                self.threads = threads
+
+        def workerThreadsRunning(self):
+                self.threads = [t for t in self.threads if t is not None and t.isAlive]
+                return len(self.threads) > 0
 
         def run(self):
 
-                while True:
-
-                        if self.queue.empty:
-                                time.sleep(3)
-
+                while (not self.queue.empty() or self.workerThreadsRunning()):
                         document = self.queue.get()
                         writeBack(document)
                         self.queue.task_done()
+
+                print 'Writer Thread terminated'
 
 
 def main():
@@ -248,7 +259,7 @@ def main():
                 threads.append(thread)
                 thread.start()
 
-        writer = WriterThread(resultQueue)
+        writer = WriterThread(resultQueue, threads)
         writer.setDaemon(True)
         writer.start()
 
@@ -258,7 +269,7 @@ def main():
 
                 except KeyboardInterrupt:
                         print 'Abort'
-                        return
+                        break
 
 
 main()
