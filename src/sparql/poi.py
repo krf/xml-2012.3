@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from lxml import etree
 from SPARQLWrapper import SPARQLWrapper, JSON
 
