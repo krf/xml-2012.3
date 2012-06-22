@@ -5,6 +5,7 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 
 from shared.db import DatabaseConnection
 from shared import constants
+from shared.interface import TrackInterface
 
 import logging
 import Queue
@@ -64,8 +65,9 @@ class POI:
 # in order to augment them
 def getTrackDocuments():
         database = DatabaseConnection(constants.DATABASE_NAME)
+        interface = TrackInterface(database)
         database.connect()
-        documents = database.getAllDocuments()
+        documents = interface.getNonPoiTracks()
         database.close()
 
         verified = []
@@ -78,7 +80,7 @@ def getTrackDocuments():
                         pass
                         #print 'Syntax error at document %s' % i
 
-        return [doc for doc in verified if doc.find('.//pois') is None]
+        return verified
 
 # For the SPARQL query the GPS coordinates are parsed and
 # returned as a list [latitude, longitude]
@@ -158,9 +160,9 @@ def augmentTrackDocument(document, pois):
 # Writes the augmented document back into the database
 def writeBack(document):
         database = DatabaseConnection(constants.DATABASE_NAME)
+        interface = TrackInterface(database)
         database.connect()
-        fileId = document.find('.//fileId').text
-        database.session.replace('%s.xml' % fileId, etree.tostring(document))
+        interface.addTrack(document)
         database.close()
 
 class SparqlThread(threading.Thread):
@@ -231,6 +233,7 @@ def main():
         logger.setLevel(logging.CRITICAL)
 
         tracks = getTrackDocuments()
+        print 'Found %d tracks with no POIs' % len(tracks)
 
         workQueue = Queue.Queue()
         resultQueue = Queue.Queue()
