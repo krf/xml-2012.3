@@ -1,0 +1,32 @@
+#!/usr/bin/env python
+# -*- coding: iso-8859-15 -*-
+
+from pprint import pprint
+from web.handler import doc_root, MainHandler, RequestHandler, DetailHandler, \
+    StatisticsHandler
+import os
+import sys
+import tornado.ioloop
+import tornado.web
+
+settings = {
+    "static_path": os.path.join(doc_root, "static"),
+    "debug": True
+}
+pprint(settings)   
+
+application = tornado.web.Application([
+    (r"/", MainHandler),
+    (r"/request", RequestHandler),
+    (r"/detail", DetailHandler),
+    (r"/stats", StatisticsHandler)
+], **settings)
+
+if __name__ == "__main__":
+    application.listen(8888)
+
+    try:
+        tornado.ioloop.IOLoop.instance().start()
+    except KeyboardInterrupt:
+        print("\nKeyboardInterrupt. Exit.")
+    sys.exit(0)

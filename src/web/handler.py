@@ -1,17 +1,11 @@
-#!/usr/bin/env python
-# -*- coding: iso-8859-15 -*-
-
 from lxml import etree
-from pprint import pprint
 from shared import constants
 from shared.db import DatabaseConnection
 from shared.interface import TrackInterface
-import sys
 import os
-import tornado.ioloop
 import tornado.web
 
-
+doc_root = os.path.dirname(__file__)
 
 class MainHandler(tornado.web.RequestHandler):
 
@@ -156,26 +150,3 @@ class StatisticsHandler(tornado.web.RequestHandler):
                   iface.getAugmentedTrackCount(),
                   databaseInfo)
         )
-
-doc_root = os.path.dirname(__file__)
-settings = {
-    "static_path": os.path.join(doc_root, "static"),
-    "debug": True
-}
-pprint(settings)   
-
-application = tornado.web.Application([
-    (r"/", MainHandler),
-    (r"/request", RequestHandler),
-    (r"/detail", DetailHandler),
-    (r"/stats", StatisticsHandler)
-], **settings)
-
-if __name__ == "__main__":
-    application.listen(8888)
-
-    try:
-        tornado.ioloop.IOLoop.instance().start()
-    except KeyboardInterrupt:
-        print("\nKeyboardInterrupt. Exit.")
-    sys.exit(0)

@@ -1,35 +1,27 @@
 #!/usr/bin/env python
 
 from __future__ import print_function # for print()
-
-# global
-import argparse
-import urllib2
-import os
-import sys
-import shutil
-import time
-
-from lxml import etree
-
-# see: http://www.doughellmann.com/PyMOTW/ConfigParser/s
 from ConfigParser import SafeConfigParser
-
-# local
-import data
-from parser import XmlParser
-from validator import XmlValidator
+from crawler import data
+from crawler.parser import XmlParser
+from crawler.validator import XmlValidator
+from lxml import etree
 from shared import constants
 from shared.db import DatabaseConnection
-from shared.util import log
 from shared.interface import TrackInterface
+from shared.util import log
+import argparse
+import os
+import shutil
+import sys
+import time
+import urllib2
 
 # read options file initially
 options = SafeConfigParser()
-dirname = os.path.dirname(os.path.realpath(__file__))
 
 # read defaul config
-defaultConfig = os.path.join(dirname, 'config.ini')
+defaultConfig = os.path.join(constants.DATA_DIR, 'config.ini')
 options.read(defaultConfig)
 
 # read per-user config
