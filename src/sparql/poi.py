@@ -16,22 +16,25 @@ import threading
 import time
 import sys
 
-NUM_THREAD_WORKER = 100
+NUM_THREAD_WORKER = 30
 
 # SPARQL query string, has to be formatted
 SPARQL_QUERY = """
                PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
-               SELECT ?subject ?label ?lat ?long ?abstract ?wiki ?image WHERE {
+               SELECT ?subject ?label ?lat ?long ?abstract ?wiki ?image ?typeLabel WHERE {
                ?subject geo:lat ?lat.
                ?subject geo:long ?long.
                ?subject rdfs:label ?label.
                ?subject dbpedia-owl:abstract ?abstract.
                ?subject foaf:page ?wiki.
+               ?subject rdf:type ?type.
                ?subject foaf:depiction ?image.
+               ?type rdfs:label ?typeLabel.
                FILTER(?lat - %f <= %f && %f - ?lat <= %f &&
                       ?long - %f <= %f && %f - ?long <= %f &&
                       lang(?abstract) = "de" &&
-                      lang(?label) = "de"
+                      lang(?label) = "de" &&
+                      lang(?typeLabel) = "de"
                       ).
                } LIMIT %d
                """
@@ -50,13 +53,14 @@ FIND_ONLY_MINIMUM = True
 
 class POI:
 
-        def __init__(self, label, la, lo, abstract, wiki, image):
+        def __init__(self, label, la, lo, abstract, wiki, image, typeLabel):
                 self.label = label
                 self.latitude = la
                 self.longitude = lo
                 self.abstract = abstract
                 self.wiki = wiki
                 self.image = image
+                self.typeLabel = typeLabel
 
         def __hash__(self):
                 return hash(self.label)
@@ -110,10 +114,12 @@ def queryDBpedia(latitude, longitude, distance, limit):
         while True:
                 try:
                         results = sparql.query().convert()
+                        #print 'Success'
                         break
                 except Exception as e:
                         # retry after some seconds
-                        wait = random.randint(1, 3)
+                        wait = random.randint(5, 20)
+                        #print 'Feeling sleepy for %d second' % wait
                         time.sleep(wait)
 
         pois = []
@@ -124,7 +130,8 @@ def queryDBpedia(latitude, longitude, distance, limit):
                 abstract = result['abstract']['value']
                 wiki = result['wiki']['value']
                 image = result['image']['value']
-                pois.append(POI(label, la, lo, abstract, wiki, image))
+                typeLabel = result['typeLabel']['value']
+                pois.append(POI(label, la, lo, abstract, wiki, image, typeLabel))
 
         return pois
 
@@ -140,6 +147,7 @@ def augmentTrackDocument(document, pois):
                 abstractNode = etree.Element('abstract')
                 wikiNode = etree.Element('wiki')
                 imageNode = etree.Element('image')
+                typeLabelNode = etree.Element('type')
 
                 nameNode.text = poi.label
                 latNode.text = poi.latitude
@@ -147,8 +155,10 @@ def augmentTrackDocument(document, pois):
                 abstractNode.text = poi.abstract
                 wikiNode.text = poi.wiki
                 imageNode.text = poi.image
+                typeLabelNode.text = poi.typeLabel
 
                 poiNode.append(nameNode)
+                poiNode.append(typeLabelNode)
                 poiNode.append(latNode)
                 poiNode.append(lonNode)
                 poiNode.append(abstractNode)
