@@ -146,10 +146,12 @@ def augmentOneTrack(db, fileId):
     track = tracks[0]
 
     # transform to our database format
-    success = data.transformTrack(tree)
+    success = data.transformTrack(track)
     if not success:
         log.debug("Failed to transform track to database format")
         return False
+
+    print(etree.tostring(track))
 
     # re-add node (with full details now)
     log.debug("Add track details for fileID: {0}".format(fileId))

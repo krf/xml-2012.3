@@ -28,6 +28,7 @@ def transformTrack(track):
     assert(isinstance(trackTree, etree._Element))
 
     startPointAddress = trackTree.xpath("startPointAddress")[0]
+
     m = re.search("([0-9]+) (.+)", startPointAddress.text)
     if not m or len(m.groups()) != 2:
         return False
