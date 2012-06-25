@@ -151,8 +151,6 @@ def augmentOneTrack(db, fileId):
         log.debug("Failed to transform track to database format")
         return False
 
-    print(etree.tostring(track))
-
     # re-add node (with full details now)
     log.debug("Add track details for fileID: {0}".format(fileId))
     iface = TrackInterface(db)
