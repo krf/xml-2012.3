@@ -10,12 +10,11 @@ function loadScript() {
 }
 
 function init() {
-	var options = {
+	var mapOptions = {
 		zoom : 8,
-		center : new google.maps.LatLng(-34.397, 150.644),
 		mapTypeId : google.maps.MapTypeId.ROADMAP
 	}
-	var map = new google.maps.Map(document.getElementById("mapHolder"), options);
+	map = new google.maps.Map(document.getElementById("mapHolder"), mapOptions);
 	loadXmlData(map);
 }
 
@@ -25,10 +24,13 @@ function loadXmlData(map) {
 		trackDataArray = $("trackData", result).text().split(/\n/);
 
 		mapsTrack = new Array();
+		mapBounds = new google.maps.LatLngBounds();
 
 		for (trackPointIndex in trackDataArray) {
 			tempTrackSplit = trackDataArray[trackPointIndex].split(/,/);
-			mapsTrack.push(new google.maps.LatLng(tempTrackSplit[0], tempTrackSplit[1]));
+			tempPoint = new google.maps.LatLng(tempTrackSplit[0], tempTrackSplit[1]);
+			mapsTrack.push(tempPoint);
+			mapBounds.extend(tempPoint);
 		}
 
 		mapsTrackObject = new google.maps.Polyline({
@@ -39,6 +41,8 @@ function loadXmlData(map) {
 		})
 
 		mapsTrackObject.setMap(map);
+		
+		map.fitBounds(mapBounds);
 
 		poiDataArray = $("poi", result);
 
