@@ -187,22 +187,27 @@ def getTrackCount(db):
     return int(results[0])
 
 def pruneDatabase(db):
+    """Delete non-augmented tracks"""
+
     trackCount_old = getTrackCount(db)
 
-    queryString = "delete node //track[not(startPointAddress)]"
-    db.query(queryString)
+    queryString = "//track[not(startPointZip)]"
+    tracks = db.query(queryString)
+
+    iface = TrackInterface(db)
+    for track in tracks:
+        iface.removeTrack(track)
 
     trackCount_new = getTrackCount(db)
     removedTracksCount = trackCount_old - trackCount_new
     print("Removed tracks count: {0}".format(removedTracksCount))
-
     return True
 
 def printStatistics(db):
-    result = db.query("count(//track[not(startPointAddress)])")
+    result = db.query("count(//track[not(startPointZip)])")
     print("Number of non-augmented tracks: {0}".format(result[0]))
 
-    result = db.query("count(//track/startPointAddress)")
+    result = db.query("count(//track/startPointZip)")
     print("Number of     augmented tracks: {0}".format(result[0]))
 
 def main(args):
