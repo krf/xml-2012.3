@@ -145,6 +145,13 @@ def augmentOneTrack(db, fileId):
     assert(len(tracks) == 1)
     track = tracks[0]
 
+    titles = tree.xpath("//track/title")
+    assert(len(titles) == 1)
+    title = etree.tostring(titles[0])
+    if "API key required" in title:
+        log.error("Title: {0}".format(title))
+        raise RuntimeError("Fatal: API key broken? File ID: {0}".format(fileId))
+
     # transform to our database format
     success = data.transformTrack(track)
     if not success:
