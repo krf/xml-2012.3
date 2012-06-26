@@ -1,0 +1,376 @@
+<track>
+  <title>bvcgbf 3</title>
+  <fileId>czlbtqtfmnrxggyp</fileId>
+  <downloadLink>http://www.gpsies.com/files/kmz/c/czlbtqtfmnrxggyp.kmz</downloadLink>
+  <createdDate>2012-05-26 00:17:04.0</createdDate>
+  <changedDate>2012-05-26 00:17:06.0</changedDate>
+  <trackTypes>
+    <trackType>sightseeing</trackType>
+  </trackTypes>
+  <trackAttributes>
+    <trackAttribute>crowded</trackAttribute>
+  </trackAttributes>
+  <trackCharacters>
+    <trackCharacter>hilly</trackCharacter>
+  </trackCharacters>
+  <trackClassifications>
+    <trackClassification>trekkingClassification</trackClassification>
+  </trackClassifications>
+  <trackRoadbeds>
+    <trackRoadbed>soft</trackRoadbed>
+  </trackRoadbeds>
+  <trackRoads>
+    <trackRoad>onroad</trackRoad>
+  </trackRoads>
+  <statistics>
+    <countDownload>5</countDownload>
+    <countViewOnMap>1</countViewOnMap>
+  </statistics>
+  <username>much175</username>
+  <startPointLat>50.8594463</startPointLat>
+  <startPointLon>14.6933934</startPointLon>
+  <endPointLat>50.8594979</endPointLat>
+  <endPointLon>14.6934423</endPointLon>
+  <startPointCountry>DE</startPointCountry>
+  <endPointCountry>DE</endPointCountry>
+  <startPointAddress>02796 Jonsdorf, Görlitz, Sachsen</startPointAddress>
+  <endPointAddress>02796 Jonsdorf, Görlitz, Sachsen</endPointAddress>
+  <trackLengthM>29755.8561117544</trackLengthM>
+  <countTrackpoints>173</countTrackpoints>
+  <trackProperty>roundTrip</trackProperty>
+  <altitudeMinHeightM>415</altitudeMinHeightM>
+  <altitudeMaxHeightM>773</altitudeMaxHeightM>
+  <altitudeDifferenceM>358</altitudeDifferenceM>
+  <totalAscentM>1208</totalAscentM>
+  <totalDescentM>1238</totalDescentM>
+  <trackData>50.85944630,14.69339340,415.0
+50.85891890,14.69222000,432.0
+50.85841740,14.69161850,445.0
+50.85644360,14.69058130,458.0
+50.85567930,14.68964930,455.0
+50.85430340,14.68834410,451.0
+50.85220820,14.68481900,496.0
+50.85066920,14.67893130,538.0
+50.84986470,14.67439860,556.0
+50.84997770,14.67152690,573.0
+50.85309620,14.67086870,604.0
+50.85382840,14.66802940,617.0
+50.85358900,14.66610970,617.0
+50.85404800,14.66093430,611.0
+50.85232770,14.65819520,561.0
+50.85017600,14.65821830,572.0
+50.84951810,14.65768360,573.0
+50.84908720,14.65470320,600.0
+50.84995190,14.65264760,617.0
+50.84989060,14.65168790,635.0
+50.85138380,14.64614060,694.0
+50.85187620,14.64470770,689.0
+50.85261310,14.64454110,682.0
+50.85329610,14.64270480,665.0
+50.85329020,14.64078510,663.0
+50.85418320,14.63999760,655.0
+50.85442610,14.63962890,651.0
+50.85471460,14.64073000,636.0
+50.85493150,14.64163760,616.0
+50.85506590,14.64257790,602.0
+50.85542230,14.64246470,588.0
+50.85586550,14.64278840,570.0
+50.85622330,14.64283170,559.0
+50.85649770,14.64218260,555.0
+50.85715400,14.64108210,548.0
+50.85767000,14.64064700,537.0
+50.85839260,14.64133160,512.0
+50.85924830,14.64316960,482.0
+50.86039900,14.64485860,459.0
+50.86087530,14.64134780,493.0
+50.86078680,14.63909080,527.0
+50.86185180,14.63846620,533.0
+50.86207060,14.63525100,550.0
+50.86214970,14.63231760,562.0
+50.86054230,14.63001920,593.0
+50.85896870,14.62795250,629.0
+50.85710930,14.62546760,664.0
+50.85679770,14.62577110,664.0
+50.85641810,14.62859690,658.0
+50.85574420,14.63006500,655.0
+50.85467590,14.63391620,656.0
+50.85377500,14.63616700,657.0
+50.85361490,14.63705740,661.0
+50.85356840,14.63838800,667.0
+50.85268450,14.63973090,673.0
+50.85252370,14.64082020,673.0
+50.85217150,14.64158780,680.0
+50.85202260,14.64391520,688.0
+50.85120410,14.64594820,700.0
+50.85045430,14.64730720,710.0
+50.84974630,14.64798900,731.0
+50.84936870,14.64872500,735.0
+50.84947230,14.64659130,762.0
+50.84896180,14.64691320,773.0
+50.84851110,14.64711450,766.0
+50.84885500,14.64614700,762.0
+50.84854810,14.64598190,751.0
+50.84866350,14.64508620,730.0
+50.84816260,14.64521030,721.0
+50.84850650,14.64424280,706.0
+50.84780740,14.64418660,694.0
+50.84650070,14.64441210,676.0
+50.84359730,14.64657610,660.0
+50.84268980,14.64766000,659.0
+50.84343120,14.64999530,654.0
+50.84409890,14.65199480,635.0
+50.84933990,14.65746290,574.0
+50.85024900,14.66023130,576.0
+50.84948800,14.66347910,552.0
+50.84937110,14.66440300,552.0
+50.84708650,14.66937000,547.0
+50.84706440,14.67019170,539.0
+50.84426690,14.67644600,537.0
+50.84270030,14.68070350,570.0
+50.84214700,14.68097720,573.0
+50.84151380,14.68196590,572.0
+50.84078540,14.68471940,574.0
+50.84002840,14.68547970,584.0
+50.83934640,14.68599340,595.0
+50.83816570,14.68916050,611.0
+50.83812700,14.68995160,616.0
+50.83909030,14.69288290,607.0
+50.83938700,14.69527810,595.0
+50.83901650,14.69879970,587.0
+50.84002020,14.69961870,572.0
+50.84093720,14.70844240,509.0
+50.83994240,14.70964230,508.0
+50.83976650,14.71084290,510.0
+50.83976970,14.71151120,516.0
+50.83939470,14.71309950,522.0
+50.83933790,14.71407310,526.0
+50.83866630,14.71583820,538.0
+50.83807280,14.71656120,542.0
+50.83648960,14.72094280,555.0
+50.83336030,14.72236350,547.0
+50.83195650,14.72401000,579.0
+50.83115740,14.72452290,595.0
+50.82956550,14.72542150,617.0
+50.82593480,14.72496170,678.0
+50.82491620,14.72408370,695.0
+50.82440430,14.72406350,704.0
+50.82402430,14.72447150,714.0
+50.82279210,14.72683480,725.0
+50.82251700,14.72657370,727.0
+50.82228470,14.72617580,719.0
+50.82231870,14.72548390,713.0
+50.82263370,14.72438610,703.0
+50.82253920,14.72356480,691.0
+50.82227670,14.72286490,679.0
+50.82212350,14.72232050,671.0
+50.82166980,14.72148360,659.0
+50.82046600,14.71943240,630.0
+50.81891650,14.71782200,600.0
+50.81841100,14.71712090,592.0
+50.81812800,14.71610610,594.0
+50.81798200,14.71468200,587.0
+50.81780550,14.71387920,571.0
+50.81832070,14.71273480,556.0
+50.81769590,14.70914990,506.0
+50.81729780,14.70626040,487.0
+50.81823100,14.70576370,486.0
+50.81861360,14.70585310,487.0
+50.81955210,14.70378030,483.0
+50.82024870,14.70278590,495.0
+50.82064640,14.70054740,497.0
+50.82457400,14.70045910,489.0
+50.82756160,14.70045480,479.0
+50.82827120,14.69478750,472.0
+50.82745990,14.68911920,461.0
+50.82751980,14.68513430,483.0
+50.82825980,14.68306490,502.0
+50.82828470,14.68218710,508.0
+50.82899080,14.68117910,535.0
+50.82842120,14.67994480,533.0
+50.82817410,14.67376290,525.0
+50.82881760,14.67219310,513.0
+50.82881010,14.66902390,462.0
+50.82902490,14.66775710,452.0
+50.83337290,14.66697830,465.0
+50.83859410,14.66748490,482.0
+50.84131130,14.67136800,496.0
+50.84320880,14.67471120,521.0
+50.84395570,14.67747400,543.0
+50.84276630,14.68064050,569.0
+50.84164180,14.68192460,573.0
+50.84226140,14.68452980,582.0
+50.84227610,14.68680550,595.0
+50.84449820,14.69196560,569.0
+50.84540940,14.69118150,542.0
+50.84511260,14.68897070,538.0
+50.84646420,14.68819760,493.0
+50.84747890,14.68916000,480.0
+50.84829070,14.68985600,472.0
+50.84903530,14.68935000,472.0
+50.84997730,14.68922330,457.0
+50.85377240,14.69092330,431.0
+50.85610300,14.69312710,421.0
+50.85949790,14.69344230,415.0</trackData>
+  <pois>
+    <poi>
+      <name>Bertsdorf-Hörnitz</name>
+      <lat>50.8889</lat>
+      <lon>14.7417</lon>
+      <abstract>Bertsdorf-Hörnitz ist eine sächsische Gemeinde im Landkreis Görlitz am Rande des Zittauer Gebirges.</abstract>
+      <wiki>http://en.wikipedia.org/wiki/Bertsdorf-H%C3%B6rnitz</wiki>
+      <image>http://upload.wikimedia.org/wikipedia/commons/f/f7/Bertsdorf.jpg</image>
+    </poi>
+    <poi>
+      <name>Zittauer Gebirge</name>
+      <lat>50.8489</lat>
+      <lon>14.6469</lon>
+      <abstract>Das Zittauer Gebirge, früher auch Lausitzer Kamm (tschech. Žitavské hory) genannt, ist der deutsche Teil des sich an der sächsisch-böhmischen Grenze erstreckenden Lausitzer Gebirges im äußersten Südosten Sachsens. Es ist maximal Vorlage:Höhe hoch und gehört zum Gebirgszug Sudeten.</abstract>
+      <wiki>http://en.wikipedia.org/wiki/Zittau_Mountains</wiki>
+      <image>http://upload.wikimedia.org/wikipedia/commons/9/92/Lausche.jpg</image>
+    </poi>
+    <poi>
+      <name>Oybin (Berg)</name>
+      <lat>50.8444</lat>
+      <lon>14.74</lon>
+      <abstract>Der Oybin ist ein Berg des Zittauer Gebirges (514 m) oberhalb des gleichnamigen Ortes mit den Ruinen der Burg Oybin, die Kaiser Karl IV. zu seinem Alterssitz ausbauen ließ, und eines Klosters der Cölestiner, das 1369 gegründet worden ist. Die Burganlage nimmt den gesamten Gipfelbereich des Berges Oybin ein. Sie beinhaltet neben der eigentlichen Burg an der Westseite mit dem Kaiserhaus, auch die Klosterruine, den Bergfriedhof der Gemeinde Oybin und ein Burgrestaurant. Am höchsten Punkt des Berges befindet sich eine Camera Obscura. Die am Hang befindliche Bergkirche Oybin besitzt sehenswerte Malereien in ihrem Innern.</abstract>
+      <wiki>http://en.wikipedia.org/wiki/Oybin_%28mountain%29</wiki>
+      <image>http://upload.wikimedia.org/wikipedia/commons/9/9d/Berg_oybin_2006.JPG</image>
+    </poi>
+    <poi>
+      <name>Jonsberg (Zittauer Gebirge)</name>
+      <lat>50.8486</lat>
+      <lon>14.7164</lon>
+      <abstract>Die Jonsberg ist ein flachkegeliger Berg des Zittauer Gebirges mit 653 m über NN. Der Jonsberg ist komplett bewaldet.</abstract>
+      <wiki>http://en.wikipedia.org/wiki/Jonsberg_%28Zittau_Mountains%29</wiki>
+      <image>http://upload.wikimedia.org/wikipedia/commons/c/c6/2010_Jonsberg_vom_Hochwald.JPG</image>
+    </poi>
+    <poi>
+      <name>Hainewalde</name>
+      <lat>50.9056</lat>
+      <lon>14.7</lon>
+      <abstract>Hainewalde ist eine sächsische Gemeinde im Landkreis Görlitz. Sie liegt nahe der deutsch-tschechischen Grenze und gehört zur Verwaltungsgemeinschaft Großschönau-Hainewalde.</abstract>
+      <wiki>http://en.wikipedia.org/wiki/Hainewalde</wiki>
+      <image>http://upload.wikimedia.org/wikipedia/commons/e/e6/Hainewalde-Wappen.svg</image>
+    </poi>
+    <poi>
+      <name>Breiteberg</name>
+      <lat>50.8919</lat>
+      <lon>14.7044</lon>
+      <abstract>Der Breiteberg ist ein Berg im Lausitzer Bergland in Sachsen. Er gilt als Hausberg von Hainewalde und ist von dort in ca. 30 Minuten zu erreichen.</abstract>
+      <wiki>http://en.wikipedia.org/wiki/Breiteberg</wiki>
+      <image>http://upload.wikimedia.org/wikipedia/commons/c/cb/Breiteberg07.jpg</image>
+    </poi>
+    <poi>
+      <name>Großschönau (Sachsen)</name>
+      <lat>50.8964</lat>
+      <lon>14.6622</lon>
+      <abstract>Großschönau ist eine sächsische Gemeinde im Landkreis Görlitz an der deutsch-tschechischen Grenze. Sie ist Verwaltungssitz der Verwaltungsgemeinschaft Großschönau-Hainewalde. Der Name leitet sich von der Gründung des Ortes ab. Der Ort wurde an einer Aue gegründet daher entstand der Name aus „Große schöne Aue“.</abstract>
+      <wiki>http://en.wikipedia.org/wiki/Gro%C3%9Fsch%C3%B6nau,_Saxony</wiki>
+      <image>http://upload.wikimedia.org/wikipedia/commons/3/32/Gemeideverwaltung_Gro%C3%9Fsch%C3%B6nau.JPG</image>
+    </poi>
+    <poi>
+      <name>Jonsdorf</name>
+      <lat>50.8528</lat>
+      <lon>14.7028</lon>
+      <abstract>Jonsdorf ist ein staatlich anerkannter Luftkurort im Zittauer Gebirge. Die sächsische Gemeinde im Landkreis Görlitz gehört der Verwaltungsgemeinschaft Olbersdorf an.</abstract>
+      <wiki>http://en.wikipedia.org/wiki/Jonsdorf</wiki>
+      <image>http://upload.wikimedia.org/wikipedia/commons/8/80/Jonsdorf_vom_Nonnenfelsen.JPG</image>
+    </poi>
+    <poi>
+      <name>Jonsdorf</name>
+      <lat>50.8528</lat>
+      <lon>14.7028</lon>
+      <abstract>Jonsdorf ist ein staatlich anerkannter Luftkurort im Zittauer Gebirge. Die sächsische Gemeinde im Landkreis Görlitz gehört der Verwaltungsgemeinschaft Olbersdorf an.</abstract>
+      <wiki>http://en.wikipedia.org/wiki/Jonsdorf</wiki>
+      <image>http://upload.wikimedia.org/wikipedia/commons/8/80/Jonsdorf_vom_Nonnenfelsen.JPG</image>
+    </poi>
+    <poi>
+      <name>Großschönau (Sachsen)</name>
+      <lat>50.8964</lat>
+      <lon>14.6622</lon>
+      <abstract>Großschönau ist eine sächsische Gemeinde im Landkreis Görlitz an der deutsch-tschechischen Grenze. Sie ist Verwaltungssitz der Verwaltungsgemeinschaft Großschönau-Hainewalde. Der Name leitet sich von der Gründung des Ortes ab. Der Ort wurde an einer Aue gegründet daher entstand der Name aus „Große schöne Aue“.</abstract>
+      <wiki>http://en.wikipedia.org/wiki/Gro%C3%9Fsch%C3%B6nau,_Saxony</wiki>
+      <image>http://upload.wikimedia.org/wikipedia/commons/3/32/Gemeideverwaltung_Gro%C3%9Fsch%C3%B6nau.JPG</image>
+    </poi>
+    <poi>
+      <name>Oybin</name>
+      <lat>50.8422</lat>
+      <lon>14.7428</lon>
+      <abstract>Oybin ist eine Gemeinde im Landkreis Görlitz, die im Südosten Sachsens an der Grenze zur Tschechischen Republik liegt.</abstract>
+      <wiki>http://en.wikipedia.org/wiki/Oybin</wiki>
+      <image>http://upload.wikimedia.org/wikipedia/commons/6/60/Wappen_oybin.png</image>
+    </poi>
+    <poi>
+      <name>Oybin</name>
+      <lat>50.8422</lat>
+      <lon>14.7428</lon>
+      <abstract>Oybin ist eine Gemeinde im Landkreis Görlitz, die im Südosten Sachsens an der Grenze zur Tschechischen Republik liegt.</abstract>
+      <wiki>http://en.wikipedia.org/wiki/Oybin</wiki>
+      <image>http://upload.wikimedia.org/wikipedia/commons/6/60/Wappen_oybin.png</image>
+    </poi>
+    <poi>
+      <name>Zittauer Gebirge</name>
+      <lat>50.8489</lat>
+      <lon>14.6469</lon>
+      <abstract>Das Zittauer Gebirge, früher auch Lausitzer Kamm (tschech. Žitavské hory) genannt, ist der deutsche Teil des sich an der sächsisch-böhmischen Grenze erstreckenden Lausitzer Gebirges im äußersten Südosten Sachsens. Es ist maximal Vorlage:Höhe hoch und gehört zum Gebirgszug Sudeten.</abstract>
+      <wiki>http://en.wikipedia.org/wiki/Zittau_Mountains</wiki>
+      <image>http://upload.wikimedia.org/wikipedia/commons/9/92/Lausche.jpg</image>
+    </poi>
+    <poi>
+      <name>Hainewalde</name>
+      <lat>50.9056</lat>
+      <lon>14.7</lon>
+      <abstract>Hainewalde ist eine sächsische Gemeinde im Landkreis Görlitz. Sie liegt nahe der deutsch-tschechischen Grenze und gehört zur Verwaltungsgemeinschaft Großschönau-Hainewalde.</abstract>
+      <wiki>http://en.wikipedia.org/wiki/Hainewalde</wiki>
+      <image>http://upload.wikimedia.org/wikipedia/commons/e/e6/Hainewalde-Wappen.svg</image>
+    </poi>
+    <poi>
+      <name>Lausche</name>
+      <lat>50.85</lat>
+      <lon>14.65</lon>
+      <abstract>Die Lausche ist mit 793 m über NN der höchste Berg des Lausitzer Gebirges und der Oberlausitz. Direkt über den Gipfel verläuft die Staatsgrenze zwischen Deutschland und Tschechien. Die Lausche ist die höchste Erhebung östlich der Elbe in Deutschland.</abstract>
+      <wiki>http://en.wikipedia.org/wiki/Lausche</wiki>
+      <image>http://upload.wikimedia.org/wikipedia/commons/9/92/Lausche.jpg</image>
+    </poi>
+    <poi>
+      <name>Oybin (Berg)</name>
+      <lat>50.8444</lat>
+      <lon>14.74</lon>
+      <abstract>Der Oybin ist ein Berg des Zittauer Gebirges (514 m) oberhalb des gleichnamigen Ortes mit den Ruinen der Burg Oybin, die Kaiser Karl IV. zu seinem Alterssitz ausbauen ließ, und eines Klosters der Cölestiner, das 1369 gegründet worden ist. Die Burganlage nimmt den gesamten Gipfelbereich des Berges Oybin ein. Sie beinhaltet neben der eigentlichen Burg an der Westseite mit dem Kaiserhaus, auch die Klosterruine, den Bergfriedhof der Gemeinde Oybin und ein Burgrestaurant. Am höchsten Punkt des Berges befindet sich eine Camera Obscura. Die am Hang befindliche Bergkirche Oybin besitzt sehenswerte Malereien in ihrem Innern.</abstract>
+      <wiki>http://en.wikipedia.org/wiki/Oybin_%28mountain%29</wiki>
+      <image>http://upload.wikimedia.org/wikipedia/commons/9/9d/Berg_oybin_2006.JPG</image>
+    </poi>
+    <poi>
+      <name>Bertsdorf-Hörnitz</name>
+      <lat>50.8889</lat>
+      <lon>14.7417</lon>
+      <abstract>Bertsdorf-Hörnitz ist eine sächsische Gemeinde im Landkreis Görlitz am Rande des Zittauer Gebirges.</abstract>
+      <wiki>http://en.wikipedia.org/wiki/Bertsdorf-H%C3%B6rnitz</wiki>
+      <image>http://upload.wikimedia.org/wikipedia/commons/f/f7/Bertsdorf.jpg</image>
+    </poi>
+    <poi>
+      <name>Breiteberg</name>
+      <lat>50.8919</lat>
+      <lon>14.7044</lon>
+      <abstract>Der Breiteberg ist ein Berg im Lausitzer Bergland in Sachsen. Er gilt als Hausberg von Hainewalde und ist von dort in ca. 30 Minuten zu erreichen.</abstract>
+      <wiki>http://en.wikipedia.org/wiki/Breiteberg</wiki>
+      <image>http://upload.wikimedia.org/wikipedia/commons/c/cb/Breiteberg07.jpg</image>
+    </poi>
+    <poi>
+      <name>Lausche</name>
+      <lat>50.85</lat>
+      <lon>14.65</lon>
+      <abstract>Die Lausche ist mit 793 m über NN der höchste Berg des Lausitzer Gebirges und der Oberlausitz. Direkt über den Gipfel verläuft die Staatsgrenze zwischen Deutschland und Tschechien. Die Lausche ist die höchste Erhebung östlich der Elbe in Deutschland.</abstract>
+      <wiki>http://en.wikipedia.org/wiki/Lausche</wiki>
+      <image>http://upload.wikimedia.org/wikipedia/commons/9/92/Lausche.jpg</image>
+    </poi>
+    <poi>
+      <name>Jonsberg (Zittauer Gebirge)</name>
+      <lat>50.8486</lat>
+      <lon>14.7164</lon>
+      <abstract>Die Jonsberg ist ein flachkegeliger Berg des Zittauer Gebirges mit 653 m über NN. Der Jonsberg ist komplett bewaldet.</abstract>
+      <wiki>http://en.wikipedia.org/wiki/Jonsberg_%28Zittau_Mountains%29</wiki>
+      <image>http://upload.wikimedia.org/wikipedia/commons/c/c6/2010_Jonsberg_vom_Hochwald.JPG</image>
+    </poi>
+  </pois>
+</track>
