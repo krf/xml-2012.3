@@ -40,12 +40,14 @@ class RequestHandler(tornado.web.RequestHandler):
         orderType = self.get_argument("ordertype", default="text")
 
         # build query
+        queryString = "for $x in /track where true()" # use true() here to make the following code less complex
         # TODO: Sanitize input?
-        queryString = "for $x in //track where"
-        queryString += ' contains($x/title/text(), "{0}")'.format(searchParam)
+        if searchParam:
+            queryString += ' and contains($x/title/text(), "{0}")'.format(searchParam)
         if zipParam:
             queryString += ' and $x/startPointZip/text() = "{0}"'.format(zipParam)
-        queryString += ' and contains($x/startPointLocation/text(), "{0}")'.format(locationParam)
+        if locationParam:
+            queryString += ' and contains($x/startPointLocation/text(), "{0}")'.format(locationParam)
         queryString += " return $x"
         print(queryString)
         results = db.query(queryString)
