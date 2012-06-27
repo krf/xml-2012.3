@@ -2,6 +2,7 @@ from lxml import etree
 from shared import constants
 from shared.db import DatabaseConnection
 from shared.interface import TrackInterface
+import subprocess
 import os
 import tornado.web
 
@@ -48,6 +49,7 @@ class RequestHandler(tornado.web.RequestHandler):
         queryString += " return $x"
         print(queryString)
         results = db.query(queryString)
+        print(4)
 
         searchParamXml = """
             <searchparameter>
@@ -60,24 +62,35 @@ class RequestHandler(tornado.web.RequestHandler):
             </searchparameter>""".format(
             searchParam, locationParam, zipParam, orderCol, orderDir, orderType
         )
+        print(5)
         rawXml = """<?xml version='1.0' encoding='UTF-8'?>
             <response>{0}<searchresult>{1}</searchresult></response>""".format(
             searchParamXml, ", ".join(results)
         )
+        print(6)
         xml = etree.fromstring(rawXml)
+        print(7)
         xslt = etree.parse(os.path.join(doc_root,"xslt/")+"core.xsl")
+        print(8)
         transform = etree.XSLT(xslt)      
+        print(9)
         resulthtml = transform(xml)
-        
+        print(10)
         self.write(unicode(resulthtml))
         return
 
 class DetailHandler(tornado.web.RequestHandler):
 
     def get(self):
+        if False:
+            trackId = self.get_argument("id", default="")
+            script = "/."+os.path.join(doc_root,"static/")+"helper.sh"
+            subprocess.Popen([script, trackId])   
+        
         self.post()
 
     def post(self):
+        print('post DetailHandler')
         db = DatabaseConnection(constants.DATABASE_NAME)
         success = db.connect()
         if not success:
@@ -100,6 +113,37 @@ class DetailHandler(tornado.web.RequestHandler):
         
         self.write(unicode(resulthtml))
         return
+
+class KmlHandler(tornado.web.RequestHandler):
+
+    def get(self):
+        print('get KMLhandler')
+        self.post()
+
+    def post(self):
+        print('post KMLhandler')
+        db = DatabaseConnection(constants.DATABASE_NAME)
+        success = db.connect()
+        if not success:
+            self.write("Database error: {0}".format(db.error))
+            return
+
+        # params
+        trackId = self.get_argument("id", default="")
+
+        # build query
+        queryString = """//track[fileId='{0}']/pois/poi""".format(trackId)
+        results = db.query(queryString)
+
+        rawxml = "<?xml version='1.0' encoding='UTF-8'?><response><pois>"+", ".join(results)+"</pois></response>"
+        xml = etree.fromstring(rawxml)
+        xslt = etree.parse(os.path.join(doc_root,"xslt/")+"kml.xsl")
+        transform = etree.XSLT(xslt)      
+        resulthtml = transform(xml)
+        
+        self.write(unicode(resulthtml))
+        return
+
 
 class StatisticsHandler(tornado.web.RequestHandler):
 

@@ -3,8 +3,6 @@
 }
 
 div.summarytable {
-    height: 290px;
-    overflow-y: scroll;
 }
 
 div.detail {
@@ -32,3 +30,57 @@ div.detail span.label {
 .invisible {
     display: none;    
 }
+
+/* google maps */
+#gmapscontainer {
+    margin: 0 50px;
+    height: 700px;
+}
+
+#gmapscontainer img{
+    max-width: inherit;
+}
+
+
+
+
+/* tagliste */
+ul.tags {}
+
+ul.tags li {
+    float: left;
+    list-style: none;    
+}
+
+ul.tags li .label {
+    margin: 0 10px;    
+}
+
+
+
+/* poislist */
+ul.poilist {
+    
+}
+
+ul.poilist li {
+    clear: both;
+    display: block;  
+    margin: 30px 60px;  
+}
+
+ul.poilist div.thumbnail {
+    max-height: 150px;
+    max-width: 150px;
+    overflow: hidden;
+    float: left;
+    margin: 0 20px 20px 0;    
+}
+
+ul.poilist div.info {
+}
+
+ul.poilist div.info a {
+    font-size: 1.2em;    
+}
+
