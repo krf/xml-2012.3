@@ -1,38 +1,22 @@
 #!/usr/bin/env python
 
 from __future__ import print_function # for print()
-from ConfigParser import SafeConfigParser
 from crawler import data
 from crawler.data import openDatabase
 from crawler.parser import XmlParser
 from lxml import etree
 from shared import constants
 from shared.interface import TrackInterface
-from shared.util import log
+from shared.util import log, options
 import argparse
-import os
-import shutil
 import sys
 import time
 import urllib2
 
-# read options file initially
-options = SafeConfigParser()
-
-# read defaul config
-defaultConfig = os.path.join(constants.DATA_DIR, 'config.ini')
-options.read(defaultConfig)
-
-# read per-user config
-userConfig = os.path.expanduser('~/.xml2012.3.ini')
-if not os.path.isfile(userConfig):
-    shutil.copy(defaultConfig, userConfig)
-options.read(userConfig)
-
 def getApiKey():
     API_KEY = options.get('Common', 'API_KEY', )
     if not API_KEY:
-        raise RuntimeError("API key not set: Set it in {0}".format(userConfig))
+        raise RuntimeError("API key not set: Set it in {0}".format(constants.USER_CONFIG))
     return API_KEY
 
 def readUrl(url):
