@@ -23,14 +23,11 @@ Quick install (Ubuntu):
 Running
 -----
 
-Prerequisites:
-* $ export PYTHONPATH=./src
-
 Run basexserver (should contain data)
 *  $ basexserver
 
 Run web server:
 *  $ cd src/
-*  $ ./web/web.py
+*  $ ./web.py
 
 This starts a web server on http://localhost:8888
