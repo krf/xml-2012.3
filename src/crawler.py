@@ -54,28 +54,6 @@ def parseContent(content):
     parser.parse(content)
     return parser.tree
 
-def validateContent(tree, schema):
-    validator = XmlValidator(schema)
-    validator.validate(tree) # raises
-
-def saveToFile(content, outputFile):
-    with open(outputFile, 'w') as f:
-        f.write(content)
-        f.close()
-
-def isValidUrl(url):
-    API_BASE_URL = options.get('Common', 'API_BASE_URL')
-
-    url = url.replace('http://', '')
-    if not url.startswith(API_BASE_URL):
-        return False
-
-    return True
-
-def sanitizedPath(path):
-    dirname = os.path.dirname(os.path.realpath(__file__))
-    return os.path.join(dirname, path)
-
 def crawlResultpages(db):
     """Crawl from a specific set of result pages
 
