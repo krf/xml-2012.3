@@ -208,7 +208,7 @@ class SparqlThread(threading.Thread):
                 approxString = '%dh %dmin' % (h, m)
 
                 sys.stdout.write('Tracks processed: %d / %d (~ %s) => 100.000 Tracks (~ %s) (DB write back queue: %d)\r'
-                                % (remaining, self.size, estimatedString, approxString, self.out.qsize()))
+                                % (processed, self.size, estimatedString, approxString, self.out.qsize()))
                 sys.stdout.flush()
 
         def run(self):
