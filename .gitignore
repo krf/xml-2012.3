@@ -11,3 +11,10 @@ tornado.httpserver
 tornado.ioloop
 tornado.options
 tornado.web
+
+# latex
+*.aux
+*.bbl
+*.blg
+*.log
+*.pdf
