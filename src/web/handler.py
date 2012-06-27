@@ -49,7 +49,6 @@ class RequestHandler(tornado.web.RequestHandler):
         queryString += " return $x"
         print(queryString)
         results = db.query(queryString)
-        print(4)
 
         searchParamXml = """
             <searchparameter>
@@ -62,20 +61,14 @@ class RequestHandler(tornado.web.RequestHandler):
             </searchparameter>""".format(
             searchParam, locationParam, zipParam, orderCol, orderDir, orderType
         )
-        print(5)
         rawXml = """<?xml version='1.0' encoding='UTF-8'?>
             <response>{0}<searchresult>{1}</searchresult></response>""".format(
             searchParamXml, ", ".join(results)
         )
-        print(6)
         xml = etree.fromstring(rawXml)
-        print(7)
         xslt = etree.parse(os.path.join(doc_root,"xslt/")+"core.xsl")
-        print(8)
         transform = etree.XSLT(xslt)      
-        print(9)
         resulthtml = transform(xml)
-        print(10)
         self.write(unicode(resulthtml))
         return
 
