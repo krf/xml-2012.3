@@ -2,10 +2,20 @@ from lxml import etree
 from shared import constants
 from shared.db import DatabaseConnection
 from shared.interface import TrackInterface
+from xml.sax.saxutils import escape
 import os
+import subprocess
 import tornado.web
 
 doc_root = os.path.dirname(__file__)
+
+def sanitized(inputStr):
+    """Sanitize input for XQuery comparable strings"""
+
+    inputStr = escape(inputStr,
+        {'"': ""}
+    )
+    return inputStr
 
 class MainHandler(tornado.web.RequestHandler):
 
@@ -31,20 +41,22 @@ class RequestHandler(tornado.web.RequestHandler):
             return
 
         # params
-        searchParam = self.get_argument("search", default="")
-        locationParam = self.get_argument("location", default="")
-        zipParam = self.get_argument("zip", default="")
+        searchParam = sanitized(self.get_argument("search", default=""))
+        locationParam = sanitized(self.get_argument("location", default=""))
+        zipParam = sanitized(self.get_argument("zip", default=""))
         orderCol = self.get_argument("ordercol", default="title")
         orderDir = self.get_argument("orderdir", default="ascending")
         orderType = self.get_argument("ordertype", default="text")
 
         # build query
+        queryString = "for $x in /track where true()" # use true() here to make the following code less complex
         # TODO: Sanitize input?
-        queryString = "for $x in //track where"
-        queryString += ' contains($x/title/text(), "{0}")'.format(searchParam)
+        if searchParam:
+            queryString += ' and contains($x/title/text(), "{0}")'.format(searchParam)
         if zipParam:
             queryString += ' and $x/startPointZip/text() = "{0}"'.format(zipParam)
-        queryString += ' and contains($x/startPointLocation/text(), "{0}")'.format(locationParam)
+        if locationParam:
+            queryString += ' and contains($x/startPointLocation/text(), "{0}")'.format(locationParam)
         queryString += " return $x"
         print(queryString)
         results = db.query(queryString)
@@ -68,16 +80,21 @@ class RequestHandler(tornado.web.RequestHandler):
         xslt = etree.parse(os.path.join(doc_root,"xslt/")+"core.xsl")
         transform = etree.XSLT(xslt)      
         resulthtml = transform(xml)
-        
         self.write(unicode(resulthtml))
         return
 
 class DetailHandler(tornado.web.RequestHandler):
 
     def get(self):
+        if False:
+            trackId = self.get_argument("id", default="")
+            script = "/."+os.path.join(doc_root,"static/")+"helper.sh"
+            subprocess.Popen([script, trackId])   
+        
         self.post()
 
     def post(self):
+        print('post DetailHandler')
         db = DatabaseConnection(constants.DATABASE_NAME)
         success = db.connect()
         if not success:
@@ -100,6 +117,37 @@ class DetailHandler(tornado.web.RequestHandler):
         
         self.write(unicode(resulthtml))
         return
+
+class KmlHandler(tornado.web.RequestHandler):
+
+    def get(self):
+        print('get KMLhandler')
+        self.post()
+
+    def post(self):
+        print('post KMLhandler')
+        db = DatabaseConnection(constants.DATABASE_NAME)
+        success = db.connect()
+        if not success:
+            self.write("Database error: {0}".format(db.error))
+            return
+
+        # params
+        trackId = self.get_argument("id", default="")
+
+        # build query
+        queryString = """//track[fileId='{0}']/pois/poi""".format(trackId)
+        results = db.query(queryString)
+
+        rawxml = "<?xml version='1.0' encoding='UTF-8'?><response><pois>"+", ".join(results)+"</pois></response>"
+        xml = etree.fromstring(rawxml)
+        xslt = etree.parse(os.path.join(doc_root,"xslt/")+"kml.xsl")
+        transform = etree.XSLT(xslt)      
+        resulthtml = transform(xml)
+        
+        self.write(unicode(resulthtml))
+        return
+
 
 class StatisticsHandler(tornado.web.RequestHandler):
 

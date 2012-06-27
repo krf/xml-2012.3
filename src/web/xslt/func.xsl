@@ -13,6 +13,8 @@
 <xsl:template name="htmlhead">
 	<head>
 	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
 	    <title>xml-2012-drei</title>
 	    <script type="text/javascript" src="static/js/jquery-1.7.2.min.js"></script>
 	    <script type="text/javascript" src="static/js/core.js"></script>
@@ -30,7 +32,7 @@
 -->
 <xsl:template name="searchform">
     <h1>Neue Suche</h1>
-    <form action="/request" method="post" class="well">
+    <form action="/request" method="get" class="well">
         <label for="inSearch">Freitext</label>
         <input id="inSearch" type="text" class="span12" name="search" placeholder="Berge, Brandenburger Tor, ..."/>
         

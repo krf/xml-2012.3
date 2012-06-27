@@ -3,7 +3,7 @@
 
 from pprint import pprint
 from web.handler import doc_root, MainHandler, RequestHandler, DetailHandler, \
-    StatisticsHandler
+    StatisticsHandler, KmlHandler
 import os
 import sys
 import tornado.ioloop
@@ -19,6 +19,7 @@ application = tornado.web.Application([
     (r"/", MainHandler),
     (r"/request", RequestHandler),
     (r"/detail", DetailHandler),
+    (r"/kml", KmlHandler),
     (r"/stats", StatisticsHandler)
 ], **settings)
 
