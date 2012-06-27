@@ -2,11 +2,20 @@ from lxml import etree
 from shared import constants
 from shared.db import DatabaseConnection
 from shared.interface import TrackInterface
-import subprocess
+from xml.sax.saxutils import escape
 import os
+import subprocess
 import tornado.web
 
 doc_root = os.path.dirname(__file__)
+
+def sanitized(inputStr):
+    """Sanitize input for XQuery comparable strings"""
+
+    inputStr = escape(inputStr,
+        {'"': ""}
+    )
+    return inputStr
 
 class MainHandler(tornado.web.RequestHandler):
 
@@ -32,9 +41,9 @@ class RequestHandler(tornado.web.RequestHandler):
             return
 
         # params
-        searchParam = self.get_argument("search", default="")
-        locationParam = self.get_argument("location", default="")
-        zipParam = self.get_argument("zip", default="")
+        searchParam = sanitized(self.get_argument("search", default=""))
+        locationParam = sanitized(self.get_argument("location", default=""))
+        zipParam = sanitized(self.get_argument("zip", default=""))
         orderCol = self.get_argument("ordercol", default="title")
         orderDir = self.get_argument("orderdir", default="ascending")
         orderType = self.get_argument("ordertype", default="text")
