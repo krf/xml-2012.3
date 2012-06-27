@@ -9,7 +9,7 @@
     <xsl:call-template name="htmlhead"/>
     <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
 
-    <xsl:for-each select="//searchresult/track[position()=2]"> <!-- remove position()=2 to show all-->
+    <xsl:for-each select="//searchresult/track[position()=1]"> <!-- remove position()=2 to show all-->
         <xsl:variable name="track" select="."/>
         
         <h1><xsl:value-of select="//searchresult/track/title"/></h1>
