@@ -54,8 +54,7 @@ class TrackInterface:#
             return False
 
         log.debug("Removing track with id {0}".format(fileId))
-        rc = self.db.session.execute("DELETE {0}".format(fileId))
-        print(rc)
+        self.db.delete(fileId)
         return True
 
     def addTracks(self, tracks):
