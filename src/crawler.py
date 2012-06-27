@@ -76,9 +76,10 @@ def sanitizedPath(path):
     dirname = os.path.dirname(os.path.realpath(__file__))
     return os.path.join(dirname, path)
 
-# TODO: Can we avoid adding tracks with duplicate fileIds here?
-def autoRun(db):
-    """Auto-run, crawl from a specific set of pages
+def crawlResultpages(db):
+    """Crawl from a specific set of result pages
+
+    Fills the data base with non-augmented tracks
 
     \return True if successful, else False"""
 
@@ -115,10 +116,7 @@ def autoRun(db):
         resultPage += 1
 
         # print out number of tracks in db
-        queryString = "count(//track)"
-        result = db.query(queryString)
-        numberOfTracks = int(result[0]) # update track count
-        log.debug("Tracks in database: {0}".format(numberOfTracks))
+        log.debug("Tracks in database: {0}".format(iface.getTrackCount()))
 
     return True
 
@@ -168,12 +166,14 @@ def augmentOneTrack(db, fileId):
 def augmentTracks(db):
     """Augment tracks that are already in the database"""
 
-    queryString = "//track[not(startPointAddress)]"
-    results = db.query(queryString)
+    iface = TrackInterface(db)
+    tracks = iface.getNonAugmentedTracks()
+
+    log.debug("Number of non-augmented tracks: {0}".format(iface.getNonAugmentedTrackCount()))
 
     iterations = 0
-    for result in results:
-        tree = etree.fromstring(result)
+    for track in tracks:
+        tree = etree.fromstring(track)
         fileId = tree.xpath("//fileId/text()")[0]
 
         log.debug("Finding track details for fileId: {0} (iteration {1})".format(fileId, iterations))
@@ -182,33 +182,25 @@ def augmentTracks(db):
 
     return True
 
-def getTrackCount(db):
-    results = db.query("count(//track)")
-    return int(results[0])
-
 def pruneDatabase(db):
     """Delete non-augmented tracks"""
 
-    trackCount_old = getTrackCount(db)
-
-    queryString = "//track[not(startPointZip)]"
-    tracks = db.query(queryString)
-
     iface = TrackInterface(db)
+    trackCount_old = iface.getTrackCount()
+    tracks = iface.getNonAugmentedTracks()
+
     for track in tracks:
         iface.removeTrack(track)
 
-    trackCount_new = getTrackCount(db)
+    trackCount_new = iface.getTrackCount()
     removedTracksCount = trackCount_old - trackCount_new
     print("Removed tracks count: {0}".format(removedTracksCount))
     return True
 
 def printStatistics(db):
-    result = db.query("count(//track[not(startPointZip)])")
-    print("Number of non-augmented tracks: {0}".format(result[0]))
-
-    result = db.query("count(//track/startPointZip)")
-    print("Number of     augmented tracks: {0}".format(result[0]))
+    iface = TrackInterface(db)
+    print("Number of non-augmented tracks: {0}".format(iface.getNonAugmentedTrackCount()))
+    print("Number of     augmented tracks: {0}".format(iface.getAugmentedTrackCount()))
 
 def main(args):
     """Main routine
@@ -216,41 +208,24 @@ def main(args):
     \param args Instance of argparse.ArgumentParser
     \return Integer indicating the return code"""
 
-    API_BASE_URL = options.get('Common', 'API_BASE_URL')
-
     success = True
     # main actions (mutual exclusive)
-    if args.autorun:
-        print("Starting auto-run")
+    if args.crawl:
+        print("Starting to crawl result pages")
         db = openDatabase()
-        success = autoRun(db)
+        success = crawlResultpages(db)
     elif args.extend:
-        print("Starting augmenting tracks")
+        print("Starting to augment tracks")
         db = openDatabase()
         success = augmentTracks(db)
     elif args.statistics:
         print("Printing statistics")
         db = openDatabase()
         success = printStatistics(db)
-    elif args.clear:
+    elif args.prune:
         print("Starting pruning database")
         db = openDatabase()
         success = pruneDatabase(db)
-    elif args.parse:
-        # validate
-        if not isValidUrl(args.parse):
-            print("URL is not a valid gpsies.com url")
-            print("It needs to be of the form {0}/*".format(API_BASE_URL))
-            return 1
-
-        print("URL: {0}".format(args.url))
-        content = readUrl(args.url)
-
-        # parse + validate content
-        tree = parseContent(content)
-        print("Trying to validate content...")
-        validateContent(tree, XmlValidator.GPSIES_RESULTPAGE_SCHEMA) # raises if invalid
-        success = True
     else:
         print("No action specified")
         success = False
@@ -266,18 +241,15 @@ if __name__ == "__main__":
         epilog="""Example URLs:
   www.gpsies.org/api.do?key=YOUR_API_KEY&lat=51&lon=10&perimeter=80&limit=20&trackTypes=jogging&filetype=kml"""
     )
-    # default args
-    #None
-    # optional
-    parser.add_argument('-p', '--parse', metavar='URL',
-        help='Parse content and validate')
-    parser.add_argument('-a', '--autorun', action='store_true',
-        help='Autorun, crawl from gpsies.com')
+
+    # options
+    parser.add_argument('-c', '--crawl', action='store_true',
+        help='Crawl from gpsies.com, parse result pages')
     parser.add_argument('-e', '--extend', action='store_true',
-        help='Extend existing tracks with track details, crawl from gpsies.com')
+        help='Crawl from gpsies.com, extend non-augmented tracks with track details')
     parser.add_argument('-s', '--statistics', action='store_true',
         help='Print database statistics')
-    parser.add_argument('-c', '--clear', action='store_true',
+    parser.add_argument('-p', '--prune', action='store_true',
         help='Clear database, remove all non-augmented tracks')
     args = parser.parse_args()
 
