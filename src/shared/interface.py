@@ -96,17 +96,17 @@ class TrackInterface:#
         return int(result[0])
 
     def getNonPoiTracks(self):
-            tracks = self.db.query("//track[not(pois)]")
-            return tracks
+        tracks = self.db.query("//track[not(pois)]")
+        return tracks
     
     def getNonPoiTrackCount(self):
-            tracks = self.db.query("count(//track[not(pois)])")
-            return tracks
+        tracks = self.db.query("count(//track[not(pois)])")
+        return tracks
 
     def getnPoiTracks(self):
-            tracks = self.db.query("//track[pois]")
-            return tracks
+        tracks = self.db.query("//track[pois]")
+        return tracks
     
     def getPoiTrackCount(self):
-            tracks = self.db.query("count(//track[pois])")
-            return tracks
+        tracks = self.db.query("count(//track[pois])")
+        return tracks
