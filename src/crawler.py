@@ -5,7 +5,6 @@ from ConfigParser import SafeConfigParser
 from crawler import data
 from crawler.data import openDatabase
 from crawler.parser import XmlParser
-from crawler.validator import XmlValidator
 from lxml import etree
 from shared import constants
 from shared.interface import TrackInterface

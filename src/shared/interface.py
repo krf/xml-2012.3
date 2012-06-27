@@ -103,7 +103,7 @@ class TrackInterface:#
         tracks = self.db.query("count(//track[not(pois)])")
         return tracks
 
-    def getnPoiTracks(self):
+    def getPoiTracks(self):
         tracks = self.db.query("//track[pois]")
         return tracks
     

@@ -31,8 +31,6 @@ class XmlValidator:
         \param tree An instance of etree.XML()"""
 
         schema = etree.XMLSchema(self.schema)
-        parser = etree.XMLParser(schema = schema)
-
         try:
             schema.assertValid(tree)
         except etree.DocumentInvalid, e:
