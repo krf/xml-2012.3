@@ -1,0 +1,60 @@
+\documentclass[a4paper,11pt]{scrartcl}
+\usepackage[left=2.5cm, right=3cm]{geometry}              % flexible and complete interface to document dimensions
+\usepackage[latin1]{inputenc}                             % font encoding for umlauts
+\usepackage[ngerman]{babel}                               % language settings
+\usepackage[T1]{fontenc}                                  % T1 font encoding
+\usepackage{amsmath}                                      % AMS mathematical facilities
+%\usepackage{amssymb}                                     % defines symbol names for math symbols in the fonts MSAM and MSBM
+\usepackage[bitstream-charter]{mathdesign}                % mathematical fonts to fit with Bitstream Charter
+\usepackage{courier}                                      % replaces the current typewriter font for Adobe Courier
+\usepackage{listings}                                     % source code printer
+\usepackage{color}                                        % adding colors
+\usepackage{fancyhdr}                                     % extensive control of page headers and footers
+\usepackage{booktabs}                                     % publication quality tables
+\usepackage{xcolor}                                       % driver-independent color extensions   
+\usepackage{tikz}                                         % creating graphics programmatically
+\usepackage{float}                                        % improved interface for floating objects
+\usepackage{subfig}                                       % figures broken into subfigures
+\usepackage{multirow}
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}      % floating algorithm environment with algorithmic keywords
+
+\definecolor{lightgray}{rgb}{.95,.95,.95}
+
+\lstset{backgroundcolor=\color{lightgray},
+        basicstyle=\ttfamily\fontsize{9pt}{9pt}\selectfont\upshape,
+				commentstyle=\rmfamily\slshape,
+				keywordstyle=\rmfamily\bfseries\color{black},
+				captionpos=b,
+				showstringspaces=false,
+				breaklines=true,
+				frame=lines,
+				tabsize=2,
+				aboveskip={\baselineskip}
+}
+
+\renewcommand{\labelenumi}{(\arabic{enumi})}
+\renewcommand{\labelenumii}{(\alph{enumii})}
+\renewcommand{\algorithmcfname}{Algorithmus}
+
+\subject{Dokumentation}
+\title{XML Technologien Projekt}
+\author{David Bialik $\cdot$ Kevin Funk\\ Jan Kostulski $\cdot$ Konrad Reiche $\cdot$ André Zoufahl}
+\date{\today}
+\publishers{\vskip 2ex -- Gruppe 3 --}
+
+\begin{document}
+
+\pagestyle{fancy}
+\maketitle
+
+\section{Einleitung}
+
+\section{Systemarchitektur}
+
+\section{Implementierung}
+
+\section{Installationsanleitung}
+
+\section{Benutzerdokumentation}
+
+\end{document}
