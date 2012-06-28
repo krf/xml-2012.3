@@ -14,11 +14,12 @@ Dependencies
 ------------
 
 * BaseX (http://basex.org/)
+* Tornado Web Server (http://www.tornadoweb.org/)
 * Python LXML (http://lxml.de)
 * SPARQL Endpoint interface to Python (http://sparql-wrapper.sourceforge.net/)
 
 Quick install (Ubuntu):
-* apt-get install basex python-lxml python-sparqlwrapper
+* apt-get install basex python-tornado python-lxml python-sparqlwrapper
 
 Running
 -----
