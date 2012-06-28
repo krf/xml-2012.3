@@ -98,7 +98,7 @@ def crawlResultpages(db):
     iface = TrackInterface(db)
 
     numberOfTracks = 0
-    resultPage = 142
+    resultPage = 1
     while numberOfTracks < MAX_DATABASE_SIZE:
         url = getUrl(resultPage)
         log.debug("Parsing URL: {0}".format(url))

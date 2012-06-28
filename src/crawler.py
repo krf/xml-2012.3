@@ -40,9 +40,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         prog='crawler',
         formatter_class=argparse.RawDescriptionHelpFormatter,
-        description='XML Crawler for gpsies.com',
-        epilog="""Example URLs:
-  www.gpsies.org/api.do?key=YOUR_API_KEY&lat=51&lon=10&perimeter=80&limit=20&trackTypes=jogging&filetype=kml"""
+        description='XML Crawler for gpsies.com'
     )
 
     # options
