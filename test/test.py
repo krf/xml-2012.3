@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from crawlertest import CrawlerTest
 from sharedtest import SharedTest
 import unittest

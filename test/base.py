@@ -17,8 +17,8 @@ class TestBase(unittest.TestCase):
     TRACK_BRIEF_SAMPLE = _read(os.path.join(constants.RESOURCES_DIR, "track_brief_sample.xml"))
     TRACK_DETAILS_SAMPLE = _read(os.path.join(constants.RESOURCES_DIR, "track_details_sample.xml"))
 
-    def __init__(self, methodName='runTest'):
-        unittest.TestCase.__init__(self, methodName)
+    def __init__(self):
+        unittest.TestCase.__init__(self)
 
         self.db = None
 
