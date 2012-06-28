@@ -49,11 +49,162 @@
 
 \section{Einleitung}
 
+% TODO: All
+
 \section{Systemarchitektur}
+
+% TODO: All
 
 \section{Implementierung}
 
+\subsection{Crawler}
+
+Das Script \emph{crawler.py} umfasst folgende Funktionen
+
+\begin{lstlisting}
+usage: crawler [-h] [-c] [-e] [-s] [-p]
+
+XML Crawler for gpsies.com
+
+optional arguments:
+  -h, --help        show this help message and exit
+  -c, --crawl       Crawl from gpsies.com, parse result pages
+  -e, --extend      Crawl from gpsies.com, extend non-augmented tracks with
+                    track details
+  -s, --statistics  Print database statistics
+  -p, --prune       Clear database, remove all non-augmented tracks
+\end{lstlisting}
+
+Der Crawler implementiert zwei Hauptaktionen (\emph{crawl, extend}), um die Datenbank mit XML-Daten von \emph{gpsies.org} zu füllen.
+
+\subsubsection{Crawl}
+\begin{itemize}
+  \item Es werden Resultpages mit jeweils 100 Tracks von \emph{gpsies.org} abgefragt
+\footnote{Beispiel-URL: http://www.gpsies.org/api.do?key=API\_KEY\&country\=DE\&limit=100\&resultPage=1}
+  \item Davon werden die einzelnen \emph{<track/>}-Elemente geparst
+  \item Diese werden einzeln als Dokument in die Datenbank geschrieben
+  \item Der Dokumentenname ist hierbei die Track-FileID
+\end{itemize}
+
+\subsubsection{Extend (Augment)}
+\begin{itemize}
+  \item Hier werden sukzessiv nicht-augmentierte Tracks aus der Datenbank angereichert
+  \item Pro Track werden die Trackdetails von \emph{gpsies.org} geholt
+\footnote{Beispiel-URL: http://www.gpsies.org/api.do?key=API\_KEY\&fileId=cimmxugjixiyzakj\&trackDataLength=250}
+  \item Danach wird der Track durch die detaillreichere Version in der Datenbank ersetzt
+\end{itemize}
+
+\subsection{SPARQL-Abfrage}
+
+% TODO: Konrad
+
+\subsection{Webserver}
+
+% TODO: Kevin, Andre
+
+\section{Test-Umgebung}
+
+\subsection{Referenzsystem}
+
+Unsere Anwendunge wurde hauptsächlich auf folgender Plattform getestet:
+
+\begin{itemize}
+  \item Ubuntu 12.04
+
+  \begin{itemize}
+    \item Python 2.7.3
+    \item BaseX 7.0.2
+  \end{itemize}
+\end{itemize}
+
+\subsection{Tests}
+
+% TODO: Kevin
+
 \section{Installationsanleitung}
+
+\subsection{Abhängigkeiten}
+
+\begin{itemize}
+  \item BaseX (http://basex.org/)
+  \item Tornado Web Server (http://www.tornadoweb.org/)
+  \item Python LXML (http://lxml.de)
+  \item SPARQL Endpoint interface to Python (http://sparql-wrapper.sourceforge.net/)
+\end{itemize}
+
+\subsubsection{Quick install (für Debian-basierte Systeme)}
+
+Getestet auf Ubuntu 12.04.
+
+\begin{lstlisting}
+* apt-get install basex python-tornado python-lxml python-sparqlwrapper
+\end{lstlisting}
+
+
+\subsection{Datenbank aufsetzen}
+
+% TODO: Woher Datenbankdump
+Zunächst muss der Datenbankdump (\emph{default-*.zip}) nach \emph{\$HOME/BaseXData/} kopiert werden um sie später importieren zu können.
+
+Starten der BaseX-Datenbank
+
+\begin{lstlisting}
+$ basexserver
+\end{lstlisting}
+
+Erstmaliges Erstellen der Datenbank
+
+\begin{lstlisting}
+$ basexclient
+
+# Notiz: Der Standardlogin ist admin:admnin
+
+$ > create database default
+\end{lstlisting}
+
+Importieren unseres Datenbankdumps:
+\begin{lstlisting}
+$ > restore default
+\end{lstlisting}
+
+\subsection{Ausführen des Crawlers (optional)}
+
+Zum Ausführen des Crawlers muss eine Internetverbindung bestehen und die Verfügbarkeit von \emph{gpsies.org} gewährleistet sein.
+Außerdem muss eine BaseX-Server-Instanz für die Datenbankanbindung laufen.
+
+Danach kann der Crawler folgendermaßen gestartet werden:
+\footnote{Notiz: Alle ausführbaren Dateien liegen im Projektorder \emph{src/}}
+
+\begin{lstlisting}
+# Parse result pages from gpsies.org
+$ ./crawler.py -c
+\end{lstlisting}
+
+Der Crawler läuft mit diesem Parameter solange, bis er mindestens $100000$ Tracks in der Datenbank gespeichert hat. Diesen Tracks fehlen dann aber noch Detaillinformationen, wie die Startpunktaddresse, welche aber für die Suchmaske auf dem Webformular gebraucht werden.
+
+Um diese Informationen zu bekommen muss danach der Crawler mit folgenden Parameters gestartet werden.
+
+\begin{lstlisting}
+# Augment tracks with information from gpsies.org
+$ ./crawler.py -e
+\end{lstlisting}
+
+Bei diesem Aufruf fragt der Crawler für jeden Track in der Datenbank die Detaillinformationen auf \emph{gpsies.org} ab und reichert damit die jeweiligen Tracks an.
+
+\subsection{Anreicherung mit Point-Of-Interests (optional)}
+
+% TODO: Konrad?
+
+\subsection{Webserver starten}
+
+Nachdem die Datenbank befüllt ist, kann der Webserver gestartet werden.
+
+\begin{lstlisting}
+# Start web server
+$ ./web.py
+\end{lstlisting}
+
+Dies startet einen Tornado-Webserver auf der Adresse \emph{http://localhost:8888} welche mit dem Browser angesteuert werden kann.
 
 \section{Benutzerdokumentation}
 
