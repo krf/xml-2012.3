@@ -24,9 +24,11 @@ application = tornado.web.Application([
 ], **settings)
 
 if __name__ == "__main__":
-    application.listen(8888)
+    port = 8888
+    application.listen(port)
 
     try:
+        print("Starting web server on localhost:{0}".format(port))
         tornado.ioloop.IOLoop.instance().start()
     except KeyboardInterrupt:
         print("\nKeyboardInterrupt. Exit.")
