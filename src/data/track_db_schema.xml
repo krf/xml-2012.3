@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified" version="1.0"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="track">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="title" type="xsd:string" />
+				<xsd:element name="fileId" type="xsd:string" />
+				<xsd:element name="downloadLink" type="xsd:string" />
+
+				<!-- Next two elements are no valid xsd:dateTime values :'( -->
+				<xsd:element name="createdDate" type="xsd:string" />
+				<xsd:element name="changedDate" type="xsd:string" />
+
+				<xsd:element name="description" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="trackTypes" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="trackType" type="xsd:string" maxOccurs="unbounded"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="trackAttributes" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="trackAttribute" type="xsd:string" maxOccurs="unbounded"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="trackCharacters" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="trackCharacter" type="xsd:string"  maxOccurs="unbounded"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="trackClassifications" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="trackClassification" type="xsd:string"  maxOccurs="unbounded"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+                                <xsd:element name="trackRoadbeds" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="trackRoadbed" type="xsd:string"  maxOccurs="unbounded"/>
+						</xsd:sequence>
+					</xsd:complexType> 
+                                </xsd:element>
+                                <xsd:element name="trackRoads" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="trackRoad" type="xsd:string"  maxOccurs="unbounded"/>
+						</xsd:sequence>
+					</xsd:complexType> 
+                                </xsd:element>
+				<xsd:element name="statistics">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="countDownload" type="xsd:int" />
+							<xsd:element name="countViewOnMap" type="xsd:int" />
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="username" type="xsd:string" minOccurs="0" />
+				<xsd:element name="startPointLat" type="xsd:decimal" />
+				<xsd:element name="startPointLon" type="xsd:decimal" />
+				<xsd:element name="endPointLat" type="xsd:decimal" />
+				<xsd:element name="endPointLon" type="xsd:decimal" />
+				<xsd:element name="startPointCountry" type="xsd:string" />
+				<xsd:element name="endPointCountry" type="xsd:string" />
+				<xsd:element name="endPointAddress" type="xsd:string" minOccurs="0" />
+                                <xsd:element name="trackLengthM" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="countTrackpoints" type="xsd:int" minOccurs="0"/>
+				<xsd:element name="trackProperty" type="xsd:string" minOccurs="0" />
+				<xsd:element name="externalLink" type="xsd:string" minOccurs="0" />
+				<xsd:element name="altitudeMinHeightM" type="xsd:int" minOccurs="0" />
+				<xsd:element name="altitudeMaxHeightM" type="xsd:int"  minOccurs="0" />
+				<xsd:element name="altitudeDifferenceM" type="xsd:int"  minOccurs="0" />
+				<xsd:element name="totalAscentM" type="xsd:int"  minOccurs="0" />
+				<xsd:element name="totalDescentM" type="xsd:int"  minOccurs="0" />
+				<xsd:element name="trackData" type="xsd:string" />
+				<xsd:element name="startPointZip" type="xsd:int" />
+				<xsd:element name="startPointLocation" type="xsd:string" />
+                                <xsd:element name="pois">
+                                        <xsd:complexType>
+                                                <xsd:sequence>
+                                                        <xsd:element name="poi" minOccurs="0" maxOccurs="unbounded">
+                                                                <xsd:complexType>
+                                                                        <xsd:sequence>
+                                                                                <xsd:element name="name" type="xsd:string"/>
+                                                                                <xsd:element name="type" type="xsd:string"/>
+                                                                                <xsd:element name="lat" type="xsd:decimal"/>
+                                                                                <xsd:element name="lon" type="xsd:decimal"/>
+                                                                                <xsd:element name="abstract" type="xsd:string"/>
+                                                                                <xsd:element name="wiki" type="xsd:string"/>
+                                                                                <xsd:element name="image" type="xsd:string"/>
+                                                                        </xsd:sequence>
+                                                                </xsd:complexType>
+                                                        </xsd:element>
+                                                </xsd:sequence>
+                                        </xsd:complexType>
+                                </xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>
