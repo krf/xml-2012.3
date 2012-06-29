@@ -41,7 +41,7 @@ class CrawlerTest(TestBase):
         validator.validate(tree)
 
     def testValidateTrackDbXml(self):
-        tree = etree.fromstring(TestBase.TRACK_DETAILS_SAMPLE)
+        tree = etree.fromstring(TestBase.TRACK_DB_SAMPLE)
         data.transformTrack(tree)
         validator = XmlValidator(XmlValidator.TRACK_DB_SCHEMA)
         validator.validate(tree)
