@@ -112,7 +112,7 @@ class DetailHandler(tornado.web.RequestHandler):
         try:
             if True:
                 trackId = self.get_argument("id", default="")
-                script = "/."+os.path.join(doc_root,"static/")+"helpe.sh"
+                script = "/."+os.path.join(doc_root,"static/")+"helper.sh"
                 subprocess.Popen([script, trackId])   
         except OSError as e:
             log.info('tried to publish kml, failed, but continued request')
