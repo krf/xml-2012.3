@@ -53,6 +53,7 @@ function initGoogleMaps(_lat, _lon) {
     var myOptions = {
         zoom: 13,
         center: latlng,
+        scrollwheel: false,
         mapTypeId: google.maps.MapTypeId.TERRAIN
     };
     map = new google.maps.Map(document.getElementById("gmapscontainer"), myOptions);    
@@ -79,7 +80,8 @@ function addRouteToMap(_routestr) {
 }
 
 function addPointsOfInterestToMap(id) {
-    url = 'http://www.userpage.fu-berlin.de/andrez/kml/'+id+'.kml';
+    rand = Math.round(Math.random()*1000);
+    url = 'http://www.userpage.fu-berlin.de/andrez/kml/'+id+'.kml'+"?"+rand;
     console.log(url);
     var georssLayer = new google.maps.KmlLayer(url);
     georssLayer.setMap(map);
