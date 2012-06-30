@@ -90,7 +90,7 @@ class RequestHandler(tornado.web.RequestHandler):
             searchParam, locationParam, zipParam, orderCol, orderDir, orderType
         )
         rawXml = """<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<?xml-stylesheet type=\"text/xsl\" href=\"/static/xslt/client.xsl\"?>
+<?xml-stylesheet type=\"text/xsl\" href=\"/static/xslt/core.xsl\"?>
 <response>{0}\n<searchresult>\n{1}\n</searchresult>\n</response>""".format(
             searchParamXml, "\n".join(results)
         )
