@@ -44,7 +44,6 @@ class RequestHandler(tornado.web.RequestHandler):
         searchParam = sanitized(self.get_argument("search", default=""))
         locationParam = sanitized(self.get_argument("location", default=""))
         zipParam = sanitized(self.get_argument("zip", default=""))
-        queryLimit = self.get_argument("limit", default=1000)
         orderCol = self.get_argument("ordercol", default="title")
         orderDir = self.get_argument("orderdir", default="ascending")
         orderType = self.get_argument("ordertype", default="text")
@@ -64,23 +63,18 @@ class RequestHandler(tornado.web.RequestHandler):
         queryString += searchString
         queryString += " return <track>{$x/title}{$x/fileId}{$x/startPointZip}<pois>{count($x/pois/poi)}</pois></track>"
               
-        
-        offset = 1
-        
-        queryString2 = """
-let $sortedtrack :=
-    for $x in track where true() {2}
-    return <track>{{$x/title}}{{$x/fileId}}{{$x/startPointZip}}<pois>{{count($x/pois/poi)}}</pois></track>
-    
-for $track in subsequence($sortedtrack, {0}, {1})
-    return $track
-""".format(offset, queryLimit, searchString)
-    
-    #    order by $x/title
-
-    #    return <track>{$x/title}{$x/fileId}{$x/startPointZip}<pois>{count($x/pois/poi)}</pois></track>
-
-       
+# legacy code (is to slow compared to plain query)        
+#        offset = 1
+#        limit       
+#        queryString2 = """
+#let $sortedtrack :=
+#    for $x in track where true() {2}
+#    return <track>{{$x/title}}{{$x/fileId}}{{$x/startPointZip}}<pois>{{count($x/pois/poi)}}</pois></track>
+#    
+#for $track in subsequence($sortedtrack, {0}, {1})
+#    return $track
+#""".format(offset, limit, searchString)
+#    
         print(queryString)
         results = db.query(queryString)
 
