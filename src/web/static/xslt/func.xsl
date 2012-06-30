@@ -41,7 +41,7 @@
         
         <label for="inZIP">Postleitzahl</label>
         <input id="inZIP" type="text" class="span4" name="zip" placeholder="12345"/>
-        
+
         <button type="submit" class="btn">Suche</button>
     </form>
 
@@ -56,7 +56,8 @@
 -->
 <xsl:template match="searchresult">
     <div class="contentcontainer summary">
-        <h1>Suchergebnisse</h1>
+        <h1>Suchergebnisse <span class="label label-info"><xsl:value-of select="count(track)"/> Treffer</span></h1>
+        
         <xsl:choose>
             <xsl:when test="count(track)>0">
                 
@@ -81,12 +82,12 @@
                                     <a href="/request?{$requestvar}&amp;ordercol=title&amp;orderdir=descending&amp;ordertype=text"><i class="icon-chevron-down"></i></a> 
                                 </th>
                                 <th>
-                                    <a href="/request?{$requestvar}&amp;ordercol=startPointCountry&amp;orderdir=ascending&amp;ordertype=text"><i class="icon-chevron-up"></i></a> Land 
-                                    <a href="/request?{$requestvar}&amp;ordercol=startPointCountry&amp;orderdir=descending&amp;ordertype=text"><i class="icon-chevron-down"></i></a> 
+                                    <a href="/request?{$requestvar}&amp;ordercol=startPointZip&amp;orderdir=ascending&amp;ordertype=text"><i class="icon-chevron-up"></i></a> Ort 
+                                    <a href="/request?{$requestvar}&amp;ordercol=startPointZip&amp;orderdir=descending&amp;ordertype=text"><i class="icon-chevron-down"></i></a> 
                                 </th>
                                 <th>
-                                    <a href="/request?{$requestvar}&amp;ordercol=countTrackpoints&amp;orderdir=ascending&amp;ordertype=number"><i class="icon-chevron-up"></i></a> POIs
-                                    <a href="/request?{$requestvar}&amp;ordercol=countTrackpoints&amp;orderdir=descending&amp;ordertype=number"><i class="icon-chevron-down"></i></a>
+                                    <a href="/request?{$requestvar}&amp;ordercol=pois&amp;orderdir=ascending&amp;ordertype=number"><i class="icon-chevron-up"></i></a> POIs
+                                    <a href="/request?{$requestvar}&amp;ordercol=pois&amp;orderdir=descending&amp;ordertype=number"><i class="icon-chevron-down"></i></a>
                                 </th>                        
                             </tr>
                         </thead>
@@ -106,13 +107,13 @@
                                 <xsl:sort select="*[name() = $sortselect]" order="{$sortorder}" data-type="{$sorttype}"/>
                                 <tr>
                                     <td>
-                                        <a href="/detail?id={fileId}" class="ajax"><xsl:value-of select="title"/></a>
+                                        <a href="/detail?id={fileId}" target="_blank" class="ajax"><xsl:value-of select="title"/></a>
                                     </td>
                                     <td>
-                                        <xsl:value-of select="startPointCountry"/>
+                                        <xsl:value-of select="startPointZip"/>
                                     </td>
                                     <td>
-                                        <xsl:value-of select="count(pois/poi)"/>
+                                        <xsl:value-of select="pois"/>
                                         <!-- <xsl:value-of select="countTrackpoints"/> -->
                                     </td>
                                 </tr>

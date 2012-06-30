@@ -79,7 +79,7 @@ function addRouteToMap(_routestr) {
 }
 
 function addPointsOfInterestToMap(id) {
-    url = 'http://userpage.fu-berlin.de/andrez/kml/'+id+'.kml';
+    url = 'http://www.userpage.fu-berlin.de/andrez/kml/'+id+'.kml';
     console.log(url);
     var georssLayer = new google.maps.KmlLayer(url);
     georssLayer.setMap(map);

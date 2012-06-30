@@ -22,7 +22,7 @@ class MainHandler(tornado.web.RequestHandler):
     def get(self):    
         rawxml = "<?xml version='1.0' encoding='UTF-8'?><response></response>"
         xml = etree.fromstring(rawxml)
-        xslt = etree.parse(os.path.join(doc_root,"xslt/")+"core.xsl")
+        xslt = etree.parse(os.path.join(doc_root,"static/xslt/")+"core.xsl")
         transform = etree.XSLT(xslt)
         resulthtml = transform(xml)
         self.write(unicode(resulthtml))
@@ -44,43 +44,71 @@ class RequestHandler(tornado.web.RequestHandler):
         searchParam = sanitized(self.get_argument("search", default=""))
         locationParam = sanitized(self.get_argument("location", default=""))
         zipParam = sanitized(self.get_argument("zip", default=""))
+        queryLimit = self.get_argument("limit", default=1000)
         orderCol = self.get_argument("ordercol", default="title")
         orderDir = self.get_argument("orderdir", default="ascending")
         orderType = self.get_argument("ordertype", default="text")
 
-        # build query
-        queryString = "for $x in /track where true()" # use true() here to make the following code less complex
+
         # TODO: Sanitize input?
+        searchString = ""
         if searchParam:
-            queryString += ' and contains($x/title/text(), "{0}")'.format(searchParam)
+            searchString += ' and contains($x/title/text(), "{0}")'.format(searchParam)
         if zipParam:
-            queryString += ' and $x/startPointZip/text() = "{0}"'.format(zipParam)
+            searchString += ' and $x/startPointZip/text() = "{0}"'.format(zipParam)
         if locationParam:
-            queryString += ' and contains($x/startPointLocation/text(), "{0}")'.format(locationParam)
-        queryString += " return $x"
+            searchString += ' and contains($x/startPointLocation/text(), "{0}")'.format(locationParam)
+
+        # build query
+        queryString = "for $x in track where true()" # use true() here to make the following code less complex
+        queryString += searchString
+        queryString += " return <track>{$x/title}{$x/fileId}{$x/startPointZip}<pois>{count($x/pois/poi)}</pois></track>"
+              
+        
+        offset = 1
+        
+        queryString2 = """
+let $sortedtrack :=
+    for $x in track where true() {2}
+    return <track>{{$x/title}}{{$x/fileId}}{{$x/startPointZip}}<pois>{{count($x/pois/poi)}}</pois></track>
+    
+for $track in subsequence($sortedtrack, {0}, {1})
+    return $track
+""".format(offset, queryLimit, searchString)
+    
+    #    order by $x/title
+
+    #    return <track>{$x/title}{$x/fileId}{$x/startPointZip}<pois>{count($x/pois/poi)}</pois></track>
+
+       
         print(queryString)
         results = db.query(queryString)
 
         searchParamXml = """
-            <searchparameter>
-                <param label="search" value="{0}"/>
-                <param label="location" value="{1}"/>
-                <param label="zip" value="{2}"/>
-                <param label="ordercol" value="{3}"/>
-                <param label="orderdir" value="{4}"/>
-                <param label="ordertype" value="{5}"/>
-            </searchparameter>""".format(
+<searchparameter>
+    <param label="search" value="{0}"/>
+    <param label="location" value="{1}"/>
+    <param label="zip" value="{2}"/>
+    <param label="ordercol" value="{3}"/>
+    <param label="orderdir" value="{4}"/>
+    <param label="ordertype" value="{5}"/>
+</searchparameter>""".format(
             searchParam, locationParam, zipParam, orderCol, orderDir, orderType
         )
-        rawXml = """<?xml version='1.0' encoding='UTF-8'?>
-            <response>{0}<searchresult>{1}</searchresult></response>""".format(
-            searchParamXml, ", ".join(results)
+        rawXml = """<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<?xml-stylesheet type=\"text/xsl\" href=\"/static/xslt/client.xsl\"?>
+<response>{0}\n<searchresult>\n{1}\n</searchresult>\n</response>""".format(
+            searchParamXml, "\n".join(results)
         )
-        xml = etree.fromstring(rawXml)
-        xslt = etree.parse(os.path.join(doc_root,"xslt/")+"core.xsl")
-        transform = etree.XSLT(xslt)      
-        resulthtml = transform(xml)
-        self.write(unicode(resulthtml))
+        if False:
+            self.set_header("Content-type", "text/xml")
+            self.write(rawXml)
+        else:
+            xml = etree.fromstring(rawXml)
+            xslt = etree.parse(os.path.join(doc_root,"static/xslt/")+"core.xsl")
+            transform = etree.XSLT(xslt)      
+            resulthtml = transform(xml)
+            self.write(unicode(resulthtml))
         return
 
 class DetailHandler(tornado.web.RequestHandler):
@@ -111,7 +139,7 @@ class DetailHandler(tornado.web.RequestHandler):
         rawxml = "<?xml version='1.0' encoding='UTF-8'?><response><searchresult>"+", ".join(results)+"</searchresult></response>"
         print(rawxml)
         xml = etree.fromstring(rawxml)
-        xslt = etree.parse(os.path.join(doc_root,"xslt/")+"ajax.xsl")
+        xslt = etree.parse(os.path.join(doc_root,"static/xslt/")+"ajax.xsl")
         transform = etree.XSLT(xslt)      
         resulthtml = transform(xml)
         
@@ -141,7 +169,7 @@ class KmlHandler(tornado.web.RequestHandler):
 
         rawxml = "<?xml version='1.0' encoding='UTF-8'?><response><pois>"+", ".join(results)+"</pois></response>"
         xml = etree.fromstring(rawxml)
-        xslt = etree.parse(os.path.join(doc_root,"xslt/")+"kml.xsl")
+        xslt = etree.parse(os.path.join(doc_root,"static/xslt/")+"kml.xsl")
         transform = etree.XSLT(xslt)      
         resulthtml = transform(xml)
         
