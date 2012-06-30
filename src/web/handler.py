@@ -2,6 +2,7 @@ from lxml import etree
 from shared import constants
 from shared.db import DatabaseConnection
 from shared.interface import TrackInterface
+from shared.util import log
 from xml.sax.saxutils import escape
 import os
 import subprocess
@@ -108,11 +109,13 @@ class RequestHandler(tornado.web.RequestHandler):
 class DetailHandler(tornado.web.RequestHandler):
 
     def get(self):
-        if True:
-            trackId = self.get_argument("id", default="")
-            script = "/."+os.path.join(doc_root,"static/")+"helper.sh"
-            subprocess.Popen([script, trackId])   
-        
+        try:
+            if True:
+                trackId = self.get_argument("id", default="")
+                script = "/."+os.path.join(doc_root,"static/")+"helpe.sh"
+                subprocess.Popen([script, trackId])   
+        except OSError as e:
+            log.info('tried to publish kml, failed, but continued request')
         self.post()
 
     def post(self):
