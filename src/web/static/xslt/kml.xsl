@@ -10,7 +10,11 @@
     <xsl:for-each select="pois/poi">
         <Placemark>
             <name><xsl:value-of select="name"/></name>
-            <description><xsl:value-of select="abstract"/></description>
+            <description>
+                <xsl:value-of select="abstract"/>
+<div class="controls">
+    <a href="#poi{position()}" class="anchorlink">Was wird über diesen Ort gesagt?</a></div>              
+            </description>
             <Point>
                 <coordinates><xsl:value-of select="lon"/>,<xsl:value-of select="lat"/>,0</coordinates>
             </Point>

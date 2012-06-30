@@ -85,4 +85,30 @@ function addPointsOfInterestToMap(id) {
     console.log(url);
     var georssLayer = new google.maps.KmlLayer(url);
     georssLayer.setMap(map);
+    
+    
+    google.maps.event.addListener(georssLayer, 'click', function(kmlEvent) {
+        var html = kmlEvent.featureData.description;
+        var poi = $(html).find('a').attr('href');
+        var name = kmlEvent.featureData.name;
+        triggerTwittersearch(poi, name);
+    });  
+}
+
+function triggerTwittersearch(poianchor, title) {
+    var geocode = $("#poilist").find(poianchor+" span.coords").html();
+    lat = geocode.split(" ")[0];
+    lon = geocode.split(" ")[1];
+    console.log(geocode);
+    $("#twittercontainer").html(geocode); 
+    
+    var baseurl = "http://search.twitter.com/search.json?callback=?&q=&geocode="+geocode+",1km&lang=de&rpp=10&result_type=mixed";
+    var baseurl = "http://search.twitter.com/search.json?callback=?&q="+title+"&lang=de&rpp=10&result_type=mixed";
+    var baseurl = "https://api.twitter.com/1/geo/reverse_geocode.json?callback=?&lat="+lat+"&long="+lon;    
+        
+    console.log(baseurl);
+    $.getJSON(baseurl, function(data) {       
+        console.log(data);
+        $("#twittercontainer").append(data); 
+    });   
 }

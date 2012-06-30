@@ -29,31 +29,38 @@
         <h2><a name="verlauf">Verlauf</a></h2>
         <xsl:variable name="koords" select="$track/trackData"/>
         <!-- googlemaps related -->
-        <div id="koords" class="invisible"><xsl:value-of select="$koords"/></div>
-        <div id="gmapscontainer"></div>
-        <script type="text/javascript">
-            initGoogleMaps(<xsl:value-of select="$track/startPointLat"/>, <xsl:value-of select="$track/startPointLon"/>);
-            var koords = document.getElementById("koords").innerHTML;
-            addRouteToMap(koords);
-            // addPointsOfInterestToMap('<xsl:value-of select="$track/fileId"/>');
-        </script>         
+        <div id="ajaxstuff">
+            <div id="koords" class="invisible"><xsl:value-of select="$koords"/></div>
+            <div id="twittercontainer"></div>
+            <div id="gmapscontainer"></div>
+            <script type="text/javascript">
+                initGoogleMaps(<xsl:value-of select="$track/startPointLat"/>, <xsl:value-of select="$track/startPointLon"/>);
+                var koords = document.getElementById("koords").innerHTML;
+                addRouteToMap(koords);
+                addPointsOfInterestToMap('<xsl:value-of select="$track/fileId"/>');
+            </script>  
+            <br style="clear: both"/>
+        </div>
+       
         
         
         <h2><a name="pois">Interessante Punkte</a></h2>
-        <ul class="poilist">
+        <ul class="poilist" id="poilist">
         <xsl:for-each select="$track/pois/poi">
-            <li>
+            <li id="poi{position()}">
                 <div class="thumbnail"><img src="{image}"/></div>
                 <div class="info">
-                    <a name="poi{position()}"><xsl:value-of select="name"/></a>
+                    <span class="label label-info"><xsl:value-of select="type"/></span><a name="poi{position()}"><xsl:value-of select="name"/></a>
                     <p><xsl:value-of select="abstract"/></p>
-                    <p><a href="{wiki}">Erzähl mir mehr</a></p>
+                    <p><a href="{wiki}" target="_blank">Erzähl mir mehr</a></p>
                 </div>            
+                <span class="invisible coords"><xsl:value-of select="concat(lat,' ',lon)"/></span>
             </li>
         </xsl:for-each> 
         </ul>    
         <br style="clear: both;"/>
-            
+       
+<!--            
         <h2><a name="meinungen">Meinungen</a></h2>
         <ul>        
             <li class="twitterlist"><span class="label label-info">Tweets über <span class="tsearch"><xsl:value-of select="$track/title"/></span></span>
@@ -68,6 +75,7 @@
             </li>
         </ul>
         <span class="invisible"><xsl:value-of select="//searchresult/track/countTrackpoints"/></span>
+-->
     
  
     

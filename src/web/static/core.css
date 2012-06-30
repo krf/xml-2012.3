@@ -33,7 +33,7 @@ div.detail span.label {
 
 /* google maps */
 #gmapscontainer {
-    margin: 0 50px;
+    margin: 0 350px 0 50px;
     height: 700px;
 }
 
@@ -41,6 +41,13 @@ div.detail span.label {
     max-width: inherit;
 }
 
+/* twitter */
+#twittercontainer {
+    float: right;
+    width: 300px;
+    height: 700px;
+    margin: 0 25px;    
+}
 
 
 
@@ -82,5 +89,9 @@ ul.poilist div.info {
 
 ul.poilist div.info a {
     font-size: 1.2em;    
+}
+
+ul.poilist div.info span.label {
+    margin: 0 15px 0 0;    
 }
 
