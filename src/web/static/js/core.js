@@ -110,8 +110,8 @@ function triggerTwittersearch(poianchor, title) {
     $.getJSON(baseurl, function(data) {       
         console.log(data);
         for (tweetIndex in data.results) {
-        	$.getJSON('https://api.twitter.com/1/statuses/oembed.json?callback=?&id='+data.results[tweetIndex].id+'&lang=de&omit_script=false', function(tweetResult) {
-//        		console.log(tweetResult);
+        	$.getJSON('https://api.twitter.com/1/statuses/oembed.json?callback=?&id='+data.results[tweetIndex].id_str+'&lang=de&omit_script=false', function(tweetResult) {
+        		console.log(tweetResult);
         		$("#twittercontainer").append(tweetResult.html);
         	});
          }
