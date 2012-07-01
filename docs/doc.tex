@@ -55,7 +55,32 @@ Im weiteren werden wir auf Implementierungsdetails eingehen, erläutern welche Pr
 
 \section{Systemarchitektur}
 
-% TODO: All
+Die Systemarchitektur ist in Abbildung \ref{fig:architecture} skizziert. An ihr kann auch der Ablauf der Anwendung erläutert werden:
+
+\begin{enumerate}
+\item der Crawler, als unabhängige Komponente, wird in zwei Schritten ausgeführt
+
+\begin{enumerate}
+\item laden der \emph{Result Pages} von gpsies.org und Persistieren auf der XML Datenbank
+
+\item laden der \emph{Track Details} pro \emph{File Id} von gpsies.org und Persistieren auf der XML Datenbank
+\end{enumerate}
+
+\item das SPARQL Skript, ebenfalls als unabhängige Komponente, konstruiert pro Track 2 SPARQL Queries (Anfangs- und Endkoordinaten) und sendet diese Anfrage an DBpedia, die Antwort wird als JSON bearbeitet und als Erweiterung in die XML Datenbank zurückgeschrieben
+
+\item der Web Server sendet auf Anfrage durch den Benutzer das HTML Formular für eine detaillierte Suche in den Tracks, dabei wird die HTML Seite mithilfe von XSLT konstruiert.
+
+\item auf Suchanfrage durch den Benutzer werden entsprechende Dokumente durch XQuery Anfrage an die Datenbank geladen, Point of Interest Daten werden verwendet um Zusatzinformationen vom Kurznachrichtendienst Twitter zu erhalten, beim Konstruieren des HTML Ergebnis wird Microdata zur semantischen Erweiterung hinzugefügt.
+
+\end{enumerate}
+
+\begin{figure}[H]
+\includegraphics[width=\columnwidth]{resources/architecture.pdf}
+\caption{Skizze der Architektur mit den verschiedenen Komponenten und Interaktionen}
+\label{fig:architecture}
+\end{figure}
+
+Jeder Track wird als einzelnes Dokument in der XML Datenbank abgelegt. Es gibt zwei Validierungsschritte, zum einen die Validierung der Trackdokumente nach einem Schema wie sie von \emph{gpsies.org} direkt ausgeliefert werden und zum anderen das XML Schema nach der augmentierung durch das SPARQL Skript. Für das SPARQL Skript wurden mehrere Threads verwendet um mehrere Tracks gleichzeitig zu erweitern.
 
 \section{Implementierung}
 
