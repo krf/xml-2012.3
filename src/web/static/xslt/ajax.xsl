@@ -47,14 +47,17 @@
         <h2><a name="pois">Interessante Punkte</a></h2>
         <ul class="poilist" id="poilist">
         <xsl:for-each select="$track/pois/poi">
-            <li id="poi{position()}">
-                <div class="thumbnail"><img src="{image}"/></div>
+            <li id="poi{position()}" itemscope="" itemtype="http://schema.org/Place">
+                <div class="thumbnail"><img itemprop="image" src="{image}"/></div>
                 <div class="info">
-                    <span class="label label-info"><xsl:value-of select="type"/></span><a name="poi{position()}"><xsl:value-of select="name"/></a>
-                    <p><xsl:value-of select="abstract"/></p>
-                    <p><a href="{wiki}" target="_blank">Erzähl mir mehr</a></p>
+                    <span class="label label-info"><xsl:value-of select="type"/></span><a name="poi{position()}" itemprop="name"><xsl:value-of select="name"/></a>
+                    <p itemprop="description"><xsl:value-of select="abstract"/></p>
+                    <p><a itemprop="url" href="{wiki}" target="_blank">Erzähl mir mehr</a></p>
                 </div>            
-                <span class="invisible coords"><xsl:value-of select="concat(lat,' ',lon)"/></span>
+                <span itemprop="geo" itemscope="" itemtype="http://schema.org/GeoCoordinates" class="invisible coords"><xsl:value-of select="concat(lat,' ',lon)"/>
+                	<meta itemprop="latitude" content="{lat}" />
+                	<meta itemprop="longitude" content="{lon}" />
+                </span>
             </li>
         </xsl:for-each> 
         </ul>    
