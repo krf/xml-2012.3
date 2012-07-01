@@ -100,15 +100,20 @@ function triggerTwittersearch(poianchor, title) {
     lat = geocode.split(" ")[0];
     lon = geocode.split(" ")[1];
     console.log(geocode);
-    $("#twittercontainer").html(geocode); 
+    $("#twittercontainer").empty();
     
     var baseurl = "http://search.twitter.com/search.json?callback=?&q=&geocode="+geocode+",1km&lang=de&rpp=10&result_type=mixed";
     var baseurl = "http://search.twitter.com/search.json?callback=?&q="+title+"&lang=de&rpp=10&result_type=mixed";
-    var baseurl = "https://api.twitter.com/1/geo/reverse_geocode.json?callback=?&lat="+lat+"&long="+lon;    
+//    var baseurl = "https://api.twitter.com/1/geo/reverse_geocode.json?callback=?&lat="+lat+"&long="+lon;    
         
     console.log(baseurl);
     $.getJSON(baseurl, function(data) {       
         console.log(data);
-        $("#twittercontainer").append(data); 
+        for (tweetIndex in data.results) {
+        	$.getJSON('https://api.twitter.com/1/statuses/oembed.json?callback=?&id='+data.results[tweetIndex].id_str+'&lang=de&omit_script=false', function(tweetResult) {
+        		console.log(tweetResult);
+        		$("#twittercontainer").append(tweetResult.html);
+        	});
+         }
     });   
 }
