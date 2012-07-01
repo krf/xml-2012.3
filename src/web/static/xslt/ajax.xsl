@@ -11,8 +11,8 @@
 
     <xsl:for-each select="//searchresult/track[position()=1]"> <!-- remove position()=2 to show all-->
         <xsl:variable name="track" select="."/>
-        
-        <h1><xsl:value-of select="//searchresult/track/title"/></h1>
+        <span itemscope="" itemtype="hhttp://schema.org/Event">
+        <h1><span itemprop="summary"><xsl:value-of select="//searchresult/track/title"/></span></h1>
         
         
         <h2><a name="tags">Begriffe</a></h2>
@@ -80,7 +80,7 @@
         <span class="invisible"><xsl:value-of select="//searchresult/track/countTrackpoints"/></span>
 -->
     
- 
+	</span>
     
     </xsl:for-each>
 </xsl:template>
