@@ -21,7 +21,7 @@
         <h1><xsl:value-of select="//searchresult/track/title"/></h1>
         
         
-        <h2><a name="tags">Begriffe</a></h2>
+        <h2 id="tags">Begriffe</h2>
         <!-- various trackproperties in different labels -->     
         <ul class="tags">
             <li><span class="label"><xsl:value-of select="$track/fileId"/></span></li>
@@ -32,7 +32,7 @@
         <br style="clear: both;"/>
         
         
-        <h2><a name="verlauf">Verlauf</a></h2>
+        <h2 id="verlauf">Verlauf</h2>
         <xsl:variable name="koords" select="$track/trackData"/>
         <!-- googlemaps related -->
         <div id="ajaxstuff">
@@ -50,13 +50,13 @@
        
         
         
-        <h2><a name="pois">Interessante Punkte</a></h2>
+        <h2 id="pois">Interessante Punkte</h2>
         <ul class="poilist" id="poilist">
         <xsl:for-each select="$track/pois/poi">
             <li id="poi{position()}" itemscope="" itemtype="http://schema.org/Place">
                 <div class="thumbnail"><img itemprop="image" src="{image}" alt="Bild zu {name}" /></div>
                 <div class="info">
-                    <span class="label label-info"><xsl:value-of select="type"/></span><a name="poi{position()}" itemprop="name"><xsl:value-of select="name"/></a>
+                    <span class="label label-info"><xsl:value-of select="type"/></span><a itemprop="name"><xsl:value-of select="name"/></a>
                     <p itemprop="description"><xsl:value-of select="abstract"/></p>
                     <p><a itemprop="url" href="{wiki}" target="_blank">Erzähl mir mehr</a></p>
                 </div>            
