@@ -20,7 +20,8 @@
 
 \definecolor{lightgray}{rgb}{.95,.95,.95}
 
-\lstset{backgroundcolor=\color{lightgray},
+\lstset{language=python,
+        backgroundcolor=\color{lightgray},
         basicstyle=\ttfamily\fontsize{9pt}{9pt}\selectfont\upshape,
 				commentstyle=\rmfamily\slshape,
 				keywordstyle=\rmfamily\bfseries\color{black},
@@ -90,7 +91,7 @@ Für die Implementierung haben wir uns für die Programmiersprache Python entschie
 
 Das Script \emph{crawler.py} umfasst folgende Funktionen
 
-\begin{lstlisting}
+\begin{lstlisting}[language=]
 usage: crawler [-h] [-c] [-e] [-s] [-p]
 
 XML Crawler for gpsies.com
@@ -122,6 +123,31 @@ Der Crawler implementiert zwei Hauptaktionen (\emph{crawl, extend}), um die Date
 \footnote{Beispiel-URL: http://www.gpsies.org/api.do?key=API\_KEY\&fileId=cimmxugjixiyzakj\&trackDataLength=250}
   \item Danach wird der Track durch die detaillreichere Version in der Datenbank ersetzt
 \end{itemize}
+
+\subsection{Schnittstelle zur Datenbank}
+
+BaseX bietet verschiedene Befehle an, um auf die Datenbank zuzugreifen, Dokumente hinzuzufügen, zu modifizieren oder zu löschen. BaseX bietet selber einen relative dünnen Python Wrapper an, um die Befehle programmatisch von Python zu nutzen. Für unsere Anwendung hätten aber viele Befehle in Komposition genutzt werden müssen, daher lag es nahe, alle für uns relevanten Funktionalitäten in einer Python Schnittstelle für die Datenbank zu abstrahieren:
+
+\begin{lstlisting}[caption=Methoden aus interface.py]
+def parseFileId(track):
+def addTrack(self, track):
+def removeTrack(self, track):
+def removeTrackById(self, fileId):
+def addTracks(self, tracks):
+def findTrack(self, fileId):
+def getTracks(self):
+def getTrackCount(self):
+def getNonAugmentedTracks(self):
+def getNonAugmentedTrackCount(self):
+def getAugmentedTracks(self):
+def getAugmentedTrackCount(self):
+def getNonPoiTracks(self):
+def getNonPoiTrackCount(self):
+def getPoiTracks(self):
+def getPoiTrackCount(self):
+\end{lstlisting}
+
+Implementierungen wie diese Schnittstelle entstanden in mehreren Iterationen, d.h. zunächst wurde der Python Wrapper genutzt und später nach Hinzufügen der Schnittstelle refaktorisiert.
 
 \subsection{SPARQL Anfrage}
 
@@ -167,6 +193,59 @@ Dies konnte durch den Einsatz von mehreren Threads gelöst werden. Das SPARQL Skr
 DBpedia erkennt jedoch, wenn mehere Anfragen gleichzeitig gestellt werden und blockt diese mit der Fehlermeldung HTTP 503 \emph{Service Unavailable} ab. Erhält ein Thread diese Fehlermeldung ruft er zwischen $5$ und $20$ Sekunden \emph{sleep} auf und versucht es dann erneut. Auf diese weise pendeln die Threads sich ein, bis es keine Fehlermeldung mehr gibt. Damit konnte die benötigte Zeit von $4$ Monaten auf $40$h reduziert werden.
 
 \subsection{Webserver}
+
+Der Webserver ist unter Verwendung von \emph{Tornado} sehr schnell realisiert. Die verschiedene Pfade, wie z.B. \emph{/request} oder \emph{/stats} werden auf verschiedene Handler abstrahiert, die sich mit den Anfragen separat auseinandersetzen.
+
+\begin{lstlisting}[caption=Starten des Webservers und Zuordnung der Kontexte]
+application = tornado.web.Application([
+    (r"/", MainHandler),
+    (r"/request", RequestHandler),
+    (r"/detail", DetailHandler),
+    (r"/kml", KmlHandler),
+    (r"/stats", StatisticsHandler)
+], **settings)
+
+if __name__ == "__main__":
+    port = 8888
+    application.listen(port)
+
+    try:
+        print("Starting web server on localhost:{0}".format(port))
+        tornado.ioloop.IOLoop.instance().start()
+    except KeyboardInterrupt:
+        print("\nKeyboardInterrupt. Exit.")
+    sys.exit(0)
+\end{lstlisting}
+
+\subsection{Webanwendung}
+
+Die benötigte HTML Seiten werden ausschließlich dynamisch durch serverseitige XSL Transformationen konstruiert und an den Anwender übertragen. Dies wurde jedoch nicht nur für HTML Seiten verwendet, sondern auch für das weitere Aufbereiten der Daten.
+
+\begin{lstlisting}[label=lst:kml, caption=Transformation von XML nach KML, language=xslt]
+<xsl:template match="response">
+    <kml xmlns="http://www.opengis.net/kml/2.2">
+    <Document>
+        <name>POI</name>
+        <description>Points of interest zur Route dieser ID</description>
+    <xsl:for-each select="pois/poi">
+        <Placemark>
+            <name><xsl:value-of select="name"/></name>
+            <description>
+                <xsl:value-of select="abstract"/>
+<div class="controls">
+    <a href="#poi{position()}" class="anchorlink">Was wird über diesen Ort gesagt?</a></div>              
+            </description>
+            <Point>
+                <coordinates><xsl:value-of select="lon"/>,<xsl:value-of select="lat"/>,0</coordinates>
+            </Point>
+        </Placemark>
+    </xsl:for-each>
+    </Document>
+    </kml>
+</xsl:template>
+\end{lstlisting}
+
+So wie zum Beispiel in Listing \ref{lst:kml}, die Trackdaten werden nach Keyhole Markup Language (KML) überführt, ein XML Format um geographische Daten bspw. auf Google Maps darzustellen.
 
 % TODO: Kevin, Andre
 
@@ -282,7 +361,7 @@ $ ./sparql.py
 Daraufhin werden die gefundenen Tracks angezeigt, sowie eine sich aktualisierende Statusanzeige mit Zeitabschätzung bis zur Terminierung, einer Hochrechnung für 100.000 Tracks, sowie ausstehnden Tracks die noch zurückgeschrieben werden müssen.
 
 \begin{lstlisting}
-Found 55321 tracks without POIs
+Found 5300 tracks without POIs
 Tracks processed: 4665 / 5300 (~ 2h 22min) => 100.000 Tracks (~ 46h 38min) (DB Writer Queue: 1)
 \end{lstlisting}
 
