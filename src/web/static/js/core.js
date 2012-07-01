@@ -62,10 +62,13 @@ function initGoogleMaps(_lat, _lon) {
 function addRouteToMap(_routestr) {
     var _route = _routestr.split("\n");
     var routeCoords = new Array(); 
+    var mapBounds = new google.maps.LatLngBounds();
     for (var i=0; i<_route.length; i++) {
         point = _route[i];
         llh = point.split(",");
-        routeCoords.push (new google.maps.LatLng(llh[0], llh[1]));
+        var tempGcoord = new google.maps.LatLng(llh[0], llh[1]);
+        routeCoords.push (tempGcoord);
+        mapBounds.extend(tempGcoord);
     }
     
     var flightPath = new google.maps.Polyline({
@@ -75,7 +78,8 @@ function addRouteToMap(_routestr) {
         strokeWeight: 2
     });
         
-    flightPath.setMap(map);    
+    flightPath.setMap(map);
+    map.fitBounds(mapBounds);
     
 }
 
@@ -84,15 +88,18 @@ function addPointsOfInterestToMap(id) {
     url = 'http://www.userpage.fu-berlin.de/andrez/kml/'+id+'.kml'+"?"+rand;
     console.log(url);
     var georssLayer = new google.maps.KmlLayer(url);
-    georssLayer.setMap(map);
-    
-    
-    google.maps.event.addListener(georssLayer, 'click', function(kmlEvent) {
-        var html = kmlEvent.featureData.description;
-        var poi = $(html).find('a').attr('href');
-        var name = kmlEvent.featureData.name;
-        triggerTwittersearch(poi, name);
-    });  
+    if (!typeof georssLayer.getStatus() === "undefined") {
+    	georssLayer.setMap(map);
+    	
+    	google.maps.event.addListener(georssLayer, 'click', function(kmlEvent) {
+    		var html = kmlEvent.featureData.description;
+    		var poi = $(html).find('a').attr('href');
+    		var name = kmlEvent.featureData.name;
+    		triggerTwittersearch(poi, name);
+    	});  
+    } else {
+    	console.log("myTime");
+    } 
 }
 
 function triggerTwittersearch(poianchor, title) {
