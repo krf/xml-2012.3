@@ -217,8 +217,13 @@ Getestet auf Ubuntu 12.04.
 
 \subsection{Datenbank aufsetzen}
 
-% TODO: Woher Datenbankdump
-Zunächst muss der Datenbankdump (\emph{default-*.zip}) nach \emph{\$HOME/BaseXData/} kopiert werden um sie später importieren zu können.
+Ein fertiger Datensatz kann hier heruntergeladen werden:
+
+\begin{center}
+http://kuonrat.userpage.fu-berlin.de/default-2012-06-28-15-26-57.zip [373 MB]
+\end{center}
+
+Dieser beinhaltet 55.823 Tracks wovon 1.696 keine POIs haben, d.h. für die wurde nichts im Umkreis gefunden. Zunächst muss der Datenbankdump (\emph{default-*.zip}) nach \emph{\$HOME/BaseXData/} kopiert werden um sie später importieren zu können.
 
 Starten der BaseX-Datenbank
 
@@ -231,7 +236,7 @@ Erstmaliges Erstellen der Datenbank
 \begin{lstlisting}
 $ basexclient
 
-# Notiz: Der Standardlogin ist admin:admnin
+# Notiz: Der Standardlogin ist admin:admin
 
 $ > create database default
 \end{lstlisting}
