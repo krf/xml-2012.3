@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-<xsl:output method="html" version="4.0" encoding="utf-8" indent="yes"/>
+<xsl:output method="html" encoding="utf-8" indent="yes"/>
 <xsl:include href="func.xsl"/>
 
 
 <xsl:template match="response">
-
+    <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html></xsl:text>    
+    <html>
     <xsl:call-template name="htmlhead"/>
+    
+    <body>
     <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+    
+    
+
 
     <xsl:for-each select="//searchresult/track[position()=1]"> <!-- remove position()=2 to show all-->
         <xsl:variable name="track" select="."/>
@@ -48,7 +54,7 @@
         <ul class="poilist" id="poilist">
         <xsl:for-each select="$track/pois/poi">
             <li id="poi{position()}" itemscope="" itemtype="http://schema.org/Place">
-                <div class="thumbnail"><img itemprop="image" src="{image}"/></div>
+                <div class="thumbnail"><img itemprop="image" src="{image}" alt="Bild zu {name}" /></div>
                 <div class="info">
                     <span class="label label-info"><xsl:value-of select="type"/></span><a name="poi{position()}" itemprop="name"><xsl:value-of select="name"/></a>
                     <p itemprop="description"><xsl:value-of select="abstract"/></p>
@@ -79,10 +85,10 @@
         </ul>
         <span class="invisible"><xsl:value-of select="//searchresult/track/countTrackpoints"/></span>
 -->
-    
- 
-    
+
     </xsl:for-each>
+    </body>
+    </html>
 </xsl:template>
 
 </xsl:stylesheet>
