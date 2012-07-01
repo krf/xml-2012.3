@@ -84,6 +84,8 @@ Jeder Track wird als einzelnes Dokument in der XML Datenbank abgelegt. Es gibt z
 
 \section{Implementierung}
 
+Für die Implementierung haben wir uns für die Programmiersprache Python entschieden, d.h. alle Komponenten die programmatisch ausgeführt werden müssen, wurden in Python realisiert. Von einer Auswahl von verschiedenen XML Datenbanken wurde BaseX gewählt. Als Webserver Framework wurde \emph{Tornado} gewählt. Im weiteren werden Details zur Implementierung der einzelnen Komponenten erläutert.
+
 \subsection{Crawler}
 
 Das Script \emph{crawler.py} umfasst folgende Funktionen
@@ -121,9 +123,48 @@ Der Crawler implementiert zwei Hauptaktionen (\emph{crawl, extend}), um die Date
   \item Danach wird der Track durch die detaillreichere Version in der Datenbank ersetzt
 \end{itemize}
 
-\subsection{SPARQL-Abfrage}
+\subsection{SPARQL Anfrage}
 
-% TODO: Konrad
+Dank eines SPARQL Wrappers für Python können die SPARQL Anfragen in Python konstruiert, gesendet und deren Ergebnis verarbeiten werden. Für jeden Track der noch keine Point-of-Interests Elemente hat, d.h. im XML Dokument noch keinen \emph{<poi/>} Knoten vorzuweisen hat, werden die Start- und Endkoordinaten analysiert. Eine Beispiel SPARQL Anfrage sieht dann bspw. wie folgt aus:
+
+\begin{lstlisting}[caption=Beispiel SPARQL Anfrage]
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+SELECT ?subject ?label ?lat ?long ?abstract ?wiki ?image ?typeLabel WHERE {
+?subject geo:lat ?lat.
+?subject geo:long ?long.
+?subject rdfs:label ?label.
+?subject dbpedia-owl:abstract ?abstract.
+?subject foaf:page ?wiki.
+?subject rdf:type ?type.
+?subject foaf:depiction ?image.
+?type rdfs:label ?typeLabel.
+FILTER(?lat - 50.333777 <= 0.050000 && 50.333777 - ?lat <= 0.050000 &&
+      ?long - 6.945088 <= 0.050000 && 6.945088 - ?long <= 0.050000 &&
+      lang(?abstract) = "de" &&
+      lang(?label) = "de" &&
+      lang(?typeLabel) = "de"
+      ).
+} LIMIT 10
+\end{lstlisting}
+
+Durch den Filter wird eine Umkreissuche realisiert, dabei werden alle in der DBpedia befindlichen Ressourcen gelistet, deren GPS Koordinaten, sofern vorhanden, im Umkreis von $0,05$ Latitude/Longitude liegen. Das entspricht in Deutschland circa einem Umkreis von 7,5km.
+
+Von den gefundenen Ressourcen werden folgende Daten verwendet, die dann auch als Point-of-Interest dem Trackdokument angereichet werden:
+
+\begin{itemize}
+\item \textbf{Label} Bezeichner
+\item \textbf{Latitude} Latitude Koordinate in Dezimalschreibweise
+\item \textbf{Longitude} Longitude Koordinate in Dezimalschreibweise
+\item \textbf{Abstract} Eine zusammenfassende Beschreibung der Ressource, in Wikipediaartikeln meist der erste Paragraph
+\item \textbf{Wiki} Die URL zum entsprechenden Wikipediaartikel
+\item \textbf{Image} Die URL zu einem Bild der Ressource, sofern vorhanden
+\end{itemize}
+
+Als sehr problematisch hat sich die anfängliche die Laufzeit herausgestellt. Die Anfragen werden von DBpedia nach Beobachtungen mit deutlicher Verzögerung beantwortet. Mit einfachen Hochrechnungen hätte so das Anreichern von $100.000$ Tracks circa. 4 Monate benötigt.
+
+Dies konnte durch den Einsatz von mehreren Threads gelöst werden. Das SPARQL Skript wird multithreaded ausgeführt mit $n$ Threads für das Senden der Anfragen und einem Thread für das Zurückschreiben der Tracks in die Datenbank.
+
+DBpedia erkennt jedoch, wenn mehere Anfragen gleichzeitig gestellt werden und blockt diese mit der Fehlermeldung HTTP 503 \emph{Service Unavailable} ab. Erhält ein Thread diese Fehlermeldung ruft er zwischen $5$ und $20$ Sekunden \emph{sleep} auf und versucht es dann erneut. Auf diese weise pendeln die Threads sich ein, bis es keine Fehlermeldung mehr gibt. Damit konnte die benötigte Zeit von $4$ Monaten auf $40$h reduziert werden.
 
 \subsection{Webserver}
 
@@ -139,6 +180,12 @@ Unsere Anwendunge wurde hauptsächlich auf folgender Plattform getestet:
   \item Ubuntu 12.04
 
   \begin{itemize}
+    \item Python 2.7.3
+    \item BaseX 7.0.2
+  \end{itemize}
+	
+	\item Windows 7
+	  \begin{itemize}
     \item Python 2.7.3
     \item BaseX 7.0.2
   \end{itemize}
@@ -220,7 +267,21 @@ Bei diesem Aufruf fragt der Crawler für jeden Track in der Datenbank die Detaill
 
 \subsection{Anreicherung mit Point-Of-Interests (optional)}
 
-% TODO: Konrad?
+Das SPARQL Skript kann direkt gestartet werden:
+
+\begin{lstlisting}
+# Enrich tracks with point of interests
+$ ./sparql.py
+\end{lstlisting}
+
+Daraufhin werden die gefundenen Tracks angezeigt, sowie eine sich aktualisierende Statusanzeige mit Zeitabschätzung bis zur Terminierung, einer Hochrechnung für 100.000 Tracks, sowie ausstehnden Tracks die noch zurückgeschrieben werden müssen.
+
+\begin{lstlisting}
+Found 55321 tracks without POIs
+Tracks processed: 4665 / 5300 (~ 2h 22min) => 100.000 Tracks (~ 46h 38min) (DB Writer Queue: 1)
+\end{lstlisting}
+
+Das Skript kann jederzeit unterbrochen werden und setzt bei erneutem Starten bei den Tracks fort, die noch nicht angereichert wurden.
 
 \subsection{Webserver starten}
 
