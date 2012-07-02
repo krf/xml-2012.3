@@ -93,7 +93,7 @@ function loadGeneralTweets(lat,lon){
 }
 
 function displayTweetInRightBox(row){
-	$("div#ajaxstuff div#twittercontainer").append('<div class="tweetContainerRight"><span class="label">'+row.from_user+'</span>'+ row.text+'</div>');
+	$("div#ajaxstuff div#twittercontainer").append('<div class="tweetContainerRight"><span class="label">'+row.from_user+'</span> '+ row.text+'</div>');
 }
 
 
