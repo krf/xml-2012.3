@@ -1,6 +1,8 @@
 $(document).ready(function() {
     console.log('start');    
     
+	
+	
     
     /* load detailinfo of route */
     /* catch every klick on an <a>tag and perform ajaxrequest with href */
@@ -46,6 +48,53 @@ $(document).ready(function() {
         });
     }); 
 });
+
+function loadGeneralTweets(lat,lon){
+	console.log('+info:load general tweets');   
+	
+	
+	
+               
+               
+               
+               var baseurl = "http://search.twitter.com/search.json?callback=?&lang=de&rpp=5&include_entities=true&result_type=mixed&geocode="+lat+","+lon+",5km";
+               
+               // "http://api.twitter.com/1/geo/reverse_geocode.json?callback=?&lang=de&rpp=5&include_entities=true&result_type=mixed&lat="+lat+"&long="+lon;
+               // "http://search.twitter.com/search.json?callback=?&q="+searchstring+"&lang=de&rpp=5&include_entities=true&result_type=mixed";
+               
+           	
+               console.log("baseurl: "+baseurl);
+
+
+                $.getJSON(baseurl, function(data) {    
+                	
+                	console.log(data.results.length); 
+                    if(data.results.length==0) {
+                    	console.log("0");  
+                        str = "<li><span class=\"label label-warning\">keine Tweets vorhanden</span></li>"
+                    } else {
+                    	
+                        for (i=0; i < data.results.length; i++){
+                            
+                        	row = data.results[i];
+                        	console.log(row.from_user);   
+                        	displayTweetInRightBox(row);
+                         
+                            
+                        }
+                        
+                   
+                    }          
+                 
+                });
+               
+               
+           
+}
+
+function displayTweetInRightBox(row){
+	$("div#ajaxstuff div#twittercontainer").append('<div class="tweetContainerRight"><span class="label">'+row.from_user+'</span>'+ row.text+'</div>');
+}
 
 
 function initGoogleMaps(_lat, _lon) {

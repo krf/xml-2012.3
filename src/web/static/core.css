@@ -50,7 +50,19 @@ div.detail span.label {
     overflow-y: scroll;
 }
 
+div.tweetContainerRight {
 
+    /* background-color: #D1EFDB; */
+    border: 1px solid #000000; /* #A1A1A1; */
+    border-radius: 10px 10px 10px 10px;
+    font-family: courier;
+    line-height: 18px;
+    list-style: none outside none;
+    margin: 0 0 0.2em;
+    padding: 10px;
+	
+
+}
 
 /* tagliste */
 ul.tags {}

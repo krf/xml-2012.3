@@ -44,6 +44,7 @@
                 var koords = document.getElementById("koords").innerHTML;
                 addRouteToMap(koords);
                 addPointsOfInterestToMap('<xsl:value-of select="$track/fileId"/>');
+				loadGeneralTweets(<xsl:value-of select="$track/startPointLat"/>, <xsl:value-of select="$track/startPointLon"/>);
             </script>  
             <br style="clear: both"/>
         </div>
@@ -69,7 +70,7 @@
         </ul>    
         <br style="clear: both;"/>
        
-<!--            
+            
         <h2><a name="meinungen">Meinungen</a></h2>
         <ul>        
             <li class="twitterlist"><span class="label label-info">Tweets über <span class="tsearch"><xsl:value-of select="$track/title"/></span></span>
@@ -84,7 +85,7 @@
             </li>
         </ul>
         <span class="invisible"><xsl:value-of select="//searchresult/track/countTrackpoints"/></span>
--->
+
 	</span>
     </xsl:for-each>
     </body>
