@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-<xsl:output method="html" version="4.0" encoding="utf-8" indent="yes"/>
+<xsl:output method="html" encoding="utf-8" indent="yes"/>
 <xsl:include href="func.xsl"/>
 
 
 <xsl:template match="response">
-
+    <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html></xsl:text>    
+    <html>
     <xsl:call-template name="htmlhead"/>
+    
+    <body>
     <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+    
+    
+
 
     <xsl:for-each select="//searchresult/track[position()=1]"> <!-- remove position()=2 to show all-->
         <xsl:variable name="track" select="."/>
-        <span itemscope="" itemtype="hhttp://schema.org/Event">
-        <h1><span itemprop="summary"><xsl:value-of select="//searchresult/track/title"/></span></h1>
+        <span itemscope="" itemtype="http://schema.org/Event">
+        <h1><span itemprop="name"><xsl:value-of select="//searchresult/track/title"/></span></h1>
         
         
-        <h2><a name="tags">Begriffe</a></h2>
+        <h2 id="tags">Begriffe</h2>
         <!-- various trackproperties in different labels -->     
         <ul class="tags">
             <li><span class="label"><xsl:value-of select="$track/fileId"/></span></li>
@@ -26,7 +32,7 @@
         <br style="clear: both;"/>
         
         
-        <h2><a name="verlauf">Verlauf</a></h2>
+        <h2 id="verlauf">Verlauf</h2>
         <xsl:variable name="koords" select="$track/trackData"/>
         <!-- googlemaps related -->
         <div id="ajaxstuff">
@@ -44,13 +50,13 @@
        
         
         
-        <h2><a name="pois">Interessante Punkte</a></h2>
+        <h2 id="pois">Interessante Punkte</h2>
         <ul class="poilist" id="poilist">
         <xsl:for-each select="$track/pois/poi">
             <li id="poi{position()}" itemscope="" itemtype="http://schema.org/Place">
-                <div class="thumbnail"><img itemprop="image" src="{image}"/></div>
+                <div class="thumbnail"><img itemprop="image" src="{image}" alt="Bild zu {name}" /></div>
                 <div class="info">
-                    <span class="label label-info"><xsl:value-of select="type"/></span><a name="poi{position()}" itemprop="name"><xsl:value-of select="name"/></a>
+                    <span class="label label-info"><xsl:value-of select="type"/></span><a itemprop="name"><xsl:value-of select="name"/></a>
                     <p itemprop="description"><xsl:value-of select="abstract"/></p>
                     <p><a itemprop="url" href="{wiki}" target="_blank">Erzähl mir mehr</a></p>
                 </div>            
@@ -79,10 +85,10 @@
         </ul>
         <span class="invisible"><xsl:value-of select="//searchresult/track/countTrackpoints"/></span>
 -->
-    
 	</span>
-    
     </xsl:for-each>
+    </body>
+    </html>
 </xsl:template>
 
 </xsl:stylesheet>

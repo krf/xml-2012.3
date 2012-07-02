@@ -105,11 +105,11 @@
                             </xsl:variable>                    
                             <xsl:for-each select="track">
                                 <xsl:sort select="*[name() = $sortselect]" order="{$sortorder}" data-type="{$sorttype}"/>
-								<span itemscope="" itemtype="hhttp://schema.org/Event">
+								<span itemscope="" itemtype="http://schema.org/Event">
                                 <tr>
                                     <td>
 									
-                                        <a itemprop="url" href="/detail?id={fileId}" target="_blank" class="ajax"><span itemprop="summary"><xsl:value-of select="title"/></span></a>
+                                        <a itemprop="url" href="/detail?id={fileId}" target="_blank" class="ajax"><span itemprop="name"><xsl:value-of select="title"/></span></a>
                                     </td>
                                     <td>
 										<span itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
