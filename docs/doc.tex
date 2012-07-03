@@ -138,23 +138,23 @@ Der Crawler implementiert zwei Hauptaktionen (\emph{crawl, extend}), um die Date
 
 BaseX bietet verschiedene Befehle an, um auf die Datenbank zuzugreifen, Dokumente hinzuzufügen, zu modifizieren oder zu löschen. BaseX bietet selber einen relative dünnen Python Wrapper an, um die Befehle programmatisch von Python zu nutzen. Für unsere Anwendung hätten aber viele Befehle in Komposition genutzt werden müssen, daher lag es nahe, alle für uns relevanten Funktionalitäten in einer Python Schnittstelle für die Datenbank zu abstrahieren:
 
-\begin{lstlisting}[caption=Methoden aus interface.py]
-def parseFileId(track):
-def addTrack(self, track):
-def removeTrack(self, track):
-def removeTrackById(self, fileId):
-def addTracks(self, tracks):
-def findTrack(self, fileId):
-def getTracks(self):
-def getTrackCount(self):
-def getNonAugmentedTracks(self):
-def getNonAugmentedTrackCount(self):
-def getAugmentedTracks(self):
-def getAugmentedTrackCount(self):
-def getNonPoiTracks(self):
-def getNonPoiTrackCount(self):
-def getPoiTracks(self):
-def getPoiTrackCount(self):
+\begin{lstlisting}[caption=Das Modul interface.py]
+class TrackInterface:
+  def addTrack(self, track):
+  def removeTrack(self, track):
+  def removeTrackById(self, fileId):
+  def addTracks(self, tracks):
+  def findTrack(self, fileId):
+  def getTracks(self):
+  def getTrackCount(self):
+  def getNonAugmentedTracks(self):
+  def getNonAugmentedTrackCount(self):
+  def getAugmentedTracks(self):
+  def getAugmentedTrackCount(self):
+  def getNonPoiTracks(self):
+  def getNonPoiTrackCount(self):
+  def getPoiTracks(self):
+  def getPoiTrackCount(self):
 \end{lstlisting}
 
 Implementierungen wie diese Schnittstelle entstanden in mehreren Iterationen, d.h. zunächst wurde der Python Wrapper genutzt und später nach Hinzufügen der Schnittstelle refaktorisiert.
@@ -231,7 +231,7 @@ if __name__ == "__main__":
 
 Die benötigte HTML Seiten werden ausschließlich dynamisch durch serverseitige XSL Transformationen konstruiert und an den Anwender übertragen. Dies wurde jedoch nicht nur für HTML Seiten verwendet, sondern auch für das weitere Aufbereiten der Daten.
 
-\begin{lstlisting}[label=lst:kml, caption=Transformation von XML nach KML, language=xslt]
+\begin{lstlisting}[label=lst:kml, caption=Transformation von XML nach KML, language=XSLT]
 <xsl:template match="response">
     <kml xmlns="http://www.opengis.net/kml/2.2">
     <Document>
