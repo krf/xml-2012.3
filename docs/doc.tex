@@ -17,6 +17,16 @@
 \usepackage{subfig}                                       % figures broken into subfigures
 \usepackage{multirow}
 \usepackage[linesnumbered,ruled,vlined]{algorithm2e}      % floating algorithm environment with algorithmic keywords
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=false,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=black,
+}
+% url formatting
+\urlstyle{rm}
 
 \definecolor{lightgray}{rgb}{.95,.95,.95}
 
@@ -283,10 +293,10 @@ Im folgenden wird die Installation der Anwendung erläutert. Dazu gehört auch das
 \subsection{Abhängigkeiten}
 
 \begin{itemize}
-  \item BaseX (http://basex.org/)
-  \item Tornado Web Server (http://www.tornadoweb.org/)
-  \item Python LXML (http://lxml.de)
-  \item SPARQL Endpoint interface to Python (http://sparql-wrapper.sourceforge.net/)
+  \item Base (\url{http://basex.org/})
+  \item Tornado Web Server (\url{http://www.tornadoweb.org/})
+  \item Python LXML (\url{http://lxml.de})
+  \item SPARQL Endpoint interface to Python (\url{http://sparql-wrapper.sourceforge.net/})
 \end{itemize}
 
 \subsubsection{Quick install (für Debian-basierte Systeme)}
@@ -303,7 +313,7 @@ Getestet auf Ubuntu 12.04.
 Ein fertiger Datensatz kann hier heruntergeladen werden:
 
 \begin{center}
-http://kuonrat.userpage.fu-berlin.de/default-2012-06-28-15-26-57.zip [373 MB]
+\url{http://kuonrat.userpage.fu-berlin.de/default-2012-06-28-15-26-57.zip} [373 MB]
 \end{center}
 
 Dieser beinhaltet 55.823 Tracks wovon 1.696 keine POIs haben, d.h. für die wurde nichts im Umkreis gefunden. Zunächst muss der Datenbankdump (\emph{default-*.zip}) nach \emph{\$HOME/BaseXData/} kopiert werden um sie später importieren zu können.
@@ -380,8 +390,18 @@ Nachdem die Datenbank befüllt ist, kann der Webserver gestartet werden.
 $ ./web.py
 \end{lstlisting}
 
-Dies startet einen Tornado-Webserver auf der Adresse \emph{http://localhost:8888} welche mit dem Browser angesteuert werden kann.
+Dies startet einen Tornado-Webserver auf der Adresse \url{http://localhost:8888} welche mit dem Browser angesteuert werden kann.
 
 \section{Benutzerdokumentation}
+
+\section{Anhang}
+
+\subsection{Quellcode}
+
+Der Quellcode für dieses Projekt ist einsehbar unter folgender Adresse:
+
+\begin{center}
+\url{https://github.com/krf/xml-2012.3}
+\end{center}
 
 \end{document}
