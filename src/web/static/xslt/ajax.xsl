@@ -12,9 +12,6 @@
     <body>
     <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
     
-    
-
-
     <xsl:for-each select="//searchresult/track[position()=1]"> <!-- remove position()=2 to show all-->
         <xsl:variable name="track" select="."/>
         <span itemscope="" itemtype="http://schema.org/Event">
@@ -70,7 +67,7 @@
         </ul>    
         <br style="clear: both;"/>
        
-            
+<!-- old code of old twitter-part, twitter is now embedded with the map and thus, not needed any longer here           
         <h2><a name="meinungen">Meinungen</a></h2>
         <ul>        
             <li class="twitterlist"><span class="label label-info">Tweets über <span class="tsearch"><xsl:value-of select="$track/title"/></span></span>
@@ -85,7 +82,7 @@
             </li>
         </ul>
         <span class="invisible"><xsl:value-of select="//searchresult/track/countTrackpoints"/></span>
-
+-->
 	</span>
     </xsl:for-each>
     </body>
