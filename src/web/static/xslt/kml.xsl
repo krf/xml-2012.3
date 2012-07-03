@@ -13,7 +13,7 @@
             <description>
                 <xsl:value-of select="abstract"/>
 <div class="controls">
-    <a href="#poi{position()}" class="anchorlink">Was wird über diesen Ort gesagt?</a></div>              
+    <a href="#poi{position()}" class="anchorlink">Zur Liste der Points of Interests</a></div>              
             </description>
             <Point>
                 <coordinates><xsl:value-of select="lon"/>,<xsl:value-of select="lat"/>,0</coordinates>
