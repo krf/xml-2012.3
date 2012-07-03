@@ -1,95 +1,32 @@
 $(document).ready(function() {
     console.log('start');    
     
-	
-	
-    
-    /* load detailinfo of route */
-    /* catch every klick on an <a>tag and perform ajaxrequest with href */
-    $("div.summary a.ajax").click(function (evt) {
-        return;
-        evt.preventDefault();
-        var target = $(this).attr('href');
-        console.log(target);
-        
-        $.get(target, function(data) {
-            $("div.detail").html(data);
-            
-            /* retrieve some twitterinfo */
-            
-            $("li.twitterlist").each(function(idx, para) {
-               console.log($(this).html());
-               var searchstring  = $(this).find("span.tsearch").html();
-               
-               console.log(idx+" "+para);
-               
-               var items = []
-               var baseurl = "http://search.twitter.com/search.json?callback=?&q="+searchstring+"&lang=de&rpp=5&include_entities=true&result_type=mixed";
-                console.log(baseurl);
-                $.getJSON(baseurl, function(data) {       
-                    if(data.results.length==0) {
-                        str = "<li><span class=\"label label-warning\">keine Tweets vorhanden</span></li>"
-                    } else {    
-                        console.log("return from req"+idx);
-                        items[idx] = [];
-                        for (i=0; i < data.results.length; i++){
-                            row = data.results[i];
-                            items[idx].push('<li><span class="label">'+row.from_user+'</span>' +row.text+ '</li>');                
-                        }
-                        
-                        str = items[idx].join('');
-                    }          
-                    $($("li.twitterlist").get(idx)).find(".tweets").html(str);                    
-                });
-               
-               
-            });
-           
-        });
-    }); 
 });
 
 function loadGeneralTweets(lat,lon){
 	console.log('+info:load general tweets');   
-	
-	
-	
-               
-               
-               
-               var baseurl = "http://search.twitter.com/search.json?callback=?&lang=de&rpp=5&include_entities=true&result_type=mixed&geocode="+lat+","+lon+",5km";
-               
-               // "http://api.twitter.com/1/geo/reverse_geocode.json?callback=?&lang=de&rpp=5&include_entities=true&result_type=mixed&lat="+lat+"&long="+lon;
-               // "http://search.twitter.com/search.json?callback=?&q="+searchstring+"&lang=de&rpp=5&include_entities=true&result_type=mixed";
-               
-           	
-               console.log("baseurl: "+baseurl);
 
-
-                $.getJSON(baseurl, function(data) {    
-                	
-                	console.log(data.results.length); 
-                    if(data.results.length==0) {
-                    	console.log("0");  
-                        str = "<li><span class=\"label label-warning\">keine Tweets vorhanden</span></li>"
-                    } else {
-                    	
-                        for (i=0; i < data.results.length; i++){
-                            
-                        	row = data.results[i];
-                        	console.log(row.from_user);   
-                        	displayTweetInRightBox(row);
-                         
-                            
-                        }
-                        
-                   
-                    }          
-                 
-                });
-               
-               
-           
+    var baseurl = "http://search.twitter.com/search.json?callback=?&lang=de&rpp=5&include_entities=true&result_type=mixed&geocode="+lat+","+lon+",5km";
+    
+    // "http://api.twitter.com/1/geo/reverse_geocode.json?callback=?&lang=de&rpp=5&include_entities=true&result_type=mixed&lat="+lat+"&long="+lon;
+    // "http://search.twitter.com/search.json?callback=?&q="+searchstring+"&lang=de&rpp=5&include_entities=true&result_type=mixed";
+    console.log("baseurl: "+baseurl);
+    $.getJSON(baseurl, function(data) {    
+    	
+    	console.log(data.results.length); 
+        if(data.results.length==0) {
+        	console.log("0");  
+            str = "<li><span class=\"label label-warning\">keine Tweets vorhanden</span></li>"
+        } else {
+        	
+            for (i=0; i < data.results.length; i++){
+                
+            	row = data.results[i];
+            	console.log(row.from_user);   
+            	displayTweetInRightBox(row);
+            }
+        }           
+    });
 }
 
 function displayTweetInRightBox(row){
@@ -120,20 +57,22 @@ function addRouteToMap(_routestr) {
         mapBounds.extend(tempGcoord);
     }
     
-    var flightPath = new google.maps.Polyline({
+    var routePath = new google.maps.Polyline({
         path: routeCoords,
         strokeColor: "#FF0000",
         strokeOpacity: 1.0,
         strokeWeight: 2
     });
         
-    flightPath.setMap(map);
+    routePath.setMap(map);
     map.fitBounds(mapBounds);
     
 }
 
+/* load custom kml-file from publicly available server */
+/* if the file has not yet been uploaded the map will contain no POIs (thus the list as fallback) */
 function addPointsOfInterestToMap(id) {
-    rand = Math.round(Math.random()*1000);
+    rand = Math.round(Math.random()*1000);  /* disable caching from google  by unifiing the url */
     url = 'http://www.userpage.fu-berlin.de/andrez/kml/'+id+'.kml'+"?"+rand;
     console.log(url);
     var georssLayer = new google.maps.KmlLayer(url, {preserveViewport: true});

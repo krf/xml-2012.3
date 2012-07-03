@@ -109,11 +109,13 @@ class RequestHandler(tornado.web.RequestHandler):
 class DetailHandler(tornado.web.RequestHandler):
 
     def get(self):
+        # Try to upload the kml-file used at the detailpage - will only work when the script is available and the correct sshkey is given
+        # If it fails, the script will continue anyway, showing the detailpage
+        # if the file has already been uploaded earlier the detailpage may have POIs on the map
         try:
-            if True:
-                trackId = self.get_argument("id", default="")
-                script = "/."+os.path.join(doc_root,"static/")+"helper.sh"
-                subprocess.Popen([script, trackId])   
+            trackId = self.get_argument("id", default="")
+            script = "/."+os.path.join(doc_root,"static/")+"helper.sh"
+            subprocess.Popen([script, trackId])   
         except OSError as e:
             log.info('tried to publish kml, failed, but continued request')
         self.post()
