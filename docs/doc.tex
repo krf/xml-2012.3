@@ -247,7 +247,10 @@ Die benötigte HTML Seiten werden ausschließlich dynamisch durch serverseitige XS
 
 So wie zum Beispiel in Listing \ref{lst:kml}, die Trackdaten werden nach Keyhole Markup Language (KML) überführt, ein XML Format um geographische Daten bspw. auf Google Maps darzustellen.
 
-% TODO: Kevin, Andre
+\subsection{Microdata}
+
+Nachdem die Grundfunktionalität der Anwendung gegeben war, wurde die Anreicherung von Microdata durch inkrementelle Erweiterung der XSLT
+Templates implementiert.
 
 \section{Test-Umgebung}
 
@@ -272,9 +275,6 @@ Unsere Anwendunge wurde hauptsächlich auf folgender Plattform getestet:
   \end{itemize}
 \end{itemize}
 
-\subsection{Tests}
-
-% TODO: Kevin
 
 \section{Installationsanleitung}
 
@@ -383,5 +383,33 @@ $ ./web.py
 Dies startet einen Tornado-Webserver auf der Adresse \emph{http://localhost:8888} welche mit dem Browser angesteuert werden kann.
 
 \section{Benutzerdokumentation}
+
+Wird die Anwendung gestartet, kann der Benutzer über drei verschiedene Felder eingaben machen: Freitext, Ort und Suche. Die Ergebnisse werden
+unter Angabe der Titel angezeigt, inklusive der augmentierten Postleitzahlen und der Anzahl verfügbarer POIs.
+
+\begin{figure}[H]
+\center
+\includegraphics[width=0.7\textwidth]{resources/screenshot-1.png}
+\caption{Darstellung der Suchergebnisse}
+\label{fig:screenshot-1}
+\end{figure}
+
+Über den Titellink können Details über die POIs abgerufen werden. Die POIs werden mithilfe der Google Maps API visualisiert.
+Weitere Informationen wie 
+
+\begin{figure}[H]
+\center
+\includegraphics[width=0.8\textwidth]{resources/screenshot-3.png}
+\caption{Visualisierung unter Verwendung der Google Maps API}
+\label{fig:screenshot-3}
+\end{figure}
+
+\begin{figure}[H]
+\center
+\includegraphics[width=0.7\textwidth]{resources/screenshot-2.png}
+\caption{Anzeige der Details von Point of Interests}
+\label{fig:screenshot-2}
+\end{figure}
+
 
 \end{document}
