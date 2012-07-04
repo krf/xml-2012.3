@@ -230,7 +230,29 @@ if __name__ == "__main__":
 
 \subsection{Webanwendung}
 
-Die benötigte HTML Seiten werden ausschließlich dynamisch durch serverseitige XSL Transformationen konstruiert und an den Anwender übertragen. Dies wurde jedoch nicht nur für HTML Seiten verwendet, sondern auch für das weitere Aufbereiten der Daten.
+Die benötigte HTML Seiten werden ausschließlich dynamisch durch serverseitige XSL Transformationen konstruiert und an den Anwender übertragen. Während der Transformation werden die Webseiten mit Microdata erweitert um die Routeninformationen und POIs maschinenlesbar zu machen.
+
+\begin{lstlisting}[label=lst:micro, caption=Microdata in XSL Dokument, language=XSLT]
+ <h2 id="pois">Interessante Punkte</h2>
+        <ul class="poilist" id="poilist">
+        <xsl:for-each select="$track/pois/poi">
+            <li id="poi{position()}" itemscope="" itemtype="http://schema.org/Place">
+                <div class="thumbnail"><img itemprop="image" src="{image}" alt="Bild zu {name}" /></div>
+                <div class="info">
+                    <span class="label label-info"><xsl:value-of select="type"/></span><a itemprop="name"><xsl:value-of select="name"/></a>
+                    <p itemprop="description"><xsl:value-of select="abstract"/></p>
+                    <p><a itemprop="url" href="{wiki}" target="_blank">Erzähl mir mehr</a></p>
+                </div>            
+                <span itemprop="geo" itemscope="" itemtype="http://schema.org/GeoCoordinates" class="invisible coords"><xsl:value-of select="concat(lat,' ',lon)"/>
+                	<meta itemprop="latitude" content="{lat}" />
+                	<meta itemprop="longitude" content="{lon}" />
+                </span>
+            </li>
+        </xsl:for-each> 
+        </ul>  
+\end{lstlisting}
+
+XSL Transformation wurde zudem nicht nur für die nutzerseitigen HTML Seiten verwendet, sondern auch für weiteres Aufbereiten der Daten.
 
 \begin{lstlisting}[label=lst:kml, caption=Transformation von XML nach KML, language=XSLT]
 <xsl:template match="response">
@@ -257,6 +279,8 @@ Die benötigte HTML Seiten werden ausschließlich dynamisch durch serverseitige XS
 \end{lstlisting}
 
 So wie zum Beispiel in Listing \ref{lst:kml}, die Trackdaten werden nach Keyhole Markup Language (KML) überführt, ein XML Format um geographische Daten bspw. auf Google Maps darzustellen.
+
+
 
 \section{Test-Umgebung}
 
