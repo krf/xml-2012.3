@@ -105,18 +105,25 @@
                             </xsl:variable>                    
                             <xsl:for-each select="track">
                                 <xsl:sort select="*[name() = $sortselect]" order="{$sortorder}" data-type="{$sorttype}"/>
+								<span itemscope="" itemtype="http://schema.org/Event">
                                 <tr>
                                     <td>
-                                        <a href="/detail?id={fileId}" target="_blank" class="ajax"><xsl:value-of select="title"/></a>
+									
+                                        <a itemprop="url" href="/detail?id={fileId}" target="_blank" class="ajax"><span itemprop="name"><xsl:value-of select="title"/></span></a>
                                     </td>
                                     <td>
-                                        <xsl:value-of select="startPointZip"/>
+										<span itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
+											<span itemprop="postalCode">
+											<xsl:value-of select="startPointZip"/>
+											</span>
+										</span>
                                     </td>
                                     <td>
                                         <xsl:value-of select="pois"/>
                                         <!-- <xsl:value-of select="countTrackpoints"/> -->
                                     </td>
                                 </tr>
+								</span>
                             </xsl:for-each>
                         </tbody>
                     </table>

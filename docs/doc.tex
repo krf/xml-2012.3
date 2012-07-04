@@ -17,6 +17,16 @@
 \usepackage{subfig}                                       % figures broken into subfigures
 \usepackage{multirow}
 \usepackage[linesnumbered,ruled,vlined]{algorithm2e}      % floating algorithm environment with algorithmic keywords
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=false,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=black,
+}
+% url formatting
+\urlstyle{rm}
 
 \definecolor{lightgray}{rgb}{.95,.95,.95}
 
@@ -128,23 +138,23 @@ Der Crawler implementiert zwei Hauptaktionen (\emph{crawl, extend}), um die Date
 
 BaseX bietet verschiedene Befehle an, um auf die Datenbank zuzugreifen, Dokumente hinzuzufügen, zu modifizieren oder zu löschen. BaseX bietet selber einen relative dünnen Python Wrapper an, um die Befehle programmatisch von Python zu nutzen. Für unsere Anwendung hätten aber viele Befehle in Komposition genutzt werden müssen, daher lag es nahe, alle für uns relevanten Funktionalitäten in einer Python Schnittstelle für die Datenbank zu abstrahieren:
 
-\begin{lstlisting}[caption=Methoden aus interface.py]
-def parseFileId(track):
-def addTrack(self, track):
-def removeTrack(self, track):
-def removeTrackById(self, fileId):
-def addTracks(self, tracks):
-def findTrack(self, fileId):
-def getTracks(self):
-def getTrackCount(self):
-def getNonAugmentedTracks(self):
-def getNonAugmentedTrackCount(self):
-def getAugmentedTracks(self):
-def getAugmentedTrackCount(self):
-def getNonPoiTracks(self):
-def getNonPoiTrackCount(self):
-def getPoiTracks(self):
-def getPoiTrackCount(self):
+\begin{lstlisting}[caption=Das Modul interface.py]
+class TrackInterface:
+  def addTrack(self, track):
+  def removeTrack(self, track):
+  def removeTrackById(self, fileId):
+  def addTracks(self, tracks):
+  def findTrack(self, fileId):
+  def getTracks(self):
+  def getTrackCount(self):
+  def getNonAugmentedTracks(self):
+  def getNonAugmentedTrackCount(self):
+  def getAugmentedTracks(self):
+  def getAugmentedTrackCount(self):
+  def getNonPoiTracks(self):
+  def getNonPoiTrackCount(self):
+  def getPoiTracks(self):
+  def getPoiTrackCount(self):
 \end{lstlisting}
 
 Implementierungen wie diese Schnittstelle entstanden in mehreren Iterationen, d.h. zunächst wurde der Python Wrapper genutzt und später nach Hinzufügen der Schnittstelle refaktorisiert.
@@ -221,7 +231,7 @@ if __name__ == "__main__":
 
 Die benötigte HTML Seiten werden ausschließlich dynamisch durch serverseitige XSL Transformationen konstruiert und an den Anwender übertragen. Dies wurde jedoch nicht nur für HTML Seiten verwendet, sondern auch für das weitere Aufbereiten der Daten.
 
-\begin{lstlisting}[label=lst:kml, caption=Transformation von XML nach KML, language=xslt]
+\begin{lstlisting}[label=lst:kml, caption=Transformation von XML nach KML, language=XSLT]
 <xsl:template match="response">
     <kml xmlns="http://www.opengis.net/kml/2.2">
     <Document>
@@ -247,18 +257,13 @@ Die benötigte HTML Seiten werden ausschließlich dynamisch durch serverseitige XS
 
 So wie zum Beispiel in Listing \ref{lst:kml}, die Trackdaten werden nach Keyhole Markup Language (KML) überführt, ein XML Format um geographische Daten bspw. auf Google Maps darzustellen.
 
-\subsection{Microdata}
-
-Nachdem die Grundfunktionalität der Anwendung gegeben war, wurde die Anreicherung von Microdata durch inkrementelle Erweiterung der XSLT
-Templates implementiert.
-
 \section{Test-Umgebung}
 
 Unsere Anwendung wurde in den folgenden Systemen getestet und sollte unter den entsprechenden Voraussetzungen in jedem Fall funktionsfähig sein:
 
 \subsection{Referenzsystem}
 
-Unsere Anwendunge wurde hauptsächlich auf folgender Plattform getestet:
+Unsere Anwendung wurde hauptsächlich auf folgenden Plattformen getestet:
 
 \begin{itemize}
   \item Ubuntu 12.04
@@ -267,14 +272,13 @@ Unsere Anwendunge wurde hauptsächlich auf folgender Plattform getestet:
     \item Python 2.7.3
     \item BaseX 7.0.2
   \end{itemize}
-	
-	\item Windows 7
-	  \begin{itemize}
+
+  \item Windows 7
+  \begin{itemize}
     \item Python 2.7.3
     \item BaseX 7.0.2
   \end{itemize}
 \end{itemize}
-
 
 \section{Installationsanleitung}
 
@@ -283,10 +287,10 @@ Im folgenden wird die Installation der Anwendung erläutert. Dazu gehört auch das
 \subsection{Abhängigkeiten}
 
 \begin{itemize}
-  \item BaseX (http://basex.org/)
-  \item Tornado Web Server (http://www.tornadoweb.org/)
-  \item Python LXML (http://lxml.de)
-  \item SPARQL Endpoint interface to Python (http://sparql-wrapper.sourceforge.net/)
+  \item Base (\url{http://basex.org/})
+  \item Tornado Web Server (\url{http://www.tornadoweb.org/})
+  \item Python LXML (\url{http://lxml.de})
+  \item SPARQL Endpoint interface to Python (\url{http://sparql-wrapper.sourceforge.net/})
 \end{itemize}
 
 \subsubsection{Quick install (für Debian-basierte Systeme)}
@@ -303,10 +307,12 @@ Getestet auf Ubuntu 12.04.
 Ein fertiger Datensatz kann hier heruntergeladen werden:
 
 \begin{center}
-http://kuonrat.userpage.fu-berlin.de/default-2012-06-28-15-26-57.zip [373 MB]
+\url{http://kuonrat.userpage.fu-berlin.de/default-2012-06-28-15-26-57.zip}
+\footnote{Der Datenbankdump beinhaltet 55.823 Tracks wovon 1.696 keine POIs haben, d.h. für diese Tracks wurden keine interessanten Punkte im Umkreis gefunden.}
+[373 MB]
 \end{center}
 
-Dieser beinhaltet 55.823 Tracks wovon 1.696 keine POIs haben, d.h. für die wurde nichts im Umkreis gefunden. Zunächst muss der Datenbankdump (\emph{default-*.zip}) nach \emph{\$HOME/BaseXData/} kopiert werden um sie später importieren zu können.
+Zunächst muss der Datenbankdump (\emph{default-*.zip}) nach \emph{\$HOME/BaseXData/} kopiert werden um sie später importieren zu können.
 
 Starten der BaseX-Datenbank
 
@@ -380,7 +386,7 @@ Nachdem die Datenbank befüllt ist, kann der Webserver gestartet werden.
 $ ./web.py
 \end{lstlisting}
 
-Dies startet einen Tornado-Webserver auf der Adresse \emph{http://localhost:8888} welche mit dem Browser angesteuert werden kann.
+Dies startet einen Tornado-Webserver auf der Adresse \url{http://localhost:8888} welche mit dem Browser angesteuert werden kann.
 
 \section{Benutzerdokumentation}
 
@@ -404,6 +410,8 @@ Weitere Informationen wie
 \label{fig:screenshot-3}
 \end{figure}
 
+Informationen zu den POIs befinden sich im unteren Bereich, z.B. inhaltliche Zusammenfassung zu dem POI, Bilder, Wikipedialink, usw.
+
 \begin{figure}[H]
 \center
 \includegraphics[width=0.7\textwidth]{resources/screenshot-2.png}
@@ -411,5 +419,12 @@ Weitere Informationen wie
 \label{fig:screenshot-2}
 \end{figure}
 
+\section{Anhang}
+
+Der Quellcode für dieses Projekt ist einsehbar unter folgender Adresse:
+
+\begin{center}
+\url{https://github.com/krf/xml-2012.3}
+\end{center}
 
 \end{document}

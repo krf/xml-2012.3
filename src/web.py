@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-15 -*-
 
-from pprint import pprint
+from shared.util import log
 from web.handler import doc_root, MainHandler, RequestHandler, DetailHandler, \
     StatisticsHandler, KmlHandler
 import os
@@ -13,7 +13,6 @@ settings = {
     "static_path": os.path.join(doc_root, "static"),
     "debug": True
 }
-pprint(settings)   
 
 application = tornado.web.Application([
     (r"/", MainHandler),
@@ -24,6 +23,7 @@ application = tornado.web.Application([
 ], **settings)
 
 if __name__ == "__main__":
+    log.debug("Settings: {0}".format(settings))
     port = 8888
     application.listen(port)
 

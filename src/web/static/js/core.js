@@ -1,6 +1,8 @@
 $(document).ready(function() {
     console.log('start');    
     
+	
+	
     
     /* load detailinfo of route */
     /* catch every klick on an <a>tag and perform ajaxrequest with href */
@@ -47,6 +49,53 @@ $(document).ready(function() {
     }); 
 });
 
+function loadGeneralTweets(lat,lon){
+	console.log('+info:load general tweets');   
+	
+	
+	
+               
+               
+               
+               var baseurl = "http://search.twitter.com/search.json?callback=?&lang=de&rpp=5&include_entities=true&result_type=mixed&geocode="+lat+","+lon+",5km";
+               
+               // "http://api.twitter.com/1/geo/reverse_geocode.json?callback=?&lang=de&rpp=5&include_entities=true&result_type=mixed&lat="+lat+"&long="+lon;
+               // "http://search.twitter.com/search.json?callback=?&q="+searchstring+"&lang=de&rpp=5&include_entities=true&result_type=mixed";
+               
+           	
+               console.log("baseurl: "+baseurl);
+
+
+                $.getJSON(baseurl, function(data) {    
+                	
+                	console.log(data.results.length); 
+                    if(data.results.length==0) {
+                    	console.log("0");  
+                        str = "<li><span class=\"label label-warning\">keine Tweets vorhanden</span></li>"
+                    } else {
+                    	
+                        for (i=0; i < data.results.length; i++){
+                            
+                        	row = data.results[i];
+                        	console.log(row.from_user);   
+                        	displayTweetInRightBox(row);
+                         
+                            
+                        }
+                        
+                   
+                    }          
+                 
+                });
+               
+               
+           
+}
+
+function displayTweetInRightBox(row){
+	$("div#ajaxstuff div#twittercontainer").append('<div class="tweetContainerRight"><span class="label">'+row.from_user+'</span> '+ row.text+'</div>');
+}
+
 
 function initGoogleMaps(_lat, _lon) {
     var latlng = new google.maps.LatLng(_lat, _lon);
@@ -62,10 +111,13 @@ function initGoogleMaps(_lat, _lon) {
 function addRouteToMap(_routestr) {
     var _route = _routestr.split("\n");
     var routeCoords = new Array(); 
+    var mapBounds = new google.maps.LatLngBounds();
     for (var i=0; i<_route.length; i++) {
         point = _route[i];
         llh = point.split(",");
-        routeCoords.push (new google.maps.LatLng(llh[0], llh[1]));
+        var tempGcoord = new google.maps.LatLng(llh[0], llh[1]);
+        routeCoords.push (tempGcoord);
+        mapBounds.extend(tempGcoord);
     }
     
     var flightPath = new google.maps.Polyline({
@@ -75,7 +127,8 @@ function addRouteToMap(_routestr) {
         strokeWeight: 2
     });
         
-    flightPath.setMap(map);    
+    flightPath.setMap(map);
+    map.fitBounds(mapBounds);
     
 }
 
@@ -83,15 +136,15 @@ function addPointsOfInterestToMap(id) {
     rand = Math.round(Math.random()*1000);
     url = 'http://www.userpage.fu-berlin.de/andrez/kml/'+id+'.kml'+"?"+rand;
     console.log(url);
-    var georssLayer = new google.maps.KmlLayer(url);
+    var georssLayer = new google.maps.KmlLayer(url, {preserveViewport: true});
+    
     georssLayer.setMap(map);
     
-    
     google.maps.event.addListener(georssLayer, 'click', function(kmlEvent) {
-        var html = kmlEvent.featureData.description;
-        var poi = $(html).find('a').attr('href');
-        var name = kmlEvent.featureData.name;
-        triggerTwittersearch(poi, name);
+    	var html = kmlEvent.featureData.description;
+    	var poi = $(html).find('a').attr('href');
+    	var name = kmlEvent.featureData.name;
+    	triggerTwittersearch(poi, name);
     });  
 }
 
